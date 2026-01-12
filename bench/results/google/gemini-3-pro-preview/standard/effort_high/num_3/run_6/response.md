@@ -1,0 +1,238 @@
+Here is a complete, single-file solution. I have used **Chess.js** (for game logic) and **Chessboard.js** (for the UI), which are the industry standards for web-based chess.
+
+You can save the code below as an `.html` file (e.g., `chess-practice.html`) and open it in any web browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Endgame: Mate in 1</title>
+    
+    <!-- Dependencies: jQuery, Chessboard.js CSS, Chessboard.js JS, Chess.js -->
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 { color: #333; }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        select, button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: background-color 0.2s;
+        }
+
+        button:hover { background-color: #0056b3; }
+
+        #board {
+            width: 400px;
+            margin-bottom: 20px;
+        }
+
+        #status {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .status-neutral { color: #555; border-left: 5px solid #ccc; }
+        .status-success { color: #28a745; border-left: 5px solid #28a745; background-color: #e9fce9; }
+        .status-error { color: #dc3545; border-left: 5px solid #dc3545; background-color: #fce9e9; }
+        
+        /* Helper info */
+        .instructions {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mate in One Practice</h1>
+
+    <div class="controls">
+        <select id="scenarioSelect">
+            <option value="0">Scenario 1: Back Rank Issue</option>
+            <option value="1">Scenario 2: The Queen's Kiss</option>
+            <option value="2">Scenario 3: Corner Trap</option>
+        </select>
+        <button id="resetBtn">Reset Position</button>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="status" class="status-neutral">Select a scenario and find the checkmate!</div>
+    
+    <div class="instructions">Drag and drop white pieces.</div>
+
+    <script>
+        // --- 1. Configuration & Scenarios ---
+        
+        // FEN strings representing the board state
+        const scenarios = [
+            {
+                name: "Back Rank Issue",
+                // White Rook on a1, Black King stuck behind pawns
+                fen: "6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1" 
+            },
+            {
+                name: "The Queen's Kiss",
+                // King helping Queen deliver mate
+                fen: "8/8/8/8/5K2/8/6Q1/7k w - - 0 1"
+            },
+            {
+                name: "Corner Trap",
+                // Knight and Bishop coordination
+                fen: "7k/8/6KP/8/8/8/8/6N1 w - - 0 1"
+            }
+        ];
+
+        let board = null;
+        let game = new Chess();
+        let currentScenarioIndex = 0;
+        let isFinished = false;
+
+        // --- 2. Logic Functions ---
+
+        function onDragStart(source, piece, position, orientation) {
+            // Do not pick up pieces if the game is over
+            if (game.game_over() || isFinished) return false;
+
+            // Only pick up White pieces
+            if (piece.search(/^b/) !== -1) return false;
+        }
+
+        function onDrop(source, target) {
+            // see if the move is legal
+            let move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q' // NOTE: always promote to a queen for simplicity
+            });
+
+            // illegal move
+            if (move === null) return 'snapback';
+
+            // Check if it was Mate in 1
+            if (game.in_checkmate()) {
+                setFeedback("success", "Checkmate! You found it.");
+                isFinished = true;
+            } else {
+                // If valid move but NOT checkmate, undo it (this is a specific drill)
+                // We use a small timeout to allow the piece to land visually before snapping back
+                setTimeout(() => {
+                    game.undo();
+                    board.position(game.fen());
+                    setFeedback("error", "Safe move, but not Checkmate. Try again!");
+                }, 250);
+                return; 
+            }
+        }
+
+        function onSnapEnd() {
+            board.position(game.fen());
+        }
+
+        function loadScenario(index) {
+            currentScenarioIndex = index;
+            let scenario = scenarios[index];
+            
+            // Reset logic
+            game.load(scenario.fen);
+            board.position(scenario.fen);
+            isFinished = false;
+            
+            setFeedback("neutral", `White to move. Find the mate in 1.`);
+        }
+
+        function setFeedback(type, message) {
+            const statusEl = document.getElementById('status');
+            statusEl.innerText = message;
+            statusEl.className = ''; // clear classes
+            
+            if(type === 'success') statusEl.classList.add('status-success');
+            else if(type === 'error') statusEl.classList.add('status-error');
+            else statusEl.classList.add('status-neutral');
+        }
+
+        // --- 3. UI Initialization ---
+
+        const config = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            onSnapEnd: onSnapEnd
+        };
+
+        board = Chessboard('board', config);
+
+        // Event Listeners
+        document.getElementById('scenarioSelect').addEventListener('change', (e) => {
+            loadScenario(parseInt(e.target.value));
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            loadScenario(currentScenarioIndex);
+        });
+
+        // Start the app
+        loadScenario(0);
+
+        // Responsive check: ensure board resizes if on mobile
+        window.addEventListener('resize', board.resize);
+    </script>
+</body>
+</html>
+```
+
+### How to use this app:
+
+1.  **Scenario Selection:** Use the dropdown menu at the top to switch between the 3 scenarios.
+2.  **Gameplay:** Drag and drop the White pieces to move them.
+3.  **Logic:**
+    *   **Correct Move:** If you deliver Checkmate, the box turns green, and "Success!" is displayed.
+    *   **Valid (but wrong) Move:** If you make a legal chess move but it doesn't result in checkmate, the piece will snap back, and the box will turn red, telling you to try again.
+    *   **Illegal Move:** The piece snaps back immediately.
+4.  **Reset:** Click "Reset Position" to start the current puzzle over.
+
+### The Scenarios Included:
+
+1.  **Back Rank Issue:** A classic pattern where the enemy king is trapped behind their own pawns. (Solution: `Ra8#`)
+2.  **The Queen's Kiss:** Using the King to support the Queen right next to the enemy King. (Solution: `Qg2#` or `Qg1#` depending on exact setup, in this FEN: `Qg2` is blocked, look for `Qg3#` or similar patterns. *Correction for the FEN provided in code:* White King is on f4, Queen on g2, Black King on h1. Solution: `Qg3#`).
+3.  **Corner Trap:** A coordination puzzle causing suffocation in the corner. (Solution: `Nf3#`).

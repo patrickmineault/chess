@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Scenario: Back Rank Mate",
+    "fen": "FEN: 6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Scenario: Scholar's Mate",
+    "fen": "FEN: r1bqk1nr/pppp1ppp/2n5/2b1p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+    "move": "Qxf7#"
+  },
+  {
+    "name": "Scenario: Smothered Mate",
+    "fen": "FEN: 6rk/6pp/8/6N1/8/8/8/7K w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Scenario: Arabian Mate",
+    "fen": "FEN: 7k/R6p/5N2/8/8/8/8/7K w - - 0 1",
+    "move": "Rh7#"
+  },
+  {
+    "name": "Scenario: Anastasia's Mate",
+    "fen": "FEN: 5r1k/4N2p/8/8/8/8/8/R6K w - - 0 1",
+    "move": "Rh1#"
+  },
+  {
+    "name": "Scenario: Promotion Mate",
+    "fen": "FEN: 2r4k/3P4/7K/8/8/8/8/8 w - - 0 1",
+    "move": "dxc8=Q#"
+  },
+  {
+    "name": "Scenario: Kiss of Death",
+    "fen": "FEN: 5k2/5P2/5K2/8/8/8/8/6Q1 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Scenario: En Passant Mate",
+    "fen": "FEN: 8/3p4/2pk4/3Pp3/8/8/4K3/8 w - e6 0 1",
+    "move": "dxe6#"
+  },
+  {
+    "name": "Scenario: Two Bishops Mate",
+    "fen": "FEN: k7/8/K7/8/8/6B1/8/5B2 w - - 0 1",
+    "move": "Bg2#"
+  },
+  {
+    "name": "Scenario: The Ladder Mate",
+    "fen": "FEN: k7/4R3/K7/8/3R4/8/8/8 w - - 0 1",
+    "move": "Rd8#"
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Corner Queen Mate",
+    "fen": "k7/4Q3/2K5/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Back-Rank Rook Mate",
+    "fen": "6k1/6pp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "2N3kr/5ppp/8/8/8/8/8/4K3 w - - 0 1",
+    "move": "Ne7#"
+  },
+  {
+    "name": "Diagonal Bishop Mate",
+    "fen": "6bk/6pp/6K1/8/8/8/1B6/8 w - - 0 1",
+    "move": "Bxg7#"
+  },
+  {
+    "name": "Back-Rank Queen Mate",
+    "fen": "6k1/4Q1pp/8/8/8/8/8/4K3 w - - 0 1",
+    "move": "Qe8#"
+  }
+]

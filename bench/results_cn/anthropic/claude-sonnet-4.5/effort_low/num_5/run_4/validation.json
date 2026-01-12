@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Back Rank Rook Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/7R w - - 0 1",
+    "move": "Rh8#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 0,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_low/num_5/run_4",
+    "reasoning_length": 2902
+  },
+  {
+    "name": "Back Rank Queen Mate",
+    "fen": "7k/5ppp/8/8/8/8/8/Q7 w - - 0 1",
+    "move": "Qa8#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 1,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_low/num_5/run_4",
+    "reasoning_length": 2902
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/6pp/8/8/4N3/8/8/8 w - - 0 1",
+    "move": "Nf6#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 2,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_low/num_5/run_4",
+    "reasoning_length": 2902
+  },
+  {
+    "name": "Queen Diagonal Mate",
+    "fen": "7k/7p/6Q1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 3,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_low/num_5/run_4",
+    "reasoning_length": 2902
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "6k1/5P1p/8/8/8/8/8/4K3 w - - 0 1",
+    "move": "f8=Q#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 4,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_low/num_5/run_4",
+    "reasoning_length": 2902
+  }
+]

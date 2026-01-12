@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1",
+    "move": "Rd8#"
+  },
+  {
+    "name": "Scholar's Mate",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 0 1",
+    "move": "Qxf7#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6rk/6pp/8/6N1/8/8/8/7K w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Arabian Mate",
+    "fen": "7k/2R5/5N2/8/8/8/8/7K w - - 0 1",
+    "move": "Rh7#"
+  },
+  {
+    "name": "Ladder Mate",
+    "fen": "7k/R7/8/1R6/8/8/8/2K5 w - - 0 1",
+    "move": "Rb8#"
+  },
+  {
+    "name": "Anastasia's Mate",
+    "fen": "7k/4N1p1/8/R7/8/8/8/7K w - - 0 1",
+    "move": "Rh5#"
+  },
+  {
+    "name": "Promotion Mate",
+    "fen": "6k1/P4ppp/8/8/8/8/8/6K1 w - - 0 1",
+    "move": "a8=Q#"
+  },
+  {
+    "name": "Queen and King Contact Mate",
+    "fen": "k7/8/2K5/8/8/8/1Q6/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Damiano's Mate",
+    "fen": "5rk1/6p1/6P1/8/8/7Q/8/7K w - - 0 1",
+    "move": "Qh7#"
+  },
+  {
+    "name": "Fool's Mate Pattern",
+    "fen": "rnbqkbnr/ppppp2p/5p2/6p1/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "move": "Qh5#"
+  }
+]

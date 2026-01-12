@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Corner Queen Mate",
+    "fen": "7k/5Q2/5K2/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Rook Box Mate",
+    "fen": "k7/8/1K6/8/8/8/8/7R w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/5ppp/7N/8/3K4/8/8/8 w - - 0 1",
+    "move": "Nf7#"
+  }
+]

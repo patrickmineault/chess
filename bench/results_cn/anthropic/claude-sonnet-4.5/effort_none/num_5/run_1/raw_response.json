@@ -1,0 +1,26 @@
+{
+  "id": "gen-1764628263-HfL79iROZIU1QqWCDyVT",
+  "provider": "Google",
+  "model": "anthropic/claude-sonnet-4.5",
+  "object": "chat.completion",
+  "created": 1764628263,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nBack Rank Mate with Rook\n6k1/5ppp/8/8/8/8/8/R6K w - - 0 1\nRa8#\n```\n\n```\nQueen and King Mate\n6k1/5Q2/6K1/8/8/8/8/8 w - - 0 1\nQg7#\n```\n\n```\nKnight Mate\n6k1/5p1p/5NpK/8/8/8/8/8 w - - 0 1\nNh7#\n```\n\n```\nBishop Mate\n5k2/4p3/4K3/8/3B4/8/8/8 w - - 0 1\nBc5#\n```\n\n```\nPawn Promotion Mate\n6nk/5PPP/6K1/8/8/8/8/8 w - - 0 1\ngxh8=Q#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 83,
+    "completion_tokens": 236,
+    "total_tokens": 319
+  }
+}

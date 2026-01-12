@@ -1,0 +1,26 @@
+{
+  "id": "gen-1764628269-BlH6IttkhebP3MVPOoQq",
+  "provider": "Google",
+  "model": "anthropic/claude-sonnet-4.5",
+  "object": "chat.completion",
+  "created": 1764628269,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nBack Rank Mate with Rook\n6k1/5ppp/8/8/8/8/8/R6K w - - 0 1\nRa8#\n```\n\n```\nQueen and King Checkmate\n6k1/5Q2/6K1/8/8/8/8/8 w - - 0 1\nQg7#\n```\n\n```\nKnight Fork Checkmate\n5k2/8/4N3/8/8/8/8/4K3 w - - 0 1\nNg7#\n```\n\n```\nBishop and Queen Mate\n6k1/6P1/5K2/8/8/8/1B6/8 w - - 0 1\nBf6#\n```\n\n```\nSmothered Mate with Knight\n5rkr/5ppp/8/8/8/8/5N2/6K1 w - - 0 1\nNh3#\n```\n\n```\nRook Mate on h-file\n6k1/6pp/8/8/8/8/8/6KR w - - 0 1\nRh8#\n```\n\n```\nQueen Mate on Back Rank\n3k4/3p4/8/8/8/8/8/3QK3 w - - 0 1\nQd7#\n```\n\n```\nPawn Promotion Mate\n6k1/5P1p/6pK/8/8/8/8/8 w - - 0 1\nf8=Q#\n```\n\n```\nDiscovered Check Mate with Bishop\n6k1/5R1p/6pK/8/8/8/3B4/8 w - - 0 1\nBf4#\n```\n\n```\nDouble Rook Mate\n6k1/8/6K1/8/8/8/8/R6R w - - 0 1\nRh8#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 83,
+    "completion_tokens": 482,
+    "total_tokens": 565
+  }
+}

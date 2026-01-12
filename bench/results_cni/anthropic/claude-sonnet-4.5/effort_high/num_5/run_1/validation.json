@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Queen Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4Q1K1 w - - 0 1",
+    "move": "Qe8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Back Rank Rook Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen and King Checkmate",
+    "fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Rook and Pawn Checkmate",
+    "fen": "k7/PR6/K7/8/8/8/8/8 w - - 0 1",
+    "move": "Rb8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Pawn Promotion Checkmate",
+    "fen": "2k5/4P3/2K5/8/8/8/8/8 w - - 0 1",
+    "move": "e8=Q#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  }
+]

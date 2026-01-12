@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/R3K3 w - - 0 1",
+    "move": "Ra8#"
+  },
+  {
+    "name": "Scholar's Mate",
+    "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1",
+    "move": "Qxf7#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "R5rk/6pp/7N/8/8/8/8/4K3 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Arabian Mate",
+    "fen": "7k/8/5N2/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh7#"
+  },
+  {
+    "name": "Queen and Knight Mate",
+    "fen": "7k/8/4N3/8/8/2Q5/8/4K3 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Ladder Mate (Two Rooks)",
+    "fen": "7k/R6P/8/8/8/8/8/4K1R1 w - - 0 1",
+    "move": "Ra8#"
+  },
+  {
+    "name": "Epaulette Mate",
+    "fen": "3rkr2/8/8/8/8/8/8/4QK2 w - - 0 1",
+    "move": "Qe7#"
+  },
+  {
+    "name": "Boden's Mate",
+    "fen": "1nkr4/pp1p4/B2B4/8/8/8/8/4K3 w - - 0 1",
+    "move": "Bxb7#"
+  },
+  {
+    "name": "Hook Mate",
+    "fen": "6k1/5pNp/8/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Anastasia's Mate",
+    "fen": "8/4N1pk/5B2/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh8#"
+  }
+]

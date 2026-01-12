@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Back Rank Mate with Rook",
+    "fen": "6k1/5ppp/8/8/8/8/5PPP/5RK1 w - - 0 1",
+    "move": "Rf8#"
+  },
+  {
+    "name": "Queen and Knight Mate",
+    "fen": "6k1/5ppp/5N2/8/8/8/5PPP/5QK1 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Bishop and Queen Mate",
+    "fen": "r4rk1/ppp2ppp/8/3q4/8/8/PPP1BPPP/R3K2R w KQ - 0 1",
+    "move": "Bh5#"
+  }
+]

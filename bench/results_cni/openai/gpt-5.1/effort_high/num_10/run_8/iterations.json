@@ -1,0 +1,338 @@
+[
+  {
+    "iteration": 1,
+    "request": "Describe 10 mate-in-1 scenarios for white. Put each scenario in its own code fences (three backticks); for each scenario, the first line should be the name of the scenario, the second line the FEN notation for the setup, the third line the winning move for white. The scenarios should be valid and distinct from each other.",
+    "response": "```text\nBack Rank Mate with Queen\n5r1k/4Qppp/8/8/8/8/PPP2PPP/3R2K1 w - - 0 1\nQxf8#\n```\n\n```text\nSmothered Knight Mate\n6rk/6pp/8/6N1/8/8/PPP3PP/R5K1 w - - 0 1\nNf7#\n```\n\n```text\nQueen and King Corner Mate\nk7/p7/2K5/8/8/1Q51/8/8 w - - 0 1\nQb7#\n```\n\n```text\nRook File Mate with Bishop Support\n7k/6pp/8/6K1/2B5/8/8/5R2 w - - 0 1\nRf8#\n```\n\n```text\nPromotion to Queen Mate\n8/6P1/8/8/8/5B2/4Bp1p/2K3k1 w - - 0 1\ng8=Q#\n```\n\n```text\nDiagonal Queen Capture Mate\n7k/6pp/8/8/8/2B5/6Q1/6K1 w - - 0 1\nQxg7#\n```\n\n```text\nCentral Queen Capture Mate\n3rkr2/3ppp2/4Q3/8/8/8/8/4R1K1 w - - 0 1\nQxe7#\n```\n\n```text\nClassic Qxh7 Mate\n7k/6pp/6Q1/8/8/8/2B5/6K1 w - - 0 1\nQxh7#\n```\n\n```text\nBishop Corner Mate\nk7/p2N4/2K5/8/8/8/8/1B42 w - - 0 1\nBb7#\n```\n\n```text\nAnother Corner Queen Mate\nk7/p1K5/8/8/8/8/8/1Q6 w - - 0 1\nQb8#\n```",
+    "reasoning": "**Evaluating FEN strings**\n\nThe FEN string comprises key fields: piece placement, active color, castling rights, en passant, halfmove clock, and fullmove number. For composition problems, I can set these values and ensure that the positions are legal and reachable from a game. I need to avoid complications, like two white-square bishops on one side. To keep it simple and compliant, I\u2019ll limit pawns to ranks 2-7, ensuring that the positions are \u201clegal-enough\u201d for the board.**Designing chess scenarios**\n\nI need to confirm that the side to move isn\u2019t in illegal check and that castling rights align with the rook and king positions. I'll set '-' for castling since that's acceptable. Each scenario should have a descriptive name, like \"Back Rank Mate\" or \"Smothered Mate.\" For the moves, I think standard algebraic notation with a checkmate sign would work best, like \"Qh7#.\" I\u2019ll ensure to disambiguate if needed and craft positions systematically from known puzzles, working towards a winning move for Black.**Clarifying mating scenarios**\n\nIn a typical \"mate in 1\" scenario, I just need one mating move, so it's okay if others exist. I\u2019ve got to be careful to avoid illegal checks in FEN; if it\u2019s White\u2019s turn and Black is in check that can only be resolved by the mating move, that would be illegal, since the side to move can\u2019t leave their own king in check. It's perfectly fine for Black's king to be in check in a puzzle, but I\u2019ll keep things simpler by ensuring White is not in check.**Creating checkmate scenarios**\n\nSome composition sources allow for impossible FENs, but I'll focus on simpler representations. I want to use minimal pieces for clarity\u2014like just kings and a few heavy pieces. For scenario 1, I\u2019m considering a basic back rank mate: White has King on g1, Queen on e7, Rook on f1, and some pawns, while Black has King on h8 and Rook on g8 with pawns on g7 and h7. After considering the FEN and checking if Qxf8# is checkmate, I realize that the White Queen on f8 wouldn\u2019t deliver check since it's capturing the Black Rook. The Black King at h8 can't escape to g8 or h7.**Mapping the chess board**\n\nStarting with the 8x8 board, I need to analyze the legal squares near the Black king on h8. The potential moves are to g8, g7, and h7. After the move Qxf8#, the White pieces are Kg1, Qf8, Rd1, with various pawns. The Black king has no legal moves to g8 or g7 since those squares are controlled by the White queen. Now looking at h7, it's occupied by a Black pawn, so that move isn't possible either. Thus, Black is indeed in checkmate! \n\nNext, I'll craft the FEN for the starting positions. I need to represent each rank carefully, ensuring to count empty squares and use correct notation for pieces. For example, rank 8 becomes \"5r1k\" for the Black rook and king, and rank 7 is \"4Qppp,\" considering all pieces and empty spots accurately. After mapping out each rank, I should arrive at the correct FEN representation for the board.**Designing a smothered mate**\n\nI\u2019m considering the mating move \u201cNh6#\u201d and I need to check its sources. The White knight can reach h6 from f5, f7, g4, or g8, so I'll opt for g4. Next, I\u2019ll design the board with the Black king on h8, surrounded by pieces, ensuring no escape squares. \n\nOnce I assess the escapes for the Black king, I see squares g8, g7, and h7 are occupied or attacked. For a smothered mate, I want the final position of the knight on f7 and ensure the Black king can\u2019t escape, while surrounding pieces block moves or are captured. I\u2019ll establish the correct FEN after confirming the configuration aligns with a known smothered pattern.**Calculating checkmate setup**\n\nI'm analyzing the knight on f7 and trying to establish how it affects the attack on g8. The knight blocks the bishop's attack on g8, which complicates things. I consider moving a bishop or rook to control g8, but ultimately, the best course is to use the knight and ensure it can\u2019t be captured. Checking the black king\u2019s movements, I realize it can't escape to g8 or g7 because of pawns. \n\nThe only potential defenses for the king wouldn't work, leading me to confirm that the position is indeed checkmate. I need to finalize the FEN for this setup.**Creating final board positions**\n\nI\u2019m laying out the details for the chess pieces on the board, ensuring everything is set up correctly. For rank definitions, I\u2019ve placed the black rook and king accurately, and included the pawns, knight, and white king. I'm deriving the FEN notation, which summarizes the position succinctly.\n\nI need to ensure no side is in illegal check, and I'm evaluating potential responses for the black king. Ultimately, I conclude there is a checkmate situation\u2014specifically, a \"Smothered Knight Mate.\" Next, I plan to explore other mating patterns while ensuring I keep track of black's legal moves.**Designing checkmate scenarios**\n\nI\u2019m ensuring that the initial position allows for at least one legal move for black to avoid stalemate. I\u2019ll focus on creating various checkmate scenarios, like the classic setups with the queen and king at the edge, fully blocking the black king's escapes with their pawns.\n\nI\u2019m considering various types of checkmates: corner, back rank with a queen, bishop positions, and even creative ones like en passant or castling. Each scenario should have a valid FEN notation, ensuring everything is set up correctly for the winning move. This will take careful planning and execution!**Structuring checkmate scenarios**\n\nIn analyzing en passant, I realize it\u2019s treated like other pawn captures in the SAN notation, like \"exd6 e.p.#\" or simply \"exd6#\". Now, I\u2019m setting up various scenarios.\n\nFor example, in a corner checkmate situation, I envision a setup with black's king on a8, a white queen on c8, and the white king supporting nearby. My goal is to create a position where White plays \"Qc8#\", but I'll ensure that all supporting squares are correctly occupied or attacked to achieve checkmate. This requires careful attention to details and blockades!**Evaluating checkmate scenarios**\n\nI'm examining a typical queen versus king corner checkmate. I want the final move to be \"Qb7#,\" but I need to ensure the queen is protected. For this setup, I\u2019ll place a white rook at b8 to defend the queen. \n\nIn this position, I\u2019ll check the escape routes for the black king on a8. The key is that after the queen moves to b7, the king can't legally move to a7 or b8 because those squares are controlled by white pieces. This looks like a solid checkmate!**Clarifying initial and final FEN**\n\nI'm working on setting up a position in FEN where the black king is not in check because it's White's move. If the queen is on d5 and attacking the black king on a8, that's not allowed. \n\nI need to ensure the starting position has no white pieces attacking the black king, which means I must place the queen in a square that doesn\u2019t give check. I can try placing the queen at b1, ensuring that after moving to b7, no other piece is checking the black king in the initial position.**Ensuring a valid position**\n\nI need to ensure that my setup is valid for the chess position. The white king on c6 should not be checking the black king on a8. Checking that Kc6 doesn't attack a7 confirms I'm correct. Now I'll position the queen at b3, where it legally can move to b7 without checking black. \n\nI also need to make sure that the initial FEN state has the black king safe, so I'll document the positions clearly: pieces include White's king at c6, the queen at b3, black's king at a8, and the pawn at a7. Now to determine the FEN string: \"1Q51\".**Finalizing FEN and check conditions**\n\nI\u2019m checking the FEN placement: the total from the ranks adds up correctly, so the complete FEN is \"k7/p7/2K5/8/8/1Q51/8/8 w - - 0 1.\" Now I need to ensure the black king isn\u2019t in check. \n\nLooking at potential moves for the black king from the neighbors confirms it\u2019s safe. The white king on c6 doesn\u2019t threaten the black king either. Confirming the mating move of Qb7# works smoothly, as all intermediate squares are clear. Now on to scenario four, planning a rook mate on an open file.**Verifying rook mate scenario**\n\nI'm checking if the black king can capture the rook on f8, but it can\u2019t move there. The pawn on g7 has no legal move to capture f8 either, as it can only move downwards. No other black pieces can block the rook, so it's checkmate. \n\nNow, I\u2019ll encode the FEN for the initial setup with the pieces in position. For scenario four, I\u2019m naming it \"Rook File Mate with King Support,\" with the winning move being Rf8#. \n\nMoving on to scenario five, I want to set up a bishop mate on a diagonal.**Designing scenarios for checkmate**\n\nI'm exploring the use of a bishop for a checkmate. For example, I want to place the bishop on h6 to attack a king on g8 while having its pawn pinned. However, if I have the black king on h8 and a white bishop on e5, the diagonal to h8 is blocked by the white king at f6. \n\nI need to reposition the kings and pawns to create a systematic design. I\u2019m considering a mating move where a pawn promotes to a queen, ensuring it's supported and cannot be captured.**Finalizing checkmate scenarios**\n\nI'm analyzing a possible checkmate scenario where the rook on g1 attacks both the queen and a new occupant on g8. The black king on h8 can't capture the queen because it would result in self-check, which is illegal. I also need to ensure that the initial rook on g1 isn\u2019t checking the black king and that the escape squares are evaluated correctly. \n\nAfter thorough checks, I realize that the initial position has the potential for illegal moves due to the king being in check. I need to reposition pieces to create a valid checkmate, ensuring the pawn g7 doesn't place black in check while allowing for a queen promotion.**Designing a checkmate scenario**\n\nI'm thinking about how to create a winning position while ensuring the black king on g8 isn\u2019t in check. To achieve this, we can set up the board with specific pieces like a white pawn on g7. After promoting the pawn to a queen on g8, it must be ensured that the pawn doesn't leave the black king in check. \n\nI've considered various configurations, including capturing pieces during promotion, but am discovering that I need to protect my newly promoted queen from potential captures and ensure that every movement maintains the checkmate condition. I need to position additional white pieces to block escapes and check threats on key squares like h8. Every adjustment needs careful consideration to ensure legality and effectiveness as I solidify the winning move.**Planning checkmate with pawn promotion**\n\nTo create a checkmate scenario, I need to ensure the black king isn\u2019t initially in check and can\u2019t legally capture the newly promoted queen on g8. I\u2019ve thought about various piece placements, like the white king on g7 and the rook on h2 to protect h8 after promotion, but it gets tricky. \n\nInstead, I\u2019m considering a simpler arrangement. If I place the black king on g1, with the white pawn on g7, I can promote to a queen on g8. The pawn doesn't attack g1, so the initial position is legal, allowing for the checkmate after the promotion. I\u2019ll watch how nearby pieces influence their movement and capture paths!**Designing checkmate with piece arrangement**\n\nI'm aiming for a checkmate by promoting a pawn to a queen on g8, so I need to ensure that the black king on g1 has no legal moves. I'll place black pawns on g2, h2, and f2 to block the king's escape. The escape squares h1, h2, and f2 have to be controlled or occupied.   \n\nI plan to use a white rook on h1 to control h1 and h2, but I need to ensure that no piece can capture the queen after it promotes. I had some conflicting thoughts about piece placements, like using a bishop on g2, but it turns out it would block the queen\u2019s attack path. Instead, I want to find a way to arrange my pieces so that they cover all necessary squares without blocking each other.**Designing final piece placement for checkmate**\n\nI'm looking to set up checkmate after promoting to a queen on g8. The black king is on g1, and I need to ensure it can't escape to h1, h2, g2, f2, or f1. By filling these squares with black pawns and maybe a rook, I can restrict its movement. \n\nI realize I need white pieces to support this setup, like using bishops to control f1 and h1 without blocking the queen's line. I think placing a knight on g3 would have been ideal, but it blocks the queen\u2019s attack path. Instead, I find that using a bishop on f3 to control h1 and another on e2 for f1 works well. This way, I can maintain the necessary paths and ensure the black king is trapped!**Verifying checkmate position**\n\nI'm laying out the pieces: White has Qg8, Be2, Bf3, and a pawn on g7, while Black has Kg1, Pf2, and Ph2. I need to ensure that there are no potential escapes for the black king after Qg8. After going through the potential moves, I find that all neighboring squares around the black king (h1, h2, f2, g2, and f1) are either blocked or attacked.\n\nI confirm there are no black pieces available to capture or block the queen\u2019s attack path, setting up a checkmate. I'll finalize the board position with FEN notation to ensure everything is correct. The white pieces are not attacking their own king. Good to go!**Verifying checkmate scenarios**\n\nI need to ensure the black king at g1 is completely trapped after the move g8=Q#. It looks like there are no escape routes available for the black king since all neighboring squares are blocked or under attack. I confirm that the black pawns at f2 and h2 cannot reach the squares to block the attack.\n\nNext, I shift to scenario six, where I'm looking to create a double check with a white rook and bishop. The setup involves strategic placements to ensure the black king cannot move or capture. I\u2019ll develop more scenarios, ensuring distinct mating patterns while confirming they all work seamlessly with FEN positions. This should keep things interesting!**Confirming checkmate scenarios**\n\nI need to ensure that after the move Qg7#, the black king at h8 has no escape routes. The squares around h8 (g8, g7, h7) are all either attacked or blocked. Specifically, g8 is attacked by the queen, and g7 is blocked by the queen itself. The only potential capturing move available for the black king is to take the queen, but that\u2019s invalid as g7 is protected by a white bishop.\n\nNow I'll set up the FEN for this position while making sure the conditions are correct for checkmate. After confirming everything, the notation for the move is \"Qxg7#\".**Designing the knight and queen mate**\n\nFor scenario 7, I\u2019m working on a checkmate pattern using a knight and queen. The black king is at a8, and I want to use the knight at c7 to deliver check while being supported by the queen. \n\nI\u2019ll ensure that the squares around the black king are blocked or attacked to prevent escape. I realized I need additional white pieces to prevent the king from escaping to b8, so I\u2019ll include the queen at b7 to cover that square as well. \n\nI\u2019ll set up the FEN to confirm the checkmate scenario.**Finalizing the knight and bishop mate**\n\nIn this scenario, I'm setting up a checkmate using a knight and a bishop with the black king at a8. My knight moves to c7 to check, while the bishop on e5 controls the square b8 to restrict moves. \n\nI\u2019ve ensured that none of the black pawns can capture the knight, and the king can't escape to any adjacent squares. The final positions will ensure that the black king has no valid moves left, confirming that \u201cNc7#\u201d is indeed a successful checkmate. I'll finalize the FEN for the initial setup.**Setting up the Greco's Mate**\n\nI'm crafting a checkmate pattern called \"Greco's Mate.\" The black king is at g8, with a rook on h8 and pawns on g7 and h7, while my queen is set to capture on h7. The bishop on c2 supports the queen, ensuring that if the king tries to capture the queen, it would still be under attack from the bishop.\n\nI'll carefully analyze the escape squares and confirm that the king can't move to g7 or h7, nor can it capture the queen. So, that should solidify this checkmate as valid.**Refining the checkmate setup**\n\nI\u2019m assessing the position to ensure my bishop on c2 effectively attacks h7 while avoiding any interference. Since the queen will move to h7, I need to keep the path clear. I\u2019ll also confirm there aren\u2019t any black pieces that can capture the queen after the check. To avoid this, I\u2019ll eliminate the black rook on h8 and ensure that both f7 and g7 are blocked by pawns so the king on g8 has no escape routes. It seems crucial to check these connections thoroughly for a solid mate!**Planning for checkmate**\n\nI\u2019m checking the setup for the Qxh7# move to ensure it\u2019s effective. I need to confirm that the rook on f1 doesn\u2019t give a check to the king on g8 and that h8 is also covered. I\u2019ll need to reposition the Black pawns and King properly while making sure there are no escape routes left for the king. Adjustments to pieces are necessary, ensuring all positions are accounted for as I design a new framework leading into the checkmate scenario.**Verifying checkmate positions**\n\nI need to confirm the checkmate setup after Qxh7# and the initial state. With the black king on h8 and pawn on g7, I should check for potential checks or captures. The queen at g6 attacks along a diagonal and vertical line, with escape squares carefully considered. I also want to explore a scenario where castling can lead to a checkmate, planning positions carefully so that after the castle, pieces align correctly to threaten the black king effectively. Ensuring all pieces function optimally is crucial.**Designing checkmate with castling**\n\nI\u2019m working on a scenario for a checkmate using castling. Initially, I set up the black king on f8 and white pieces with specific placements. The key is to ensure pawns are strategically placed to allow the rook to have a clear line of attack after castling. For effective checkmate, I need to confirm that squares around the black king are controlled or blocked, while also making sure the castling moves are legal and follow standard chess rules. I\u2019ll need to consider each escape square carefully.**Designing bishop checkmate scenarios**\n\nI\u2019m brainstorming a scenario where a bishop delivers checkmate. I want to set the black king on g8 while ensuring pawns on g7 and h7 are present. The key is to position my bishop to control g8, which it can do by being on e6. I\u2019ll also consider my queen and any other pieces that might assist in checking or limiting the opponent's moves. Another approach could involve simpler patterns with another piece to reinforce the concept of delivering checkmate.**Planning bishop and queen checkmate**\n\nI\u2019m outlining a checkmate scenario where a bishop delivers check to the black king. I need to make sure the squares around the king, like f7 and g7, are blocked or occupied. For instance, I could use a bishop on e6 to control f7 and g8. To enhance this, I might position a queen on g5 or g4 so it can attack relevant squares without giving an initial check. Simplifying the final position may help too, such as placing the black king on h8 and ensuring the bishop can attack effectively.**Designing bishop checkmates**\n\nI\u2019m working on a checkmate scenario involving a bishop. The goal is to ensure that after the bishop moves to h6, the black king at g7 can\u2019t escape to h6 or g8. I plan to position the white pieces carefully to cover escape squares and prevent captures. I can use a bishop on e6 to attack g8, ensuring no obstruction in the diagonal. However, I realize this design is a bit complex, so I might simplify it using a corner mate setup instead. This way, I can apply a similar concept to an earlier scenario with the queen.**Evaluating potential checkmates**\n\nI\u2019m evaluating the checkmate conditions where I have a bishop and rook setup. I confirmed my winning move, Bb7#, and double-checked that the black king at a8 isn't under threat before this move. Afterward, I started designing a rook mate with Rxh7#, but I need to ensure it's supported and escape routes are blocked. It\u2019s tricky because I need to position pieces strategically to avoid giving checks beforehand and to control necessary squares afterward. My aim is for a clean, effective mate setup!**Checking mate conditions**\n\nI\u2019m analyzing a checkmate scenario involving a bishop and rook. I've confirmed that my bishop on g7 can indeed attack h8. The final arrangement includes a white rook on h8, supported by the king on g6 and the bishop still on g7. I need to ensure that before the rook's move, the bishop does not check the black king on g8 \u2014 and it turns out it doesn\u2019t. After I finalize the setup, h8 remains under attack, confirming that it\u2019s checkmate. Everything looks good!**Reassessing rook checkmate move**\n\nI need to ensure the rook isn\u2019t putting the black king in check before it makes its move from h1 to h8. The path is blocked by a pawn on h7, so I can't go directly to h8. Instead, I can opt for \u201cRxh7#,\u201d where the rook captures the pawn on h7, moving into check position for the king on g8. However, I reconsider the position and realize I need to clear the h7 square effectively, leading to new combinations for a simpler checkmate with my queen instead.**Confirming queen checkmate possibilities**\n\nI need to check if the black king can capture my queen at b8 with a move from a8. To do this, I can position my king at c7 to control b8. Then I need to see if the black pawn can legally capture the queen, but since pawns can only move forward, they cannot capture the queen at b8. After verifying these movements, I find that queen at b8 is indeed safe and delivers checkmate, completing my scenario. I\u2019ll encode the positions in FEN now.**Verifying FEN scenarios**\n\nI'm checking the FEN for the bishop mate scenario to confirm it's correctly encoded. I reaffirm the positions and ensure nothing is overlooked. Then, I analyze several different scenarios, noting how the moves lead to checkmates. I realize some FENs differ only by the queen's square, which I double-check. It\u2019s vital to ensure all paths and blockages are accounted for, including pieces that report to the king's safety. This meticulous check should help avoid any mistakes before finalizing the results.**Analyzing checkmate scenarios**\n\nI\u2019m verifying the initial conditions to ensure no piece attacks the white king at g1. The black pieces don't seem to threaten the king, and the knight move to f7 does check the black king at h8. After this move, I check for possible black king responses. None of the possible moves let the king escape, and no black pieces can block or capture the knight. Thus, this scenario results in a checkmate. Moving on, I decode the next FEN scenario and check that everything matches before confirming it\u2019s also a checkmate.**Verifying check legality**\n\nI need to ensure that a king isn't in check after its move. When considering the move Rf8#, the pawn at h7 still attacks g6, meaning the white king at g6 would remain under attack, making it an illegal move. So, I realize I need to adjust the position of the king. Moving the king to g5 keeps it safe while still allowing for a checkmate after Rf8#. Now I need to check and confirm the finalized position and FEN. The FEN will reflect changes accordingly.**Analyzing check and moves**\n\nI'm examining a position in the chess game. After considering various potential moves for the black king, I see that the king at h8 cannot escape to h7 since it's blocked by a pawn. It's also vital to check if the queen at g7 puts the king in check and if there are any paths for the black king to escape.\n\nMoving forward, I realize that my previous analysis of the attack lines is flawed due to the bishop's presence affecting the movement options. I'll need to adjust my scenario to ensure accuracy and checkmate verification in future analyses.**Revising chess scenario**\n\nI need to redesign the scenario to have an additional piece attacking b8 without obstructing the new knight at c7. Ideally, this piece should be able to control b8 without passing through the c7 square. \n\nI considered various potential attackers: knights, bishops, and rooks. Ultimately, I realized that creating a more straightforward scenario with the necessary pieces will be easier than adjusting the previous complicated setup. Instead, I decided to start fresh with a simplified arrangement that leads to checkmate. This will reset our focus and ensure clarity.**Creating chess scenarios**\n\nI need to design a new checkmate scenario involving the black king and several white pieces. I initially thought about using a knight on f7 delivering a check to a king on h8; however, constructing a legitimate board without pre-checks has proven complicated.\n\nInstead, I'll focus on simpler configurations, using my ideal layout with additional white pieces to control escape routes. I\u2019ll innovate easier checkmate scenarios involving queens and rooks, ensuring a wider variety while maintaining distinct positions across the different scenarios. Time's passing, so I want to work steadily but carefully.**Designing a checkmate scenario**\n\nLet\u2019s create a final chessboard layout with the black king on e8, surrounded by pawns on d7, e7, and f7. The white pieces will include a queen on e7, a rook on e1, and a bishop on b5. I need to ensure that when the white queen moves to e7, it delivers checkmate effectively. I'll confirm that the squares around the black king are blocked or controlled. \n\nTo finalize this, I\u2019ll outline the specific piece placements ensuring no illegal checks and confirming that the black king cannot capture the queen without being in check itself. So I\u2019ll ensure I write the FEN for this scenario accordingly.**Calculating FEN for chess scenarios**\n\nI\u2019m working on the FEN for a chess scenario, starting with the black king on e8 and pawns f8, d8. The white pieces include a queen on e6, a rook on e1, and others. I\u2019m ensuring that the placement is correct so that the black king is not in check initially. I'll then confirm that white\u2019s move captures the black pawn at e7 and delivers checkmate. I have to check all the potential captures and ensure the scenarios remain distinct while maintaining validity for their FENs.",
+    "scenarios": [
+      {
+        "name": "Back Rank Mate with Queen",
+        "fen": "5r1k/4Qppp/8/8/8/8/PPP2PPP/3R2K1 w - - 0 1",
+        "move": "Qxf8#"
+      },
+      {
+        "name": "Smothered Knight Mate",
+        "fen": "6rk/6pp/8/6N1/8/8/PPP3PP/R5K1 w - - 0 1",
+        "move": "Nf7#"
+      },
+      {
+        "name": "Queen and King Corner Mate",
+        "fen": "k7/p7/2K5/8/8/1Q51/8/8 w - - 0 1",
+        "move": "Qb7#"
+      },
+      {
+        "name": "Rook File Mate with Bishop Support",
+        "fen": "7k/6pp/8/6K1/2B5/8/8/5R2 w - - 0 1",
+        "move": "Rf8#"
+      },
+      {
+        "name": "Promotion to Queen Mate",
+        "fen": "8/6P1/8/8/8/5B2/4Bp1p/2K3k1 w - - 0 1",
+        "move": "g8=Q#"
+      },
+      {
+        "name": "Diagonal Queen Capture Mate",
+        "fen": "7k/6pp/8/8/8/2B5/6Q1/6K1 w - - 0 1",
+        "move": "Qxg7#"
+      },
+      {
+        "name": "Central Queen Capture Mate",
+        "fen": "3rkr2/3ppp2/4Q3/8/8/8/8/4R1K1 w - - 0 1",
+        "move": "Qxe7#"
+      },
+      {
+        "name": "Classic Qxh7 Mate",
+        "fen": "7k/6pp/6Q1/8/8/8/2B5/6K1 w - - 0 1",
+        "move": "Qxh7#"
+      },
+      {
+        "name": "Bishop Corner Mate",
+        "fen": "k7/p2N4/2K5/8/8/8/8/1B42 w - - 0 1",
+        "move": "Bb7#"
+      },
+      {
+        "name": "Another Corner Queen Mate",
+        "fen": "k7/p1K5/8/8/8/8/8/1Q6 w - - 0 1",
+        "move": "Qb8#"
+      }
+    ],
+    "validations": [
+      {
+        "name": "Back Rank Mate with Queen",
+        "fen": "5r1k/4Qppp/8/8/8/8/PPP2PPP/3R2K1 w - - 0 1",
+        "move": "Qxf8#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Smothered Knight Mate",
+        "fen": "6rk/6pp/8/6N1/8/8/PPP3PP/R5K1 w - - 0 1",
+        "move": "Nf7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Queen and King Corner Mate",
+        "fen": "k7/p7/2K5/8/8/1Q51/8/8 w - - 0 1",
+        "move": "Qb7#",
+        "fen_valid": false,
+        "white_to_move": false,
+        "move_valid": false,
+        "is_checkmate": false,
+        "error": "Invalid FEN: two subsequent digits in position part of fen: 'k7/p7/2K5/8/8/1Q51/8/8'"
+      },
+      {
+        "name": "Rook File Mate with Bishop Support",
+        "fen": "7k/6pp/8/6K1/2B5/8/8/5R2 w - - 0 1",
+        "move": "Rf8#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Promotion to Queen Mate",
+        "fen": "8/6P1/8/8/8/5B2/4Bp1p/2K3k1 w - - 0 1",
+        "move": "g8=Q#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Diagonal Queen Capture Mate",
+        "fen": "7k/6pp/8/8/8/2B5/6Q1/6K1 w - - 0 1",
+        "move": "Qxg7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Central Queen Capture Mate",
+        "fen": "3rkr2/3ppp2/4Q3/8/8/8/8/4R1K1 w - - 0 1",
+        "move": "Qxe7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Classic Qxh7 Mate",
+        "fen": "7k/6pp/6Q1/8/8/8/2B5/6K1 w - - 0 1",
+        "move": "Qxh7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Bishop Corner Mate",
+        "fen": "k7/p2N4/2K5/8/8/8/8/1B42 w - - 0 1",
+        "move": "Bb7#",
+        "fen_valid": false,
+        "white_to_move": false,
+        "move_valid": false,
+        "is_checkmate": false,
+        "error": "Invalid FEN: two subsequent digits in position part of fen: 'k7/p2N4/2K5/8/8/8/8/1B42'"
+      },
+      {
+        "name": "Another Corner Queen Mate",
+        "fen": "k7/p1K5/8/8/8/8/8/1Q6 w - - 0 1",
+        "move": "Qb8#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 76,
+      "completion_tokens": 63435,
+      "total_tokens": 63511,
+      "completion_tokens_details": {
+        "reasoning_tokens": 62969
+      }
+    }
+  },
+  {
+    "iteration": 2,
+    "request": "Scenario 3 (Invalid FEN: two subsequent digits in position part of fen: 'k7/p7/2K5/8/8/1Q51/8/8') and Scenario 9 (Invalid FEN: two subsequent digits in position part of fen: 'k7/p2N4/2K5/8/8/8/8/1B42') are invalid. Please generate 10 valid, **distinct** mate-in-1 scenarios using the same format as before.",
+    "response": "```text\nBack Rank Mate with Queen\n5r1k/4Qppp/8/8/8/8/5PPP/4R1K1 w - - 0 1\nQxf8#\n```\n\n```text\nSmothered Mate with Knight\n6rk/6pp/8/6N1/8/8/5PPP/6K1 w - - 0 1\nNf7#\n```\n\n```text\nQueen and Bishop Mate on the H-file\n6rk/6pp/6Q1/8/8/8/2B2PPP/6K1 w - - 0 1\nQxh7#\n```\n\n```text\nPromotion to Queen Mate\n8/6Pk/6pp/8/8/8/B4PPP/6K1 w - - 0 1\ng8=Q#\n```\n\n```text\nDiagonal Bishop Capture Mate\nk7/ppQ5/8/8/8/8/5PBP/6K1 w - - 0 1\nBxb7#\n```\n\n```text\nBasic K+Q vs K Mate (top-right corner)\n7k/8/5KQ1/8/8/8/8/8 w - - 0 1\nQg7#\n```\n\n```text\nCorner Queen Mate with Supportive King (top-left)\nk7/8/1QK5/8/8/8/8/8 w - - 0 1\nQb7#\n```\n\n```text\nCorner Mate from Below (bottom-left)\n8/8/8/8/8/1QK5/8/k7 w - - 0 1\nQb2#\n```\n\n```text\nBasic K+R vs K Mate\nk7/2K5/1R6/8/8/8/8/8 w - - 0 1\nRa6#\n```\n\n```text\nCorner Mate with Queen from Above (bottom-right)\n8/8/8/8/8/6Q1/5K2/7k w - - 0 1\nQg2#\n```",
+    "reasoning": "**Considering distinct scenarios**\n\nI can reuse some scenarios if they\u2019re valid and distinct, but the prompt specifically asks for 10 distinct mate-in-1 scenarios. It doesn't say I can't replicate earlier ones, but it might be safer to create all new ones just in case. I want to ensure variety in the positions, including different mating pieces and moves. I'll also be cautious with FEN digits, especially avoiding issues like '51' and '42,' which were flagged as invalid before.**Clarifying FEN rules**\n\nI need to sum to 8 using the digits 1-8, but they can't be combined. I realize that numbers like \"51\" are parsed separately as '5' and '1', which means 5 empty squares followed by 1 empty square, totaling 6. The user flagged an issue with \"k7/p7/2K5/8/8/1Q51/8/8\", but standard FEN actually allows '51' in ranks. While '51' is valid since it results in 6 empty squares, some validators may not allow more than 8 empty squares per rank. But upon recalculation, \"1Q51\" actually adds up correctly to 8 total squares.**Understanding FEN digit separation**\n\nI\u2019m realizing that we can represent empty squares with single digits, like using '8' alone, which is fine. In something like \"2K5,\" the '2' and '5' are separated by 'K', so that works. \"5r1k\" is fine too, with '5', 'r', and '1' separated. \n\nHowever, in \"3R2K1,\" it looks like '3', 'R', '2', 'K', and '1' are all separated correctly. The digits aren't next to each other, only adjacent to pieces, so it meets the constraints.**Designing valid FEN ranks**\n\nTo create valid FEN ranks, I need to ensure that if there are more than 8 empty squares needing multiple chunks, I should place pieces between the digits. The total empties and pieces combined must equal exactly 8, which might be tricky but manageable. \n\nFor example, \"2K5\" works since the '2' and '5' are separated by 'K'. However, in \"1Q51,\" there's a problem because '5' and '1' are adjacent with no character between them. I need to avoid segments where two digits are directly next to each other, so I\u2019ll ensure that each rank has at most one contiguous digit.**Designing valid FEN for checkmate scenarios**\n\nI need to be careful with my FEN representations to ensure pieces separate digits. For instance, \"5r1k\" works because '5' and '1' are separated, and \"k7\" is valid too because it only has one digit. However, \"71k\" is not allowed. Since the user uses a validator that mistakenly flags multi-digit empties like '11', I\u2019ll design ranks to avoid that. Each rank must add up to 8, including digits and piece characters. \n\nI\u2019ll create 10 unique positions for mating scenarios, ensuring no adjacent digits occur. Each scenario will have limited black resources, and I\u2019ll verify checkmate properties. After generating some FENs, I discovered a mistake in the move from my original queen position. I need to ensure it accurately represents legal moves. I\u2019ll replace the queen's initial position to confirm that the path is valid.**Adjusting FEN for checkmate scenarios**\n\nI\u2019ve placed the queen at e7, which makes the rank 7 configuration \"4Qppp\" valid. The entire board has the black king h8 and various pawns, with the white queen moving to f8 to deliver checkmate. I need to check for any black escape moves, and given the arrangement, it looks solid. Each rank sums to 8 empty squares plus pieces, fitting the required representation. Now, I\u2019ll design additional scenarios, starting with the \u201cSmothered Knight Mate\u201d pattern, ensuring black pieces block all escape routes for the king.**Validating smothered mate scenario**\n\nI need to ensure that the black king has no escape routes around the knight on f7. The rook on g8 can't capture the knight since rooks move straight, and I\u2019ll keep the pawn on h7 as an obstacle. The setup will include a black king at h8, rook at g8, and pawns at g7 and h7, with a white knight at f7. \n\nI\u2019ll double-check the FEN for accuracy; I think it's \"6rk/6pp/8/6N1/8/8/5PPP/6K1 w - - 0 1.\" After that, I\u2019ll design the next mating scenario featuring a corner mate with a queen, ensuring no overlapping digits or adjacent ranks.**Confirming checkmate scenario**\n\nI\u2019m designing the final position after the move Qxh7#. The black king is at h8, with a g7 pawn to capture. If a white bishop at c2 controls the diagonal to h7, it protects the queen, preventing the king from capturing it. So I verify that the king has no legal moves or pieces to intervene. I\u2019ll need to ensure that the FEN correctly reflects the arrangement of all pieces. \n\nNow, for the next scenario, I\u2019ll create a rook checkmate along a file, ensuring all conditions for blocking or capturing are impossible.**Analyzing rook checkmate scenarios**\n\nI\u2019m considering a position with the black king at h8, along with black pawns and the white rook at e8, controlled by a bishop on d4. I\u2019m thinking about how to avoid any escape moves for the black king after the rook move. For a back rank mate, I need to ensure that the king can't move to g7 or h8 without being in check.\n\nI also have to confirm that the rook's line restricts the black king effectively. I\u2019ll need to make sure h8 is occupied or controlled by another white piece to prevent any escape.**Designing rook checkmate scenarios**\n\nI\u2019m considering a setup where the black king is at h8, along with pawns on g7 and h7, while the white rook is on e8 delivering check. I need to ensure that the line from e8 to h8 is clear, without any pieces in between, so black can't escape. The challenge lies in positioning pieces so the king can't move to h8 and to ensure it can't block the check. I also want to explore a simpler checkmate where the rook can check from different positions effectively.**Exploring rook checkmate scenarios**\n\nI\u2019m considering different setups for rook checkmates. For instance, placing the black king at h8 with pawns on g7 and h7. I want to ensure that the rook can deliver check without being blocked or captured, ideally with support from other pieces like a queen or bishop. I think creating a variety of intended scenarios, including some double check patterns, would be beneficial. Ultimately, I remember that I don\u2019t need to limit myself to only rook-based checks; variety in piece type can also be captivating in mate scenarios.**Designing mating scenarios**\n\nI\u2019m focusing on various ways to achieve checkmate using pieces like the queen, knight, and bishop, rather than strictly relying on rooks. I\u2019ve already outlined three scenarios. Now, I need to create seven more, ensuring each one features a distinct setup with different FEN positions. One of these will involve promoting a pawn to a queen for checkmate. Ensuring positions are valid and that the black king cannot escape or capture the new piece is crucial. I\u2019ll carefully construct scenarios where everything aligns correctly to achieve checkmate.**Verifying checkmate scenarios**\n\nI need to ensure the initial board doesn't block any paths to checkmate. The positions for my white pieces must control critical escape squares for the black king. Using a bishop from a2 looks like a solid plan, as it can diagonally control g8. After establishing white's pieces, I'll check if all conditions for checkmate are met, meaning the black king cannot move or capture any attacking pieces. \n\nNow, scenario five will involve a bishop delivering checkmate, which is key for variety. I'll create a position where a bishop captures a pawn to complete the checkmate.**Validating bishop checkmate**\n\nI need to ensure that after my bishop captures on h7, the black king on h8 cannot capture it effectively, as h7 is protected by another piece, likely the queen. I'll set the position with the black king on g8. After capturing on h7, I want to check that there are no escape squares for the black king. I'll also verify that the other black pawns don\u2019t interfere with the checkmate conditions.\n\nNow, I\u2019ll design checkmate scenarios involving the bishop delivering the final blow while ensuring proper support from the queen!**Reassessing checkmate positions**\n\nI need to evaluate potential checkmate patterns using a queen or bishop. Starting with the queen defending g7 makes sense, so I\u2019ll set the queen on h6 alongside the bishop on f6. After Bxg7#, I must verify that g7 is protected and that the black king has no escape routes. \n\nI\u2019ll ensure the black pawns on g7 and h7 are positioned correctly and that the white pieces adequately cover all possible escapes of the black king!**Finalizing mate position**\n\nI'm analyzing a potential checkmate scenario where the knight can't help remove the check on the black king. The only viable move to resolve the check involves the king moving or a piece capturing the bishop on b7. I realize the setup requires the queen on c7 to attack both b7 and b8 effectively, ensuring no escape for the king. The final position should have the white pieces arranged properly while confirming pawns aren\u2019t obstructing necessary moves. I'll encode the initial FEN for accurate representation as well!**Designing simple checkmate scenarios**\n\nI\u2019m laying out the setup for our chess endgame positions, ensuring the arrangement doesn\u2019t include unnecessary pieces. For rank placements, I've allocated the bishop, pawns, and king correctly while keeping track of the FEN notation. Now, I\u2019m creating distinct scenarios for checkmate that involve minimal black pieces and strategic white pieces. I aim for ten unique configurations, focusing on straightforward ones like using the queen in various positions to deliver the final blow efficiently. Let\u2019s keep the designs manageable!**Creating checkmate scenarios**\n\nI'm designing a simple scenario for checkmate with minimal pieces. In one setup, I have the black king on h8, a pawn on h7, a white queen on g4, and a bishop on c4, ready to move Qg8# or Qh8#. I\u2019m aiming for clear patterns like the king and queen vs. king setup. It\u2019s crucial to ensure the initial position isn't already a checkmate to keep the puzzle valid. Encoding the FEN correctly is important, so I\u2019ll lay out the pieces carefully without violating the check condition at the start.**Designing checkmate scenarios**\n\nI\u2019m focusing on creating scenario 6 for a basic checkmate involving a king and queen. One setup has the black king on h8, while the white king is on f6 and the queen on g6, leading to a potential Qg7#. Moving on to scenario 7, I want a different orientation\u2014like a queen on b6 threatening the black king on a8. I also want to confirm each scenario is distinct and create a valid FEN representation, ensuring the initial positions aren\u2019t checkmates already. \n\nFor scenario 8, I\u2019m considering an underpromotion to a knight for the checkmate, but verifying the check patterns can be challenging. I should keep it straightforward and ensure the designs are manageable while capturing essential patterns.**Creating checkmate scenarios**\n\nI don't need two additional scenarios \u2014 just focus on creating three more to reach ten total. So far, I have seven checkmate patterns designed. For the remaining three, I\u2019m considering a discovered mate, a queen capture checkmate, and a knight mate pattern. \n\nI\u2019ll set up the eighth scenario with a corner checkmate, using the black king on a1 and the white queen on b2. I need to verify that the starting position is not in check before constructing the FEN.\n\nThe ninth scenario will involve rook versus king, and I\u2019ll ensure that this one demonstrates a recognized checkmate pattern effectively, like a box mate. I\u2019ll confirm that the rook and king effectively support each other in delivering checkmate.**Verifying and designing checkmates**\n\nI need to ensure that my arrangements allow for checkmates in a way that doesn't have the rook putting the king in check at the start. I can adjust the rook's position to b6, then move it to a6 for checkmate. \n\nI'll create a scenario with a position that starts with the black king on a8 and the white king on c7. Moving the rook to a6 will indeed checkmate.\n\nFor scenario 10, I want something unique. Maybe a checkmate involving a queen at the edge of the board, where the white queen attacks from g2. I'll ensure that the black king can't escape and is adequately trapped. I'll also verify that the starting position isn't compromised by any checks before proceeding.**Verifying FEN and scenarios**\n\nI need to confirm that my calculations for the FEN representation are correct, particularly ensuring no illegal attacks occur on the black king before my final move. \n\nFor the white queen on g3 covering various squares but not h1, we conclude that the initial positions are safe. After moving the queen to g2, it will indeed checkmate the black king at h1.\n\nNow, I\u2019ll proceed to list my scenarios clearly, ensuring each has distinct positions and FEN codes. I'll verify each scenario\u2019s FEN while maintaining proper counts of pieces and avoiding any adjacency issues with digits.**Designing promotion mate scenario**\n\nI want to create a checkmate scenario with a promotion, but it needs to start without being in check. It seems unorthodox to allow a mate from an already-checked position.\n\nLet\u2019s adjust the black king's position to g8 to avoid issues and plan for a promotion on g8. If the white pawn is on g7, I can ensure it's attacking the right squares. I\u2019ll have to confirm that no illegal moves occur after promoting the pawn to a queen.\n\nTo finalize, I can place extra black pawns to block other potential king moves. This should provide a clear pathway for a successful promotion checkmate scenario.**Verifying check scenarios**\n\nI'm outlining how to set up a checkmate scenario with a promotion. First, I want to confirm that the black king isn\u2019t currently in check before I proceed. The white pawn on g7 attacks positions, but the bishop on a2 doesn\u2019t create a check. After promoting the pawn to queen on g8, I also need to look at the black king's possible moves to ensure it has no escape.\n\nLastly, I\u2019ll verify the FEN encoding to make sure the setup accurately reflects all pieces on the board. I'll confirm everything follows the rules before finalizing this scenario.**Updating scenarios**\n\nI\u2019ve validated scenarios 6 through 10 for initial checks, but I need to double-check scenario 9 again. I\u2019m updating and recomputing all scenarios, ensuring they are accurate and formatted correctly into their own code fences. Each code block will have three lines: the name, the FEN string, and the winning move. \n\nI\u2019ll also confirm that the notation for captures and promotions is consistent, ensuring everything's clear and without extra commentary. Alright, let\u2019s get these scenarios delivered!",
+    "scenarios": [
+      {
+        "name": "Back Rank Mate with Queen",
+        "fen": "5r1k/4Qppp/8/8/8/8/5PPP/4R1K1 w - - 0 1",
+        "move": "Qxf8#"
+      },
+      {
+        "name": "Smothered Mate with Knight",
+        "fen": "6rk/6pp/8/6N1/8/8/5PPP/6K1 w - - 0 1",
+        "move": "Nf7#"
+      },
+      {
+        "name": "Queen and Bishop Mate on the H-file",
+        "fen": "6rk/6pp/6Q1/8/8/8/2B2PPP/6K1 w - - 0 1",
+        "move": "Qxh7#"
+      },
+      {
+        "name": "Promotion to Queen Mate",
+        "fen": "8/6Pk/6pp/8/8/8/B4PPP/6K1 w - - 0 1",
+        "move": "g8=Q#"
+      },
+      {
+        "name": "Diagonal Bishop Capture Mate",
+        "fen": "k7/ppQ5/8/8/8/8/5PBP/6K1 w - - 0 1",
+        "move": "Bxb7#"
+      },
+      {
+        "name": "Basic K+Q vs K Mate (top-right corner)",
+        "fen": "7k/8/5KQ1/8/8/8/8/8 w - - 0 1",
+        "move": "Qg7#"
+      },
+      {
+        "name": "Corner Queen Mate with Supportive King (top-left)",
+        "fen": "k7/8/1QK5/8/8/8/8/8 w - - 0 1",
+        "move": "Qb7#"
+      },
+      {
+        "name": "Corner Mate from Below (bottom-left)",
+        "fen": "8/8/8/8/8/1QK5/8/k7 w - - 0 1",
+        "move": "Qb2#"
+      },
+      {
+        "name": "Basic K+R vs K Mate",
+        "fen": "k7/2K5/1R6/8/8/8/8/8 w - - 0 1",
+        "move": "Ra6#"
+      },
+      {
+        "name": "Corner Mate with Queen from Above (bottom-right)",
+        "fen": "8/8/8/8/8/6Q1/5K2/7k w - - 0 1",
+        "move": "Qg2#"
+      }
+    ],
+    "validations": [
+      {
+        "name": "Back Rank Mate with Queen",
+        "fen": "5r1k/4Qppp/8/8/8/8/5PPP/4R1K1 w - - 0 1",
+        "move": "Qxf8#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Smothered Mate with Knight",
+        "fen": "6rk/6pp/8/6N1/8/8/5PPP/6K1 w - - 0 1",
+        "move": "Nf7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Queen and Bishop Mate on the H-file",
+        "fen": "6rk/6pp/6Q1/8/8/8/2B2PPP/6K1 w - - 0 1",
+        "move": "Qxh7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Promotion to Queen Mate",
+        "fen": "8/6Pk/6pp/8/8/8/B4PPP/6K1 w - - 0 1",
+        "move": "g8=Q#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Diagonal Bishop Capture Mate",
+        "fen": "k7/ppQ5/8/8/8/8/5PBP/6K1 w - - 0 1",
+        "move": "Bxb7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Basic K+Q vs K Mate (top-right corner)",
+        "fen": "7k/8/5KQ1/8/8/8/8/8 w - - 0 1",
+        "move": "Qg7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Corner Queen Mate with Supportive King (top-left)",
+        "fen": "k7/8/1QK5/8/8/8/8/8 w - - 0 1",
+        "move": "Qb7#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Corner Mate from Below (bottom-left)",
+        "fen": "8/8/8/8/8/1QK5/8/k7 w - - 0 1",
+        "move": "Qb2#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Basic K+R vs K Mate",
+        "fen": "k7/2K5/1R6/8/8/8/8/8 w - - 0 1",
+        "move": "Ra6#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      },
+      {
+        "name": "Corner Mate with Queen from Above (bottom-right)",
+        "fen": "8/8/8/8/8/6Q1/5K2/7k w - - 0 1",
+        "move": "Qg2#",
+        "fen_valid": true,
+        "white_to_move": true,
+        "move_valid": true,
+        "is_checkmate": true,
+        "error": ""
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 651,
+      "completion_tokens": 33742,
+      "total_tokens": 34393,
+      "completion_tokens_details": {
+        "reasoning_tokens": 33278
+      }
+    }
+  }
+]

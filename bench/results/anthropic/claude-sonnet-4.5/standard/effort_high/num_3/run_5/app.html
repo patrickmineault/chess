@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Endgame Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .scenario-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .scenario-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .scenario-btn.active {
+            background: #2196F3;
+        }
+
+        .reset-btn {
+            background: #ff9800;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #e68900;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            border: 3px solid #333;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .square.light {
+            background-color: #f0d9b5;
+        }
+
+        .square.dark {
+            background-color: #b58863;
+        }
+
+        .square.highlight {
+            background-color: #baca44 !important;
+        }
+
+        .square.checkmate {
+            background-color: #90EE90 !important;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .piece {
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+
+        .piece:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+
+        .piece.dragging {
+            opacity: 0.5;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            min-height: 30px;
+            color: #333;
+        }
+
+        .message.success {
+            color: #4CAF50;
+            animation: celebration 0.5s ease-in-out;
+        }
+
+        .message.error {
+            color: #f44336;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes celebration {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-10px);
+            }
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        .info {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .board {
+                grid-template-columns: repeat(8, 45px);
+                grid-template-rows: repeat(8, 45px);
+            }
+
+            .square {
+                width: 45px;
+                height: 45px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♟️ Chess Endgame Practice</h1>
+        
+        <div class="controls">
+            <button class="scenario-btn active" data-scenario="0">Scenario 1: Back Rank</button>
+            <button class="scenario-btn" data-scenario="1">Scenario 2: Queen Mate</button>
+            <button class="scenario-btn" data-scenario="2">Scenario 3: Corner Rook</button>
+            <button class="reset-btn">Reset Position</button>
+        </div>
+
+        <div class="board" id="board"></div>
+
+        <div class="message" id="message">Find mate in 1 for White!</div>
+        <div class="info">Drag and drop the white pieces to deliver checkmate</div>
+    </div>
+
+    <script>
+        // Chess pieces Unicode characters
+        const pieces = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+
+        // Scenarios: each is an 8x8 board represented as array of arrays
+        // Empty squares are null, pieces are represented by letters (uppercase = white, lowercase = black)
+        const scenarios = [
+            // Scenario 1: Back rank mate with rook
+            [
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, 'p', 'p'],
+                ['R',  null, null, null, null, null, null, null],
+                [null, null, null, null, null, 'K', 'k', null]
+            ],
+            // Scenario 2: Queen mate
+            [
+                [null, null, null, null, null, null, null, 'k'],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, 'K', null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                ['Q',  null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null]
+            ],
+            // Scenario 3: Rook mate near corner
+            [
+                ['k',  null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                ['K',  null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null, null],
+                ['R',  null, null, null, null, null, null, null]
+            ]
+        ];
+
+        // Solution moves for each scenario (from position to position)
+        const solutions = [
+            { from: [6, 0], to: [7, 0] },  // Ra8#
+            { from: [6, 0], to: [0, 7] },  // Qh8#
+            { from: [7, 0], to: [0, 0] }   // Ra1#
+        ];
+
+        let currentScenario = 0;
+        let board = [];
+        let draggedPiece = null;
+        let draggedFrom = null;
+        let gameOver = false;
+
+        function initBoard() {
+            board = scenarios[currentScenario].map(row => [...row]);
+            gameOver = false;
+            renderBoard();
+            updateMessage('Find mate in 1 for White!', '');
+        }
+
+        function renderBoard() {
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = '';
+
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    square.className = `square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+
+                    const piece = board[row][col];
+                    if (piece) {
+                        const pieceElement = document.createElement('div');
+                        pieceElement.className = 'piece';
+                        pieceElement.textContent = pieces[piece];
+                        pieceElement.draggable = true;
+                        pieceElement.dataset.piece = piece;
+                        
+                        // Only allow dragging white pieces
+                        if (piece === piece.toUpperCase()) {
+                            pieceElement.addEventListener('dragstart', handleDragStart);
+                            pieceElement.addEventListener('dragend', handleDragEnd);
+                        } else {
+                            pieceElement.draggable = false;
+                        }
+
+                        square.appendChild(pieceElement);
+                    }
+
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+
+                    boardElement.appendChild(square);
+                }
+            }
+        }
+
+        function handleDragStart(e) {
+            if (gameOver) return;
+            
+            draggedPiece = e.target.dataset.piece;
+            const square = e.target.parentElement;
+            draggedFrom = {
+                row: parseInt(square.dataset.row),
+                col: parseInt(square.dataset.col)
+            };
+            e.target.classList.add('dragging');
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (gameOver || !draggedPiece) return;
+
+            const targetSquare = e.target.classList.contains('square') 
+                ? e.target 
+                : e.target.parentElement;
+            
+            const toRow = parseInt(targetSquare.dataset.row);
+            const toCol = parseInt(targetSquare.dataset.col);
+
+            // Don't allow dropping on own pieces
+            if (board[toRow][toCol] && board[toRow][toCol] === board[toRow][toCol].toUpperCase()) {
+                draggedPiece = null;
+                draggedFrom = null;
+                return;
+            }
+
+            // Make the move
+            board[toRow][toCol] = draggedPiece;
+            board[draggedFrom.row][draggedFrom.col] = null;
+
+            renderBoard();
+            checkSolution(draggedFrom, { row: toRow, col: toCol });
+
+            draggedPiece = null;
+            draggedFrom = null;
+        }
+
+        function checkSolution(from, to) {
+            const solution = solutions[currentScenario];
+            
+            if (from.row === solution.from[0] && from.col === solution.from[1] &&
+                to.row === solution.to[0] && to.col === solution.to[1]) {
+                // Correct solution!
+                gameOver = true;
+                highlightCheckmate(to);
+                updateMessage('🎉 Checkmate! Well done! 🎉', 'success');
+            } else {
+                // Wrong move
+                updateMessage('❌ Not quite! Try again.', 'error');
+                setTimeout(() => {
+                    initBoard();
+                }, 1500);
+            }
+        }
+
+        function highlightCheckmate(square) {
+            const squares = document.querySelectorAll('.square');
+            const index = square.row * 8 + square.col;
+            squares[index].classList.add('checkmate');
+            
+            // Also highlight the king
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if (board[row][col] === 'k') {
+                        const kingIndex = row * 8 + col;
+                        squares[kingIndex].classList.add('checkmate');
+                    }
+                }
+            }
+        }
+
+        function updateMessage(text, className) {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = text;
+            messageElement.className = `message ${className}`;
+        }
+
+        // Event listeners for scenario buttons
+        document.querySelectorAll('.scenario-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                currentScenario = parseInt(e.target.dataset.scenario);
+                
+                // Update active button
+                document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                initBoard();
+            });
+        });
+
+        // Event listener for reset button
+        document.querySelector('.reset-btn').addEventListener('click', () => {
+            initBoard();
+        });
+
+        // Initialize the board on load
+        initBoard();
+    </script>
+</body>
+</html>

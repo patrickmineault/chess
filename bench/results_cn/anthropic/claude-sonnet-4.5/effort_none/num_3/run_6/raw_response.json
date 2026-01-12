@@ -1,0 +1,26 @@
+{
+  "id": "gen-1764370960-hPWGgyyBRFdGTJH6DHUz",
+  "provider": "Google",
+  "model": "anthropic/claude-sonnet-4.5",
+  "object": "chat.completion",
+  "created": 1764370960,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nBack Rank Mate with Rook\n6k1/5ppp/8/8/8/8/5PPP/5RK1 w - - 0 1\nRf8#\n```\n\n```\nQueen and Knight Checkmate\n6k1/5ppp/5N2/8/8/8/5PPP/5QK1 w - - 0 1\nQg7#\n```\n\n```\nSmothered Mate with Knight\n5rkr/5ppp/8/8/8/8/5PPP/5RKN w - - 0 1\nNf7#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 83,
+    "completion_tokens": 158,
+    "total_tokens": 241
+  }
+}

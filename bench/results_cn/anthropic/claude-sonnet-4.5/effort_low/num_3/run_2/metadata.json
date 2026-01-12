@@ -1,0 +1,14 @@
+{
+  "model": "anthropic/claude-sonnet-4.5",
+  "effort": "low",
+  "num_scenarios_requested": 3,
+  "num_scenarios_parsed": 3,
+  "run": 2,
+  "timestamp": "2025-11-28T15:37:19.044421",
+  "usage": {
+    "prompt_tokens": 112,
+    "completion_tokens": 2726,
+    "total_tokens": 2838
+  },
+  "has_reasoning": true
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Scenario 1: Back Rank Mate (Rook)",
+    "fen": "6k1/5ppp/8/8/8/8/8/2R3K1 w - - 0 1",
+    "move": "Rc8#"
+  },
+  {
+    "name": "Scenario 2: Fool's Mate Pattern (Queen)",
+    "fen": "rnbqkbnr/ppppp2p/5p2/6p1/4P3/8/PPPP1PPP/RNBQK1NR w KQkq - 0 2",
+    "move": "Qh5#"
+  },
+  {
+    "name": "Scenario 3: Scholar's Mate Pattern (Queen)",
+    "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+    "move": "Qxf7#"
+  },
+  {
+    "name": "Scenario 4: Smothered Mate (Knight)",
+    "fen": "6rk/6pp/8/4N3/8/8/8/7K w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Scenario 5: Arabian Mate (Rook + Knight)",
+    "fen": "7k/R7/5N2/8/8/8/8/7K w - - 0 1",
+    "move": "Rh7#"
+  },
+  {
+    "name": "Scenario 6: Anastasia's Mate (Rook + Knight)",
+    "fen": "5r1k/4N1p1/8/8/8/R7/8/7K w - - 0 1",
+    "move": "Rh3#"
+  },
+  {
+    "name": "Scenario 7: Promotion Mate (Pawn to Queen)",
+    "fen": "7k/5P1p/8/5K2/8/8/8/8 w - - 0 1",
+    "move": "f8=Q#"
+  },
+  {
+    "name": "Scenario 8: Battery Mate (Queen + Bishop)",
+    "fen": "5rk1/6pp/8/8/8/8/1B3Q2/6K1 w - - 0 1",
+    "move": "Qxg7#"
+  },
+  {
+    "name": "Scenario 9: Kiss of Death (Queen + King)",
+    "fen": "7k/8/6K1/2Q5/8/8/8/8 w - - 0 1",
+    "move": "Qf8#"
+  },
+  {
+    "name": "Scenario 10: Corner Rook Mate (Rook + King support)",
+    "fen": "k7/2R5/K7/8/8/8/8/3R4 w - - 0 1",
+    "move": "Rd8#"
+  }
+]

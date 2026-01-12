@@ -1,0 +1,265 @@
+Below is a complete, self‑contained example (HTML + CSS + JS) for a small “mate in 1” endgame trainer.
+
+Features:
+- 3 selectable puzzles (all “White to move, mate in 1”).
+- Drag-and-drop pieces (using chessboard.js).
+- Legal move checking and checkmate detection (using chess.js).
+- Visual feedback (colored message + board glow).
+- Reset button for the current puzzle.
+
+Save this as `index.html` and open it in a browser (internet access required for the CDNs).
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chess Endgame Practice – Mate in 1</title>
+
+  <!-- Chessboard.js CSS -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard-1.0.0.min.css"
+        integrity="sha512-gVC3SffOtCVbT4+K5QTX82GUf5g7ttVfNDKze6A7RZ/7QVunmU6PCT0S18gNuyg1xvt0I0o46XOV2RS+IWpgYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .controls {
+      margin-bottom: 10px;
+    }
+
+    label {
+      margin-right: 6px;
+      font-weight: bold;
+    }
+
+    select, button {
+      margin-right: 10px;
+      padding: 4px 8px;
+      font-size: 14px;
+    }
+
+    #boardWrapper {
+      display: inline-block;
+      padding: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      transition: box-shadow 0.2s ease;
+    }
+
+    #boardWrapper.success {
+      box-shadow: 0 0 15px 2px #4caf50;
+    }
+
+    #boardWrapper.error {
+      box-shadow: 0 0 15px 2px #f44336;
+    }
+
+    #board {
+      width: 400px;
+      margin: 0 auto;
+    }
+
+    #status {
+      margin-top: 10px;
+      padding: 8px;
+      min-height: 24px;
+      border-radius: 4px;
+      background: #eee;
+      font-weight: bold;
+    }
+
+    #status.success {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #2e7d32;
+    }
+
+    #status.error {
+      background: #ffebee;
+      color: #c62828;
+      border: 1px solid #c62828;
+    }
+
+    #status.info {
+      background: #e3f2fd;
+      color: #1565c0;
+      border: 1px solid #1565c0;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chess Endgame Practice – Mate in 1 (White to Move)</h1>
+
+  <div class="controls">
+    <label for="puzzleSelect">Scenario:</label>
+    <select id="puzzleSelect">
+      <option value="0">Puzzle 1 – Back-rank mate pattern</option>
+      <option value="1">Puzzle 2 – Corner queen mate</option>
+      <option value="2">Puzzle 3 – Queen vs king (simple mate)</option>
+    </select>
+
+    <button id="resetBtn">Reset Position</button>
+  </div>
+
+  <div id="boardWrapper">
+    <div id="board"></div>
+  </div>
+
+  <div id="status" class="info">
+    Select a puzzle. White to move and mate in 1.
+  </div>
+
+  <!-- Chess.js (move legality, checkmate detection) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"
+          integrity="sha512-0Fvz7nqE0vEVFaRYQSm4KVd+7hctL6pK6SRivOOzc8khyfaYq6J5WxVk9r5o1TUmRRfCjorFJyFEJ1ET2FI2Lw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Chessboard.js (board UI + drag & drop) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard-1.0.0.min.js"
+          integrity="sha512-YihbvqAfCfkDrI0ZyY7Zr3bZHZhNtP92zK//QDTLFrPE1+jeaG+9gYB0SU2iWC+1pZOEll0avNDQx4wXjcS2xg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    // Puzzles: all are "White to move, mate in 1"
+    const puzzles = [
+      {
+        id: 0,
+        name: 'Puzzle 1 – Back-rank mate',
+        fen: '6k1/6pp/8/7Q/8/8/8/6K1 w - - 0 1',
+        hint: 'White to move and mate in 1.'
+      },
+      {
+        id: 1,
+        name: 'Puzzle 2 – Corner queen mate',
+        fen: '7k/6Q1/6K1/8/8/8/8/8 w - - 0 1',
+        hint: 'White to move and mate in 1.'
+      },
+      {
+        id: 2,
+        name: 'Puzzle 3 – Queen vs king',
+        fen: 'k7/2K5/8/1Q6/8/8/8/8 w - - 0 1',
+        hint: 'White to move and mate in 1.'
+      }
+    ];
+
+    let board = null;
+    let game = null;
+    let currentPuzzleIndex = 0;
+    let puzzleFinished = false;
+
+    const statusEl = document.getElementById('status');
+    const boardWrapperEl = document.getElementById('boardWrapper');
+    const puzzleSelectEl = document.getElementById('puzzleSelect');
+    const resetBtnEl = document.getElementById('resetBtn');
+
+    function setStatus(text, type = 'info') {
+      statusEl.textContent = text;
+      statusEl.className = '';
+      statusEl.classList.add(type);
+      boardWrapperEl.classList.remove('success', 'error');
+      if (type === 'success' || type === 'error') {
+        boardWrapperEl.classList.add(type);
+      }
+    }
+
+    function loadPuzzle(index) {
+      currentPuzzleIndex = index;
+      puzzleFinished = false;
+
+      const puzzle = puzzles[index];
+
+      game.reset();
+      game.load(puzzle.fen);
+      board.position(game.fen());
+
+      setStatus(puzzle.name + ': ' + puzzle.hint, 'info');
+    }
+
+    function onDragStart(source, piece, position, orientation) {
+      // Do not allow moves if the puzzle is already finished
+      if (puzzleFinished) return false;
+
+      // Only allow White to move
+      if (game.turn() !== 'w') return false;
+      if (piece[0] !== 'w') return false; // Only pick up white pieces
+
+      // No moves if game already over (should not happen in puzzles)
+      if (game.game_over()) return false;
+    }
+
+    function onDrop(source, target) {
+      // Attempt the move
+      const move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q' // promote to queen if needed
+      });
+
+      // Illegal move
+      if (move === null) return 'snapback';
+
+      puzzleFinished = true;
+
+      // Check outcome
+      if (game.in_checkmate()) {
+        setStatus('Checkmate! Well done.', 'success');
+      } else if (game.in_check()) {
+        setStatus('That is check, but not checkmate. Mate in 1 failed. Press "Reset Position" to try again.', 'error');
+      } else {
+        setStatus('Not checkmate. Mate in 1 failed. Press "Reset Position" to try again.', 'error');
+      }
+    }
+
+    function onSnapEnd() {
+      board.position(game.fen());
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      game = new Chess();
+
+      const config = {
+        draggable: true,
+        position: 'start',
+        orientation: 'white',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd
+      };
+
+      board = Chessboard('board', config);
+
+      // Load initial puzzle
+      loadPuzzle(0);
+
+      // Change puzzle
+      puzzleSelectEl.addEventListener('change', function () {
+        const index = parseInt(this.value, 10);
+        loadPuzzle(index);
+      });
+
+      // Reset current puzzle
+      resetBtnEl.addEventListener('click', function () {
+        loadPuzzle(currentPuzzleIndex);
+      });
+
+      // Optional: keep board responsive
+      window.addEventListener('resize', board.resize);
+    });
+  </script>
+</body>
+</html>
+```
+
+You can change the FEN strings or add more puzzles to extend it; the logic will handle any “White to move, mate in 1” position.

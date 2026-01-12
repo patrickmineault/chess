@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Mate with Rook",
+    "fen": "6k1/5ppp/8/8/8/8/5PPP/6KR w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Queen and King Mate",
+    "fen": "6k1/6pp/8/8/8/8/5Q2/6K1 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Smothered Mate with Knight",
+    "fen": "5rkr/5ppp/8/8/8/8/3N4/6K1 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Bishop and Rook Mate",
+    "fen": "6k1/5ppp/5B2/8/8/8/8/4R2K w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Two Rooks Mate",
+    "fen": "6k1/6pp/8/8/8/8/R7/R5K1 w - - 0 1",
+    "move": "Ra8#"
+  },
+  {
+    "name": "Queen Mate on Long Diagonal",
+    "fen": "2k5/3p4/3P4/8/8/8/8/Q5K1 w - - 0 1",
+    "move": "Qa8#"
+  },
+  {
+    "name": "Rook Mate on Open File",
+    "fen": "r5k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Knight Fork Mate",
+    "fen": "6k1/5pNp/6p1/8/8/8/8/6K1 w - - 0 1",
+    "move": "Nf5#"
+  },
+  {
+    "name": "Bishop Mate in Corner",
+    "fen": "7k/6Bp/5K2/8/8/8/8/8 w - - 0 1",
+    "move": "Bf6#"
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "6k1/5PBp/6p1/8/8/8/8/6K1 w - - 0 1",
+    "move": "f8=Q#"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Back-Rank Mate",
+    "fen": "q3k3/5ppp/8/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6bk/6pp/5N2/8/8/8/8/4K3 w - - 0 1",
+    "move": "Ng8#"
+  },
+  {
+    "name": "Promotion Mate",
+    "fen": "r5k1/4P3/8/8/8/8/8/4K3 w - - 0 1",
+    "move": "e8=Q#"
+  }
+]

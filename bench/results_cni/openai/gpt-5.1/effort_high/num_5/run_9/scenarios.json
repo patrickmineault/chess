@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Corner queen mate",
+    "fen": "7k/8/5KQ1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Back-rank rook mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Smothered knight mate",
+    "fen": "6rk/6pp/7N/8/8/8/8/4K3 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Queen and bishop battery mate",
+    "fen": "6rk/6pp/4Q3/3B4/8/8/8/6K1 w - - 0 1",
+    "move": "Qxg8#"
+  },
+  {
+    "name": "Pawn promotion mate",
+    "fen": "6kr/6P1/6K1/8/3B4/8/8/8 w - - 0 1",
+    "move": "gxh8=Q#"
+  }
+]

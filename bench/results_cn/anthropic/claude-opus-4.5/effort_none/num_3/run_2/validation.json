@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R2K w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "1k6/ppp5/8/8/8/8/8/K2R4",
+    "scenario_index": 0,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2",
+    "reasoning_length": 168,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2/board_0_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2/board_0_after.png"
+  },
+  {
+    "name": "Scholar's Mate Finish",
+    "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+    "move": "Qxf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "RN1K1BNR/PPP1PPPP/8/3P1B2/Q2p4/2n2n2/ppp1pppp/r1bkqb1r",
+    "scenario_index": 1,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2",
+    "reasoning_length": 168,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2/board_1_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2/board_1_after.png"
+  },
+  {
+    "name": "Arabian Mate",
+    "fen": "5rk1/5p1p/8/8/8/8/8/4R1NK w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move does not give check",
+    "canonical_fen": "1kr5/p1p5/8/8/8/8/8/KN1R4",
+    "scenario_index": 2,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2",
+    "reasoning_length": 168,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2/board_2_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_none/num_3/run_2/board_2_after.png"
+  }
+]

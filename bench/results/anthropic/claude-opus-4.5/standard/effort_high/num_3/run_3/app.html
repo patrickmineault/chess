@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Mate in 1 Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        #app {
+            text-align: center;
+        }
+        
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        #scenario-buttons {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .scenario-btn {
+            background: linear-gradient(135deg, #4a6fa5 0%, #3d5a80 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .scenario-btn:hover {
+            background: linear-gradient(135deg, #5a8fd5 0%, #4a7fc5 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .scenario-btn.active {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+        }
+        
+        #board-container {
+            display: inline-block;
+            padding: 15px;
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            border: 4px solid #5d3a1a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            position: relative;
+            transition: box-shadow 0.2s ease;
+        }
+        
+        .square.light {
+            background: #f0d9b5;
+        }
+        
+        .square.dark {
+            background: #b58863;
+        }
+        
+        .square.highlight {
+            box-shadow: inset 0 0 25px rgba(255, 215, 0, 0.8);
+        }
+        
+        .square.valid-drop {
+            box-shadow: inset 0 0 25px rgba(0, 255, 100, 0.6);
+        }
+        
+        .square.success-highlight {
+            box-shadow: inset 0 0 30px rgba(46, 204, 113, 0.9);
+        }
+        
+        .square.error-highlight {
+            box-shadow: inset 0 0 30px rgba(231, 76, 60, 0.9);
+        }
+        
+        .piece {
+            cursor: grab;
+            transition: transform 0.15s ease;
+            line-height: 1;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        .piece:active {
+            cursor: grabbing;
+        }
+        
+        .piece.white-piece {
+            color: #fff;
+            text-shadow: 
+                1px 1px 2px rgba(0,0,0,0.8),
+                -1px -1px 1px rgba(0,0,0,0.4);
+        }
+        
+        .piece.black-piece {
+            color: #1a1a1a;
+            text-shadow: 
+                1px 1px 1px rgba(255,255,255,0.2),
+                0 0 3px rgba(0,0,0,0.5);
+        }
+        
+        .piece.dragging {
+            opacity: 0.4;
+            transform: scale(1.1);
+        }
+        
+        .piece.not-draggable {
+            cursor: default;
+        }
+        
+        .coordinates {
+            position: absolute;
+            font-size: 11px;
+            font-weight: bold;
+            pointer-events: none;
+        }
+        
+        .file-coord {
+            bottom: 2px;
+            right: 4px;
+        }
+        
+        .rank-coord {
+            top: 2px;
+            left: 4px;
+        }
+        
+        .light .coordinates { color: #b58863; }
+        .dark .coordinates { color: #f0d9b5; }
+        
+        #message {
+            margin: 20px auto;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            max-width: 400px;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        #message.success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+            animation: pulse 0.5s ease;
+        }
+        
+        #message.error {
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+            animation: shake 0.5s ease;
+        }
+        
+        #message.info {
+            background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-8px); }
+            80% { transform: translateX(8px); }
+        }
+        
+        #reset-btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        #reset-btn:hover {
+            background: linear-gradient(135deg, #ff5f4f 0%, #e74c3c 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .status-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #27ae60;
+        }
+        
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 550px) {
+            #board {
+                grid-template-columns: repeat(8, 45px);
+                grid-template-rows: repeat(8, 45px);
+            }
+            
+            .square {
+                width: 45px;
+                height: 45px;
+                font-size: 36px;
+            }
+            
+            .scenario-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>♔ Mate in 1 Practice ♚</h1>
+        <p class="subtitle">White to move - Find the checkmate!</p>
+        
+        <div class="status-indicator">
+            <div class="status-item">
+                <div class="status-dot"></div>
+                <span>White to move</span>
+            </div>
+        </div>
+        
+        <div id="scenario-buttons"></div>
+        
+        <div id="board-container">
+            <div id="board"></div>
+        </div>
+        
+        <div id="message" class="info">Select a scenario and find the mate in 1!</div>
+        
+        <button id="reset-btn">↺ Reset Position</button>
+    </div>
+
+    <script>
+        // Chess piece Unicode characters
+        const PIECES = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+        
+        // Mate in 1 scenarios
+        const scenarios = [
+            {
+                name: "Back Rank Mate",
+                description: "Use the rook to deliver mate on the back rank!",
+                position: {
+                    'g8': 'k', 'f7': 'p', 'g7': 'p', 'h7': 'p',
+                    'e1': 'K', 'a1': 'R'
+                },
+                solutions: [
+                    { from: 'a1', to: 'a8' }
+                ]
+            },
+            {
+                name: "Queen Checkmate",
+                description: "Trap the king on the edge with your queen!",
+                position: {
+                    'h8': 'k',
+                    'g6': 'K', 'f6': 'Q'
+                },
+                solutions: [
+                    { from: 'f6', to: 'f8' },
+                    { from: 'f6', to: 'g7' }
+                ]
+            },
+            {
+                name: "Rook & King Ladder",
+                description: "Coordinate rook and king for the final blow!",
+                position: {
+                    'a8': 'k',
+                    'a6': 'K', 'b7': 'R'
+                },
+                solutions: [
+                    { from: 'b7', to: 'b8' }
+                ]
+            }
+        ];
+        
+        // Game state
+        let currentScenario = 0;
+        let currentPosition = {};
+        let draggedPiece = null;
+        let draggedFrom = null;
+        let solved = false;
+        
+        // Initialize the app
+        function init() {
+            createScenarioButtons();
+            loadScenario(0);
+            document.getElementById('reset-btn').addEventListener('click', resetPosition);
+        }
+        
+        // Create scenario selection buttons
+        function createScenarioButtons() {
+            const container = document.getElementById('scenario-buttons');
+            scenarios.forEach((scenario, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'scenario-btn';
+                btn.textContent = `#${index + 1}: ${scenario.name}`;
+                btn.addEventListener('click', () => loadScenario(index));
+                container.appendChild(btn);
+            });
+        }
+        
+        // Load a scenario
+        function loadScenario(index) {
+            currentScenario = index;
+            currentPosition = { ...scenarios[index].position };
+            solved = false;
+            
+            // Update button states
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            
+            showMessage(scenarios[index].description, 'info');
+            renderBoard();
+        }
+        
+        // Reset the current position
+        function resetPosition() {
+            loadScenario(currentScenario);
+        }
+        
+        // Convert algebraic notation to board indices
+        function algebraicToIndex(square) {
+            const file = square.charCodeAt(0) - 'a'.charCodeAt(0);
+            const rank = 8 - parseInt(square[1]);
+            return { row: rank, col: file };
+        }
+        
+        // Convert board indices to algebraic notation
+        function indexToAlgebraic(row, col) {
+            const file = String.fromCharCode('a'.charCodeAt(0) + col);
+            const rank = 8 - row;
+            return `${file}${rank}`;
+        }
+        
+        // Check if a piece is white
+        function isWhitePiece(piece) {
+            return piece === piece.toUpperCase();
+        }
+        
+        // Render the chess board
+        function renderBoard() {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    const isLight = (row + col) % 2 === 0;
+                    square.className = `square ${isLight ? 'light' : 'dark'}`;
+                    
+                    const algebraic = indexToAlgebraic(row, col);
+                    square.dataset.square = algebraic;
+                    
+                    // Add coordinates
+                    if (col === 0) {
+                        const rankCoord = document.createElement('span');
+                        rankCoord.className = 'coordinates rank-coord';
+                        rankCoord.textContent = 8 - row;
+                        square.appendChild(rankCoord);
+                    }
+                    if (row === 7) {
+                        const fileCoord = document.createElement('span');
+                        fileCoord.className = 'coordinates file-coord';
+                        fileCoord.textContent = String.fromCharCode('a'.charCodeAt(0) + col);
+                        square.appendChild(fileCoord);
+                    }
+                    
+                    // Add piece if present
+                    const pieceCode = currentPosition[algebraic];
+                    if (pieceCode) {
+                        const piece = document.createElement('span');
+                        const isWhite = isWhitePiece(pieceCode);
+                        piece.className = `piece ${isWhite ? 'white-piece' : 'black-piece'}`;
+                        piece.textContent = PIECES[pieceCode];
+                        piece.dataset.square = algebraic;
+                        
+                        // Only white pieces can be dragged and only if not solved
+                        if (isWhite && !solved) {
+                            piece.draggable = true;
+                            piece.addEventListener('dragstart', handleDragStart);
+                            piece.addEventListener('dragend', handleDragEnd);
+                            
+                            // Touch support
+                            piece.addEventListener('touchstart', handleTouchStart, { passive: false });
+                            piece.addEventListener('touchmove', handleTouchMove, { passive: false });
+                            piece.addEventListener('touchend', handleTouchEnd);
+                        } else {
+                            piece.classList.add('not-draggable');
+                        }
+                        
+                        square.appendChild(piece);
+                    }
+                    
+                    // Drop zone events
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('dragenter', handleDragEnter);
+                    square.addEventListener('dragleave', handleDragLeave);
+                    
+                    board.appendChild(square);
+                }
+            }
+        }
+        
+        // Drag and drop handlers
+        function handleDragStart(e) {
+            if (solved) return;
+            draggedPiece = currentPosition[e.target.dataset.square];
+            draggedFrom = e.target.dataset.square;
+            e.target.classList.add('dragging');
+            e.target.parentElement.classList.add('highlight');
+            
+            // Required for Firefox
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', draggedFrom);
+        }
+        
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            clearHighlights();
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+        
+        function handleDragEnter(e) {
+            e.preventDefault();
+            if (draggedFrom && e.currentTarget.dataset.square !== draggedFrom) {
+                e.currentTarget.classList.add('valid-drop');
+            }
+        }
+        
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('valid-drop');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            const toSquare = e.currentTarget.dataset.square;
+            
+            if (draggedFrom && toSquare && draggedFrom !== toSquare) {
+                makeMove(draggedFrom, toSquare);
+            }
+            
+            clearHighlights();
+            draggedPiece = null;
+            draggedFrom = null;
+        }
+        
+        // Touch handlers for mobile support
+        let touchPiece = null;
+        let touchClone = null;
+        let touchFromSquare = null;
+        
+        function handleTouchStart(e) {
+            if (solved) return;
+            e.preventDefault();
+            
+            const touch = e.touches[0];
+            touchPiece = e.target;
+            touchFromSquare = e.target.dataset.square;
+            
+            // Create a clone to follow the finger
+            touchClone = touchPiece.cloneNode(true);
+            touchClone.style.position = 'fixed';
+            touchClone.style.pointerEvents = 'none';
+            touchClone.style.zIndex = '1000';
+            touchClone.style.fontSize = '50px';
+            touchClone.style.opacity = '0.8';
+            document.body.appendChild(touchClone);
+            
+            updateTouchClonePosition(touch);
+            touchPiece.classList.add('dragging');
+            touchPiece.parentElement.classList.add('highlight');
+        }
+        
+        function handleTouchMove(e) {
+            if (!touchClone) return;
+            e.preventDefault();
+            
+            const touch = e.touches[0];
+            updateTouchClonePosition(touch);
+            
+            // Highlight square under touch
+            clearValidDropHighlights();
+            const elementUnder = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (elementUnder) {
+                const square = elementUnder.closest('.square');
+                if (square && square.dataset.square !== touchFromSquare) {
+                    square.classList.add('valid-drop');
+                }
+            }
+        }
+        
+        function handleTouchEnd(e) {
+            if (!touchClone) return;
+            
+            const touch = e.changedTouches[0];
+            const elementUnder = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            if (elementUnder) {
+                const square = elementUnder.closest('.square');
+                if (square && touchFromSquare && square.dataset.square !== touchFromSquare) {
+                    makeMove(touchFromSquare, square.dataset.square);
+                }
+            }
+            
+            // Cleanup
+            if (touchClone) {
+                touchClone.remove();
+                touchClone = null;
+            }
+            if (touchPiece) {
+                touchPiece.classList.remove('dragging');
+            }
+            clearHighlights();
+            touchPiece = null;
+            touchFromSquare = null;
+        }
+        
+        function updateTouchClonePosition(touch) {
+            if (touchClone) {
+                touchClone.style.left = (touch.clientX - 25) + 'px';
+                touchClone.style.top = (touch.clientY - 25) + 'px';
+            }
+        }
+        
+        function clearHighlights() {
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.classList.remove('highlight', 'valid-drop');
+            });
+        }
+        
+        function clearValidDropHighlights() {
+            document.querySelectorAll('.square.valid-drop').forEach(sq => {
+                sq.classList.remove('valid-drop');
+            });
+        }
+        
+        // Make a move and check if it's correct
+        function makeMove(from, to) {
+            const scenario = scenarios[currentScenario];
+            
+            // Check if this move matches any of the valid solutions
+            const isCorrect = scenario.solutions.some(
+                sol => sol.from === from && sol.to === to
+            );
+            
+            if (isCorrect) {
+                // Correct move - update position
+                currentPosition[to] = currentPosition[from];
+                delete currentPosition[from];
+                solved = true;
+                
+                renderBoard();
+                highlightSquares([from, to], 'success');
+                showMessage('🎉 Checkmate! Excellent work!', 'success');
+                celebrateWin();
+            } else {
+                // Wrong move
+                showMessage('❌ That\'s not checkmate. Try again!', 'error');
+                highlightSquares([from, to], 'error');
+                
+                // Reset highlights after delay
+                setTimeout(() => {
+                    document.querySelectorAll('.square').forEach(sq => {
+                        sq.classList.remove('success-highlight', 'error-highlight');
+                    });
+                }, 800);
+            }
+        }
+        
+        // Highlight specific squares
+        function highlightSquares(squares, type) {
+            squares.forEach(sq => {
+                const element = document.querySelector(`.square[data-square="${sq}"]`);
+                if (element) {
+                    element.classList.add(`${type}-highlight`);
+                }
+            });
+        }
+        
+        // Show message
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = type;
+        }
+        
+        // Celebration animation
+        function celebrateWin() {
+            const colors = ['#f1c40f', '#e74c3c', '#9b59b6', '#3498db', '#2ecc71', '#e67e22'];
+            const shapes = ['circle', 'square', 'triangle'];
+            
+            for (let i = 0; i < 60; i++) {
+                setTimeout(() => {
+                    createConfetti(
+                        colors[Math.floor(Math.random() * colors.length)],
+                        shapes[Math.floor(Math.random() * shapes.length)]
+                    );
+                }, i * 40);
+            }
+        }
+        
+        function createConfetti(color, shape) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            const size = 8 + Math.random() * 8;
+            let shapeStyle = '';
+            
+            if (shape === 'circle') {
+                shapeStyle = 'border-radius: 50%;';
+            } else if (shape === 'triangle') {
+                shapeStyle = `
+                    width: 0;
+                    height: 0;
+                    border-left: ${size/2}px solid transparent;
+                    border-right: ${size/2}px solid transparent;
+                    border-bottom: ${size}px solid ${color};
+                    background: transparent;
+                `;
+            }
+            
+            confetti.style.cssText = `
+                position: fixed;
+                width: ${size}px;
+                height: ${size}px;
+                background: ${shape !== 'triangle' ? color : 'transparent'};
+                left: ${Math.random() * 100}vw;
+                top: -20px;
+                pointer-events: none;
+                z-index: 1000;
+                ${shapeStyle}
+            `;
+            
+            document.body.appendChild(confetti);
+            
+            const duration = 2500 + Math.random() * 1500;
+            const horizontalMove = (Math.random() - 0.5) * 200;
+            
+            const animation = confetti.animate([
+                { 
+                    transform: 'translateY(0) translateX(0) rotate(0deg)', 
+                    opacity: 1 
+                },
+                { 
+                    transform: `translateY(100vh) translateX(${horizontalMove}px) rotate(${720 + Math.random() * 360}deg)`, 
+                    opacity: 0 
+                }
+            ], {
+                duration: duration,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            });
+            
+            animation.onfinish = () => confetti.remove();
+        }
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

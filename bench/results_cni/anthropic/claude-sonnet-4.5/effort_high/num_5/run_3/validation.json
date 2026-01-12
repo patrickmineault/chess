@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Queen Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/Q5K1 w - - 0 1",
+    "move": "Qa8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen and King Corner Mate",
+    "fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Rook Mate on 8th Rank",
+    "fen": "7k/5Rpp/8/8/8/8/8/6K1 w - - 0 1",
+    "move": "Rf8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Rook and King Back Rank Mate",
+    "fen": "k7/2K5/8/8/8/8/8/6R1 w - - 0 1",
+    "move": "Ra1#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Rook Mate with King Support",
+    "fen": "7k/5K1p/8/8/8/8/8/4R3 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  }
+]

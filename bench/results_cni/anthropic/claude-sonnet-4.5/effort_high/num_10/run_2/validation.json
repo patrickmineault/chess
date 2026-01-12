@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R2K w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Rook with King Support",
+    "fen": "7k/5R1p/7K/8/8/8/8/8 w - - 0 1",
+    "move": "Rf8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen and King Mate",
+    "fen": "6k1/7p/5Q1K/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "6k1/4P1pp/8/8/8/8/8/6K1 w - - 0 1",
+    "move": "e8=Q#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Bishop and Queen Mate",
+    "fen": "7k/6pp/6B1/8/8/3Q4/8/6K1 w - - 0 1",
+    "move": "Qd8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen and Rook Mate",
+    "fen": "7k/6R1/5Q2/8/8/8/8/6K1 w - - 0 1",
+    "move": "Qf8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen Captures Rook Mate",
+    "fen": "5rk1/6pp/8/8/8/8/5Q2/6K1 w - - 0 1",
+    "move": "Qxf8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move gives check but not checkmate"
+  },
+  {
+    "name": "Rook and Bishop Mate",
+    "fen": "6k1/6pp/5RB1/8/8/8/8/6K1 w - - 0 1",
+    "move": "Rf8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move gives check but not checkmate"
+  },
+  {
+    "name": "Queen and Knight Mate",
+    "fen": "7k/7p/5Q2/6N1/8/8/8/6K1 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)"
+  },
+  {
+    "name": "Rook and Knight Mate",
+    "fen": "6k1/5Npp/4R3/8/8/8/8/6K1 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move gives check but not checkmate"
+  }
+]

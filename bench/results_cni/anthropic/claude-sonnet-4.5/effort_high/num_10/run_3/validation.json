@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R2K w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Arab Mate",
+    "fen": "6k1/5Np1/6K1/8/8/8/8/7R w - - 0 1",
+    "move": "Rh8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen Ladder Mate",
+    "fen": "2k5/8/2K5/8/8/8/8/Q7 w - - 0 1",
+    "move": "Qa8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen and King Mate",
+    "fen": "7k/5Q1p/6pK/8/8/8/8/8 w - - 0 1",
+    "move": "Qf8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen Close Support Mate",
+    "fen": "7k/6p1/6KP/8/8/8/8/7Q w - - 0 1",
+    "move": "Qh7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Illegal move: Qh7#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6rk/6pp/7N/8/8/8/8/6K1 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "k7/PP6/K7/8/8/8/8/8 w - - 0 1",
+    "move": "b8=Q#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)"
+  },
+  {
+    "name": "Queen Central Mate",
+    "fen": "6k1/8/5QK1/8/8/8/8/8 w - - 0 1",
+    "move": "Qf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move gives check but not checkmate"
+  },
+  {
+    "name": "Queen Knight and Rook Mate",
+    "fen": "7k/4N3/5RK1/8/8/8/8/Q7 w - - 0 1",
+    "move": "Qa8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Queen Diagonal Mate",
+    "fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  }
+]

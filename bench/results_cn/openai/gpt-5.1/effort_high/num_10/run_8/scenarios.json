@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Rook corner mate",
+    "fen": "k7/2K5/8/2B5/8/8/8/1R6 w - - 0 1",
+    "move": "Rb8#"
+  },
+  {
+    "name": "Smothered knight mate",
+    "fen": "5nrk/6pp/7N/8/8/8/8/7K w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Double-bishop mate",
+    "fen": "7k/6pp/8/8/2B5/2B5/8/6RK w - - 0 1",
+    "move": "Bxg7#"
+  },
+  {
+    "name": "Basic corner queen mate",
+    "fen": "k7/2Q5/2K5/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Pawn promotion mate",
+    "fen": "6kr/5pP1/3B2QK/8/8/2B5/8/8 w - - 0 1",
+    "move": "gxh8=Q#"
+  },
+  {
+    "name": "Queen captures pawn mate",
+    "fen": "6k1/6pp/4PK1Q/8/2B5/8/8/8 w - - 0 1",
+    "move": "Qxg7#"
+  },
+  {
+    "name": "Shifted queen corner mate",
+    "fen": "k7/8/1QK5/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Knight corner mate",
+    "fen": "kn2N3/p7/2K5/8/8/8/8/8 w - - 0 1",
+    "move": "Nc7#"
+  },
+  {
+    "name": "King and queen vs king",
+    "fen": "7k/8/5KQ1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Bottom-corner queen mate",
+    "fen": "8/8/8/8/8/1Q6/2K5/K7 w - - 0 1",
+    "move": "Qb1#"
+  }
+]

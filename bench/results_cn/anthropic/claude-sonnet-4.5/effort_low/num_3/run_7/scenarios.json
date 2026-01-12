@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "4k3/8/8/8/8/8/8/4R2K w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Queen Checkmate on the 8th Rank",
+    "fen": "7k/6pp/8/8/8/8/8/Q6K w - - 0 1",
+    "move": "Qa8#"
+  },
+  {
+    "name": "Smothered Mate with Knight",
+    "fen": "6rk/6pp/8/4N3/8/8/8/7K w - - 0 1",
+    "move": "Nf7#"
+  }
+]

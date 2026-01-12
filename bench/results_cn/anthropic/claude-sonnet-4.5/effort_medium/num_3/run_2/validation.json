@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R3 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 0,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_2",
+    "reasoning_length": 4018
+  },
+  {
+    "name": "Queen and King Mate",
+    "fen": "7k/5K2/5Q2/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 1,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_2",
+    "reasoning_length": 4018
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6rk/7p/8/6N1/8/8/8/8 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 2,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_2",
+    "reasoning_length": 4018
+  }
+]

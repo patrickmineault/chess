@@ -1,0 +1,47 @@
+{
+  "id": "gen-1764371952-egKjc48eknmIFFGy9o2C",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3-pro-preview",
+  "object": "chat.completion",
+  "created": 1764371952,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Here are three distinct mate-in-1 scenarios for white.\n\n```text\nThe Classic Back Rank Mate\n6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1\nRe8#\n```\n\n```text\nThe King and Queen \"Kiss of Death\"\n8/8/8/5K1k/8/8/8/6Q1 w - - 0 1\nQg5#\n```\n\n```text\nSmothered Mate\n6rk/6pp/8/6N1/8/8/8/7K w - - 0 1\nNf7#\n```",
+        "refusal": null,
+        "reasoning": "**Examining Checkmates**\n\nI'm currently focused on the specific goal of identifying three distinct checkmate scenarios for White, each achievable in just one move. The structure for each scenario is now clearly defined: encapsulated within its own code block. I am making rapid progress in conceptualizing the first scenario, with a focus on simplicity and clarity.\n\n\n**Developing Scenario Ideas**\n\nI've just added a basic framework for the first checkmate scenario, aiming for a classic back-rank mate. The structure includes the scenario's name, FEN notation to define the starting position, and the winning move for White. The focus now is on fleshing out the move options within these parameters, ensuring the scenario is valid and strategically sound.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Examining Checkmates**\n\nI'm currently focused on the specific goal of identifying three distinct checkmate scenarios for White, each achievable in just one move. The structure for each scenario is now clearly defined: encapsulated within its own code block. I am making rapid progress in conceptualizing the first scenario, with a focus on simplicity and clarity.\n\n\n**Developing Scenario Ideas**\n\nI've just added a basic framework for the first checkmate scenario, aiming for a classic back-rank mate. The structure includes the scenario's name, FEN notation to define the starting position, and the winning move for White. The focus now is on fleshing out the move options within these parameters, ensuring the scenario is valid and strategically sound.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "EokFCoYFAXLI2nxElKMtQDL4VywILb2IonHe2HbDp2/eNG/niD8EedDs1ypoVYaa12BQFnnm7nEgZTlUcXhorfEigPD5hNTtF9jVSHLsbaaCzkT4cn6yzUE4ezrXOAkNEktAX9dHRdhuqJGAWMsPRhUjeR3/X4FCmdaJsdXaCVJpbGLbzYWiaUox8UN/P3TrAvYBkjN4Z3u/z2khZb4Bu+K3al9KDufp4PPB2ETpCED9TDK5wvN39Jpais4B8HWDimRXWFruY+WiJRdYawX3vyr/3H6cGK8q9X5RrLgjkKrsZV9io9wWQBYUAHi6Px+n4eMsidNYbud3AopoDK5jqsspi06mR43dni+zlDwl0bIeqS0PiYA8o0orAN3XxoR27rqc7BENYpJt+yQUW6ZdzDFZWYs+yU3cvEBXLH4gugSeStYv2V+FDBbFa6O2esrbnnD0X15zHC/EvJy38Y3dSLrbL0JBg0R8isVex0HOTtCbpXL2j5xMf6im6t4DJfgDAvLAfepZW/ghFxtxjzzPjuyHLwGUywa9edwJXLUES/dcsMowGLR9b39luNc1uhU39F2HR7roRyXqKIWPCShq1qxuxX8b9Wcxe6k4pCXfvGxKFgzl6rlHQGABV7TQ7nBNLOfPAz19iVnSpRB04C2JbXrZgkl0zRwlptIE8DXGwSxasQPCUFCAEVaZwerexi+mCVvIpQzLOiCa9EWYk2E9FMCAN4y1O7In0nnja4RB8fkT9PL1BDYnigOScmLSDFGczjTiT8CW2dmBQxtGqP1CJ0Hev1JVuolF77b69LCljkPc0fp6tS9oH8/wAQPhSaKy+JE8XLAU/zkViCqSiW+e/eyJMhjOPwXcOW6XcQ=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 72,
+    "completion_tokens": 289,
+    "total_tokens": 361,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 140,
+      "image_tokens": 0
+    }
+  }
+}

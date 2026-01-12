@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Rook Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R2K w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Back Rank Queen Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/Q6K w - - 0 1",
+    "move": "Qa8#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6rk/6pp/8/4N3/8/8/8/K7 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Knight and Queen Mate",
+    "fen": "7k/5Q2/8/6N1/8/8/8/K7 w - - 0 1",
+    "move": "Qf8#"
+  },
+  {
+    "name": "Rook with King Support",
+    "fen": "7k/8/5RK1/8/8/8/8/8 w - - 0 1",
+    "move": "Rf8#"
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "6k1/4P3/6K1/8/8/8/8/8 w - - 0 1",
+    "move": "e8=Q#"
+  },
+  {
+    "name": "Queen Corner Mate",
+    "fen": "k7/8/2K5/8/8/8/1Q6/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Bishop and Queen Mate",
+    "fen": "7k/7p/5Q1B/8/8/8/8/K7 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Two Rooks Mate",
+    "fen": "6k1/6R1/8/8/8/8/8/R6K w - - 0 1",
+    "move": "Ra8#"
+  },
+  {
+    "name": "Queen and Bishop Coordination",
+    "fen": "7k/6Bp/6Q1/8/8/8/8/K7 w - - 0 1",
+    "move": "Qg8#"
+  }
+]

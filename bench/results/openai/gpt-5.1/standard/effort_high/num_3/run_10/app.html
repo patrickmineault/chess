@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mate in 1 – Endgame Trainer</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f4f4f4;
+  }
+  #app {
+    max-width: 520px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 16px 20px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  #board {
+    width: 480px;
+    height: 480px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    border: 2px solid #333;
+    box-sizing: border-box;
+    margin-top: 8px;
+  }
+  #board.solved {
+    border-color: #2e7d32;
+    box-shadow: 0 0 10px rgba(46, 125, 50, 0.7);
+  }
+  .square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-sizing: border-box;
+  }
+  .square.light { background: #f0d9b5; }
+  .square.dark  { background: #b58863; }
+  .piece {
+    cursor: grab;
+    user-select: none;
+  }
+  .piece:active {
+    cursor: grabbing;
+  }
+  .status {
+    margin-top: 10px;
+    min-height: 1.4em;
+    font-weight: 600;
+  }
+  .status.info    { color: #333; }
+  .status.error   { color: #c62828; }
+  .status.success { color: #2e7d32; }
+  .hint {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  button {
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  select {
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <h2>Chess Endgame: Mate in 1 Trainer</h2>
+  <div class="controls">
+    <label for="scenarioSelect">Scenario:</label>
+    <select id="scenarioSelect"></select>
+    <button id="resetBtn">Reset Position</button>
+  </div>
+  <p class="hint">White to move and checkmate in one move.</p>
+  <div id="board"></div>
+  <div id="status" class="status info"></div>
+</div>
+
+<script>
+(function () {
+  // Piece display
+  const PIECE_UNICODE = {
+    w: { K: '♔', Q: '♕', R: '♖' },
+    b: { K: '♚', Q: '♛', R: '♜' }
+  };
+
+  // Sliding directions
+  const rookDirs = [
+    { dr: 1, dc: 0 }, { dr: -1, dc: 0 },
+    { dr: 0, dc: 1 }, { dr: 0, dc: -1 }
+  ];
+  const bishopDirs = [
+    { dr: 1, dc: 1 }, { dr: 1, dc: -1 },
+    { dr: -1, dc: 1 }, { dr: -1, dc: -1 }
+  ];
+  const queenDirs = rookDirs.concat(bishopDirs);
+
+  // DOM elements
+  const boardElement   = document.getElementById('board');
+  const statusDiv      = document.getElementById('status');
+  const scenarioSelect = document.getElementById('scenarioSelect');
+  const resetBtn       = document.getElementById('resetBtn');
+
+  // State
+  let board = null;
+  let currentScenarioIndex = 0;
+  let puzzleSolved = false;
+  let draggedFrom = null;
+
+  const squareDivs = [];
+
+  // Board helpers
+  function createEmptyBoard() {
+    const b = [];
+    for (let r = 0; r < 8; r++) {
+      b[r] = new Array(8).fill(null);
+    }
+    return b;
+  }
+
+  function coordToIndex(coord) {
+    const file = coord[0].toLowerCase();
+    const rank = parseInt(coord[1], 10);
+    const col = file.charCodeAt(0) - 'a'.charCodeAt(0);
+    const row = 8 - rank; // rank 8 -> row 0
+    return { row, col };
+  }
+
+  function indexToCoord(row, col) {
+    const file = String.fromCharCode('a'.charCodeAt(0) + col);
+    const rank = 8 - row;
+    return file + rank;
+  }
+
+  function placePiece(b, color, type, coord) {
+    const { row, col } = coordToIndex(coord);
+    b[row][col] = { color, type };
+  }
+
+  // Three mate-in-1 scenarios (only K, Q, R used)
+  const scenarios = [
+    {
+      label: 'Scenario 1 – Queen vs King',
+      // White: Kg6, Qg7; Black: Kh8
+      setup: function () {
+        const b = createEmptyBoard();
+        placePiece(b, 'w', 'K', 'g6');
+        placePiece(b, 'w', 'Q', 'g7');
+        placePiece(b, 'b', 'K', 'h8');
+        return b;
+      }
+    },
+    {
+      label: 'Scenario 2 – Rook vs King',
+      // White: Ka6, Rh1; Black: Ka8 (mate is 1.Rh8#)
+      setup: function () {
+        const b = createEmptyBoard();
+        placePiece(b, 'w', 'K', 'a6');
+        placePiece(b, 'w', 'R', 'h1');
+        placePiece(b, 'b', 'K', 'a8');
+        return b;
+      }
+    },
+    {
+      label: 'Scenario 3 – Queen vs King',
+      // White: Kf7, Qg6; Black: Kh8
+      setup: function () {
+        const b = createEmptyBoard();
+        placePiece(b, 'w', 'K', 'f7');
+        placePiece(b, 'w', 'Q', 'g6');
+        placePiece(b, 'b', 'K', 'h8');
+        return b;
+      }
+    }
+  ];
+
+  // Build board DOM
+  function buildBoard() {
+    boardElement.innerHTML = '';
+    for (let r = 0; r < 8; r++) {
+      squareDivs[r] = [];
+      for (let c = 0; c < 8; c++) {
+        const square = document.createElement('div');
+        square.classList.add('square', (r + c) % 2 === 0 ? 'light' : 'dark');
+        square.dataset.row = r;
+        square.dataset.col = c;
+        square.dataset.coord = indexToCoord(r, c);
+        square.addEventListener('dragover', onSquareDragOver);
+        square.addEventListener('drop', onSquareDrop);
+        squareDivs[r][c] = square;
+        boardElement.appendChild(square);
+      }
+    }
+  }
+
+  // Render current board state into DOM
+  function renderBoard() {
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        const square = squareDivs[r][c];
+        square.innerHTML = '';
+        const p = board[r][c];
+        if (p) {
+          const pieceDiv = document.createElement('div');
+          pieceDiv.classList.add('piece', p.color === 'w' ? 'white' : 'black');
+          pieceDiv.textContent = PIECE_UNICODE[p.color][p.type] || '';
+          pieceDiv.draggable = (p.color === 'w' && !puzzleSolved);
+          if (pieceDiv.draggable) {
+            pieceDiv.addEventListener('dragstart', onPieceDragStart);
+          }
+          square.appendChild(pieceDiv);
+        }
+      }
+    }
+  }
+
+  function setStatus(message, type) {
+    statusDiv.textContent = message;
+    statusDiv.className = 'status ' + (type || 'info');
+  }
+
+  // Logic helpers
+  function cloneBoard(src) {
+    const b = [];
+    for (let r = 0; r < 8; r++) {
+      b[r] = [];
+      for (let c = 0; c < 8; c++) {
+        const p = src[r][c];
+        b[r][c] = p ? { color: p.color, type: p.type } : null;
+      }
+    }
+    return b;
+  }
+
+  function findKing(b, color) {
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        const p = b[r][c];
+        if (p && p.type === 'K' && p.color === color) {
+          return { row: r, col: c };
+        }
+      }
+    }
+    return null;
+  }
+
+  function isSquareAttackedBy(b, row, col, attackerColor) {
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        const p = b[r][c];
+        if (!p || p.color !== attackerColor) continue;
+
+        if (p.type === 'K') {
+          if (Math.max(Math.abs(r - row), Math.abs(c - col)) === 1) return true;
+        } else if (p.type === 'Q' || p.type === 'R') {
+          const dirs = (p.type === 'Q') ? queenDirs : rookDirs;
+          for (const dir of dirs) {
+            let rr = r + dir.dr;
+            let cc = c + dir.dc;
+            while (rr >= 0 && rr < 8 && cc >= 0 && cc < 8) {
+              if (rr === row && cc === col) return true;
+              if (b[rr][cc]) break; // blocked by any piece
+              rr += dir.dr;
+              cc += dir.dc;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  function isInCheck(b, color) {
+    const kingPos = findKing(b, color);
+    if (!kingPos) return false;
+    const enemy = (color === 'w') ? 'b' : 'w';
+    return isSquareAttackedBy(b, kingPos.row, kingPos.col, enemy);
+  }
+
+  function makeMove(b, fr, fc, tr, tc) {
+    const newBoard = cloneBoard(b);
+    newBoard[tr][tc] = newBoard[fr][fc];
+    newBoard[fr][fc] = null;
+    return newBoard;
+  }
+
+  function isLegalMove(b, fr, fc, tr, tc, color) {
+    if (fr === tr && fc === tc) return false;
+    if (tr < 0 || tr > 7 || tc < 0 || tc > 7) return false;
+
+    const piece = b[fr][fc];
+    if (!piece || piece.color !== color) return false;
+
+    const target = b[tr][tc];
+    if (target && target.color === color) return false;
+    if (target && target.type === 'K') return false; // cannot capture king
+
+    const dr = tr - fr;
+    const dc = tc - fc;
+
+    if (piece.type === 'K') {
+      if (Math.max(Math.abs(dr), Math.abs(dc)) !== 1) return false;
+    } else if (piece.type === 'Q') {
+      const absDr = Math.abs(dr);
+      const absDc = Math.abs(dc);
+      if (!(fr === tr || fc === tc || absDr === absDc)) return false;
+      const stepR = Math.sign(dr);
+      const stepC = Math.sign(dc);
+      let r = fr + stepR;
+      let c = fc + stepC;
+      while (r !== tr || c !== tc) {
+        if (b[r][c]) return false;
+        r += stepR;
+        c += stepC;
+      }
+    } else if (piece.type === 'R') {
+      if (!(fr === tr || fc === tc)) return false;
+      const stepR = Math.sign(dr);
+      const stepC = Math.sign(dc);
+      let r = fr + stepR;
+      let c = fc + stepC;
+      while (r !== tr || c !== tc) {
+        if (b[r][c]) return false;
+        r += stepR;
+        c += stepC;
+      }
+    } else {
+      // Only K, Q, R used in these puzzles
+      return false;
+    }
+
+    const testBoard = makeMove(b, fr, fc, tr, tc);
+    if (isInCheck(testBoard, color)) return false;
+
+    return true;
+  }
+
+  function generateAllLegalMoves(b, color) {
+    const moves = [];
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        const p = b[r][c];
+        if (!p || p.color !== color) continue;
+
+        if (p.type === 'K') {
+          for (let dr = -1; dr <= 1; dr++) {
+            for (let dc = -1; dc <= 1; dc++) {
+              if (dr === 0 && dc === 0) continue;
+              const nr = r + dr;
+              const nc = c + dc;
+              if (nr < 0 || nr > 7 || nc < 0 || nc > 7) continue;
+              const target = b[nr][nc];
+              if (target && target.color === color) continue;
+              if (target && target.type === 'K') continue;
+              if (isLegalMove(b, r, c, nr, nc, color)) {
+                moves.push({ fr: r, fc: c, tr: nr, tc: nc });
+              }
+            }
+          }
+        } else if (p.type === 'Q' || p.type === 'R') {
+          const dirs = p.type === 'Q' ? queenDirs : rookDirs;
+          for (const dir of dirs) {
+            let nr = r + dir.dr;
+            let nc = c + dir.dc;
+            while (nr >= 0 && nr < 8 && nc >= 0 && nc < 8) {
+              const target = b[nr][nc];
+              if (target && target.color === color) break;
+              if (target && target.type === 'K') break;
+              if (isLegalMove(b, r, c, nr, nc, color)) {
+                moves.push({ fr: r, fc: c, tr: nr, tc: nc });
+              }
+              if (target) break;
+              nr += dir.dr;
+              nc += dir.dc;
+            }
+          }
+        }
+      }
+    }
+    return moves;
+  }
+
+  function isCheckmate(b, color) {
+    if (!isInCheck(b, color)) return false;
+    const moves = generateAllLegalMoves(b, color);
+    return moves.length === 0;
+  }
+
+  // Drag and drop
+  function onPieceDragStart(e) {
+    const parent = e.target.parentElement;
+    const r = parseInt(parent.dataset.row, 10);
+    const c = parseInt(parent.dataset.col, 10);
+    const p = board[r][c];
+
+    if (!p || p.color !== 'w' || puzzleSolved) {
+      e.preventDefault();
+      return;
+    }
+
+    draggedFrom = { row: r, col: c };
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', ''); // Firefox needs something
+    }
+  }
+
+  function onSquareDragOver(e) {
+    e.preventDefault(); // allow drop
+  }
+
+  function onSquareDrop(e) {
+    e.preventDefault();
+    if (!draggedFrom || puzzleSolved) return;
+    const r = parseInt(e.currentTarget.dataset.row, 10);
+    const c = parseInt(e.currentTarget.dataset.col, 10);
+    handleMoveAttempt(draggedFrom.row, draggedFrom.col, r, c);
+    draggedFrom = null;
+  }
+
+  function handleMoveAttempt(fr, fc, tr, tc) {
+    if (puzzleSolved) return;
+
+    const piece = board[fr][fc];
+    if (!piece || piece.color !== 'w') {
+      setStatus('You can only move the white pieces.', 'error');
+      return;
+    }
+
+    if (!isLegalMove(board, fr, fc, tr, tc, 'w')) {
+      setStatus('Illegal move. Try a different square.', 'error');
+      return;
+    }
+
+    const testBoard = makeMove(board, fr, fc, tr, tc);
+    if (isCheckmate(testBoard, 'b')) {
+      board = testBoard;
+      puzzleSolved = true;
+      renderBoard();
+      boardElement.classList.add('solved');
+      setStatus('Checkmate! Well done.', 'success');
+    } else {
+      setStatus('That move is not checkmate. Black still has a defense. Try again.', 'info');
+    }
+  }
+
+  // Scenario control
+  function loadScenario(index) {
+    currentScenarioIndex = index;
+    board = scenarios[index].setup();
+    puzzleSolved = false;
+    boardElement.classList.remove('solved');
+    renderBoard();
+    setStatus('White to move and mate in one.', 'info');
+  }
+
+  function init() {
+    // Fill scenario selector
+    scenarios.forEach((sc, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = sc.label;
+      scenarioSelect.appendChild(opt);
+    });
+
+    buildBoard();
+
+    scenarioSelect.addEventListener('change', function (e) {
+      const idx = parseInt(e.target.value, 10) || 0;
+      loadScenario(idx);
+    });
+
+    resetBtn.addEventListener('click', function () {
+      loadScenario(currentScenarioIndex);
+    });
+
+    loadScenario(0);
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

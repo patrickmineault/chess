@@ -1,0 +1,231 @@
+Here is a complete, single-file solution. To run this, save the code below as an `.html` file (e.g., `chess-practice.html`) and open it in any web browser.
+
+It relies on two standard open-source libraries: **Chessboard.js** (for the visual board and drag-and-drop) and **Chess.js** (for move validation and rules).
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mate in 1 Practice</title>
+    
+    <!-- CSS for Chessboard.js -->
+    <link rel="stylesheet"
+      href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+      integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU"
+      crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        h1 { color: #333; }
+
+        #board {
+            width: 400px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover { background-color: #0056b3; }
+
+        #status {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            height: 30px; /* Prevent jumping */
+        }
+
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+    </style>
+</head>
+<body>
+
+    <h1>Mate in 1 Practice (White to Move)</h1>
+
+    <div class="controls">
+        <select id="scenarioSelect">
+            <option value="0">Scenario 1: Back Rank Mate</option>
+            <option value="1">Scenario 2: Kiss of Death</option>
+            <option value="2">Scenario 3: Smothered Mate</option>
+        </select>
+        <button id="resetBtn">Reset Position</button>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="status">Drag a piece to solve the puzzle!</div>
+
+    <!-- DEPENDENCIES -->
+    <!-- jQuery (required for Chessboard.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Chessboard.js (Visuals) -->
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <!-- Chess.js (Logic/Rules) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <script>
+        // --- CONFIGURATION ---
+        
+        // FEN Strings represent the board state
+        const scenarios = [
+            {
+                name: "Back Rank Mate",
+                // White Rook on d1, Black King trapped on g8 by pawns
+                fen: "6k1/5ppp/8/8/8/8/8/3R2K1 w - - 0 1"
+            },
+            {
+                name: "Kiss of Death",
+                // White King on e6, Queen on c7, Black King on e8
+                fen: "4k3/2Q5/4K3/8/8/8/8/8 w - - 0 1"
+            },
+            {
+                name: "Smothered Mate",
+                // Knight checkmate with King trapped by own pieces
+                fen: "7k/6pp/8/6N1/8/8/8/7K w - - 0 1"
+            }
+        ];
+
+        let board = null;
+        let game = new Chess();
+        let currentScenarioIndex = 0;
+
+        const statusEl = document.getElementById('status');
+        const scenarioSelect = document.getElementById('scenarioSelect');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // --- LOGIC ---
+
+        function onDragStart(source, piece, position, orientation) {
+            // Do not pick up pieces if the game is over
+            if (game.game_over()) return false;
+
+            // Only pick up pieces for White
+            if (piece.search(/^b/) !== -1) return false;
+        }
+
+        function onDrop(source, target) {
+            // see if the move is legal
+            const move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q' // always promote to a queen for simplicity
+            });
+
+            // illegal move
+            if (move === null) return 'snapback';
+
+            updateStatus(move);
+        }
+
+        function onSnapEnd() {
+            // updates the board position after the piece snap
+            // for castling, en passant, pawn promotion
+            board.position(game.fen());
+        }
+
+        function updateStatus(lastMove) {
+            if (game.in_checkmate()) {
+                statusEl.innerText = "Checkmate! Excellent work!";
+                statusEl.className = "success";
+            } else {
+                statusEl.innerText = "Not checkmate. Try again.";
+                statusEl.className = "error";
+                
+                // Undo the move to let them try again immediately
+                setTimeout(() => {
+                    game.undo();
+                    board.position(game.fen());
+                }, 500);
+            }
+        }
+
+        function loadScenario(index) {
+            currentScenarioIndex = index;
+            const fen = scenarios[index].fen;
+            
+            game.load(fen);
+            board.position(fen);
+            
+            statusEl.innerText = "Find the mate in 1!";
+            statusEl.className = "";
+        }
+
+        // --- INITIALIZATION ---
+
+        const config = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            onSnapEnd: onSnapEnd,
+            pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+        };
+
+        board = Chessboard('board', config);
+
+        // Load initial scenario
+        loadScenario(0);
+
+        // --- EVENT LISTENERS ---
+
+        scenarioSelect.addEventListener('change', function() {
+            loadScenario(parseInt(this.value));
+        });
+
+        resetBtn.addEventListener('click', function() {
+            loadScenario(currentScenarioIndex);
+        });
+
+        // Handle window resize to keeping board responsive
+        window.addEventListener('resize', board.resize);
+
+    </script>
+</body>
+</html>
+```
+
+### How to use the App
+1.  **Select a Scenario:** Use the dropdown menu to choose one of the three puzzles.
+2.  **Drag pieces:** Click and drag the White pieces to make a move.
+3.  **Feedback:**
+    *   If you find the Checkmate, the text turns **Green** ("Checkmate! Excellent work!").
+    *   If you make a legal move that *isn't* checkmate, the text turns **Red**, and the board automatically resets the move so you can try again.
+    *   If you try to make an illegal move, the piece snaps back to its original square.
+4.  **Reset:** Click "Reset Position" to start the current puzzle over.
+
+### The Scenarios Logic
+1.  **Back Rank:** The white rook moves to the back rank (d8) to mate the King trapped behind his pawns.
+2.  **Kiss of Death:** The Queen moves directly in front of the Black King (Queen to e7), protected by the White King.
+3.  **Smothered Mate:** The Knight moves to f7 to jump over the pawns and deliver mate to the King trapped in the corner.

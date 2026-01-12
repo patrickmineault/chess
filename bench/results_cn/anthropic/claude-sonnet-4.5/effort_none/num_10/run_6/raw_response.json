@@ -1,0 +1,26 @@
+{
+  "id": "gen-1764628269-opLBTbZFV6hxeZYYOPin",
+  "provider": "Google",
+  "model": "anthropic/claude-sonnet-4.5",
+  "object": "chat.completion",
+  "created": 1764628269,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nBack Rank Mate with Rook\n6k1/5ppp/8/8/8/8/5PPP/6KR w - - 0 1\nRh8#\n```\n\n```\nQueen and Knight Mate\n6k1/5ppp/5N2/8/8/8/5PPP/5QK1 w - - 0 1\nQg7#\n```\n\n```\nSmothered Mate\n5rkr/5ppp/8/8/8/8/5PPP/5RKN w - - 0 1\nNf7#\n```\n\n```\nBishop and Queen Mate\n6k1/5ppp/8/6B1/8/8/5PPP/5QK1 w - - 0 1\nQg7#\n```\n\n```\nRook Mate on Back Rank\nr4rk1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1\nRe8#\n```\n\n```\nQueen Mate on h7\nr4rk1/5ppp/8/8/8/8/5PPP/5QK1 w - - 0 1\nQh7#\n```\n\n```\nDouble Rook Mate\n6k1/5ppp/8/8/8/8/6PR/6KR w - - 0 1\nRh8#\n```\n\n```\nKnight Mate from Distance\n6k1/5p1p/6p1/8/8/2N5/5PPP/6K1 w - - 0 1\nNe7#\n```\n\n```\nDiagonal Queen Mate\nr5k1/5ppp/8/8/8/8/5PPP/3Q2K1 w - - 0 1\nQd8#\n```\n\n```\nPawn Promotion Mate\n6k1/5PBp/6p1/8/8/8/6PP/6K1 w - - 0 1\nf8=Q#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 83,
+    "completion_tokens": 512,
+    "total_tokens": 595
+  }
+}

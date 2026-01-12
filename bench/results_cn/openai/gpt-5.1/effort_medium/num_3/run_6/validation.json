@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Back Rank Crush",
+    "fen": "4r1k1/5ppp/8/8/8/8/6PP/3QR1K1 w - - 0 1",
+    "move": "Rxe8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "1K1RQ3/PP6/8/8/8/8/ppp5/1k1r4",
+    "scenario_index": 0,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6",
+    "reasoning_length": 7583,
+    "image_before": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6/board_0_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6/board_0_after.png"
+  },
+  {
+    "name": "Knight Smothered Mate",
+    "fen": "6rk/6pp/7N/8/8/8/8/4K3 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "3K4/8/8/8/8/N7/pp6/kr6",
+    "scenario_index": 1,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6",
+    "reasoning_length": 7583,
+    "image_before": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6/board_1_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6/board_1_after.png"
+  },
+  {
+    "name": "Queen on the Guillotine",
+    "fen": "6rk/6pp/6Q1/8/2B5/8/8/4K3 w - - 0 1",
+    "move": "Qxg8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Illegal move: Qxg8#",
+    "canonical_fen": "3K4/8/8/5B2/8/1Q6/pp6/kr6",
+    "scenario_index": 2,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6",
+    "reasoning_length": 7583,
+    "image_before": "results_cn/openai/gpt-5.1/effort_medium/num_3/run_6/board_2_before.png"
+  }
+]

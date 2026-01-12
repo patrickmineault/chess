@@ -1,0 +1,487 @@
+# Chess Endgame Practice App
+
+Here's a complete chess endgame practice app with drag-and-drop functionality and 3 mate-in-1 scenarios:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Endgame Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .scenario-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .scenario-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .scenario-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .scenario-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .info {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        #chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            border: 3px solid #333;
+            margin: 0 auto 20px;
+            width: fit-content;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .square.light {
+            background-color: #f0d9b5;
+        }
+
+        .square.dark {
+            background-color: #b58863;
+        }
+
+        .square.drag-over {
+            background-color: #7fa650 !important;
+            opacity: 0.7;
+        }
+
+        .piece {
+            cursor: move;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+
+        .piece:hover {
+            transform: scale(1.1);
+        }
+
+        .piece:active {
+            cursor: grabbing;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .feedback {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .feedback.success {
+            background: #4caf50;
+            color: white;
+            animation: slideIn 0.5s;
+        }
+
+        .feedback.error {
+            background: #f44336;
+            color: white;
+            animation: shake 0.5s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            animation: celebrate 1s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes celebrate {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♔ Chess Endgame Practice ♔</h1>
+        
+        <div class="scenario-selector">
+            <button class="scenario-btn active" onclick="loadScenario(0)">Scenario 1</button>
+            <button class="scenario-btn" onclick="loadScenario(1)">Scenario 2</button>
+            <button class="scenario-btn" onclick="loadScenario(2)">Scenario 3</button>
+        </div>
+
+        <div class="info">
+            Find checkmate in 1 move for White!
+        </div>
+
+        <div id="chessboard"></div>
+
+        <div class="controls">
+            <button class="btn" onclick="resetPosition()">Reset Position</button>
+            <button class="btn" onclick="checkSolution()">Check Solution</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+    </div>
+
+    <script>
+        // Chess piece Unicode characters
+        const pieces = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+
+        // Scenarios: each is an 8x8 board (row 0 = rank 8, row 7 = rank 1)
+        const scenarios = [
+            {
+                name: "Back Rank Mate",
+                board: [
+                    ['k', null, null, null, null, null, null, null],
+                    ['p', 'p', null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    ['R', null, null, null, null, null, null, 'K']
+                ],
+                solution: { from: 'a1', to: 'a8' }
+            },
+            {
+                name: "Queen Mate on Edge",
+                board: [
+                    [null, null, null, null, null, null, 'k', null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, 'K', null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, 'Q', null, null],
+                    [null, null, null, null, null, null, null, null]
+                ],
+                solution: { from: 'f2', to: 'g8' }
+            },
+            {
+                name: "Rook and King Mate",
+                board: [
+                    [null, null, null, null, null, null, null, 'k'],
+                    [null, null, null, null, null, null, 'K', null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    ['R', null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null]
+                ],
+                solution: { from: 'a2', to: 'a8' }
+            }
+        ];
+
+        let currentScenario = 0;
+        let currentBoard = [];
+        let draggedPiece = null;
+        let draggedFrom = null;
+        let lastMove = null;
+
+        function loadScenario(index) {
+            currentScenario = index;
+            currentBoard = scenarios[index].board.map(row => [...row]);
+            lastMove = null;
+            
+            // Update active button
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            
+            // Clear feedback
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').textContent = '';
+            
+            renderBoard();
+        }
+
+        function renderBoard() {
+            const chessboard = document.getElementById('chessboard');
+            chessboard.innerHTML = '';
+
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    const isLight = (row + col) % 2 === 0;
+                    square.className = `square ${isLight ? 'light' : 'dark'}`;
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+                    square.dataset.position = getAlgebraic(row, col);
+
+                    const piece = currentBoard[row][col];
+                    if (piece) {
+                        const pieceElement = document.createElement('div');
+                        pieceElement.className = 'piece';
+                        pieceElement.textContent = pieces[piece];
+                        pieceElement.draggable = true;
+                        pieceElement.dataset.piece = piece;
+                        
+                        pieceElement.addEventListener('dragstart', handleDragStart);
+                        square.appendChild(pieceElement);
+                    }
+
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('dragleave', handleDragLeave);
+
+                    chessboard.appendChild(square);
+                }
+            }
+        }
+
+        function handleDragStart(e) {
+            const square = e.target.parentElement;
+            draggedPiece = e.target.dataset.piece;
+            draggedFrom = {
+                row: parseInt(square.dataset.row),
+                col: parseInt(square.dataset.col),
+                position: square.dataset.position
+            };
+            e.dataTransfer.effectAllowed = 'move';
+            e.target.style.opacity = '0.5';
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+
+            if (!draggedPiece || !draggedFrom) return;
+
+            const dropSquare = e.currentTarget;
+            const toRow = parseInt(dropSquare.dataset.row);
+            const toCol = parseInt(dropSquare.dataset.col);
+            const toPosition = dropSquare.dataset.position;
+
+            // Make the move
+            currentBoard[draggedFrom.row][draggedFrom.col] = null;
+            currentBoard[toRow][toCol] = draggedPiece;
+
+            lastMove = {
+                from: draggedFrom.position,
+                to: toPosition
+            };
+
+            draggedPiece = null;
+            draggedFrom = null;
+
+            renderBoard();
+            
+            // Auto-check solution after move
+            setTimeout(checkSolution, 300);
+        }
+
+        function getAlgebraic(row, col) {
+            const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+            const rank = 8 - row;
+            return files[col] + rank;
+        }
+
+        function resetPosition() {
+            loadScenario(currentScenario);
+        }
+
+        function checkSolution() {
+            if (!lastMove) {
+                showFeedback('Make a move first!', 'error');
+                return;
+            }
+
+            const solution = scenarios[currentScenario].solution;
+            
+            if (lastMove.from === solution.from && lastMove.to === solution.to) {
+                showFeedback('🎉 Checkmate! Excellent move! 🎉', 'success');
+                celebrate();
+            } else {
+                showFeedback('Not quite! Try again.', 'error');
+            }
+        }
+
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${type}`;
+        }
+
+        function celebrate() {
+            const celebration = document.createElement('div');
+            celebration.className = 'celebration';
+            celebration.textContent = '🏆';
+            document.body.appendChild(celebration);
+            setTimeout(() => celebration.remove(), 1000);
+        }
+
+        // Initialize the app
+        loadScenario(0);
+    </script>
+</body>
+</html>
+```
+
+## Features:
+
+### 🎯 **3 Mate-in-1 Scenarios:**
+1. **Back Rank Mate** - Move the rook from a1 to a8
+2. **Queen Mate on Edge** - Move the queen from f2 to g8
+3. **Rook and King Mate** - Move the rook from a2 to a8
+
+### ✨ **Key Features:**
+- **Drag & Drop** - Pieces can be dragged to any square
+- **Scenario Selection** - Click buttons to switch between puzzles
+- **Visual Feedback** - Success (green) and error (red) messages
+- **Reset Button** - Restore original position
+- **Auto-Check** - Automatically validates your move
+- **Animations** - Smooth transitions and celebration effects
+- **Responsive Design** - Beautiful gradient background and modern UI
+
+### 🎨 **Visual Elements:**
+- Chess board with proper light/dark squares
+- Unicode chess pieces
+- Hover effects on pieces and buttons
+- Drag-over highlighting (green)
+- Success celebration with trophy emoji
+- Shake animation for incorrect moves
+- Smooth scaling effects
+
+Simply save this as an HTML file and open it in any modern web browser. Have fun practicing your chess endgames!

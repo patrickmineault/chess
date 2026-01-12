@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Back Rank Mate with Queen",
+    "fen": "7k/5pp/8/3Q4/2B5/8/6PP/6K1 w - - 0 1",
+    "move": "Qg8#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid FEN: expected 8 columns per row in position part of fen: '7k/5pp/8/3Q4/2B5/8/6PP/6K1'",
+    "canonical_fen": "",
+    "scenario_index": 0,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_5/run_1",
+    "reasoning_length": 22305
+  },
+  {
+    "name": "Smothered Mate with Knight",
+    "fen": "6rk/5pp/7N/8/8/8/6PP/6K1 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid FEN: expected 8 columns per row in position part of fen: '6rk/5pp/7N/8/8/8/6PP/6K1'",
+    "canonical_fen": "",
+    "scenario_index": 1,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_5/run_1",
+    "reasoning_length": 22305
+  },
+  {
+    "name": "Diagonal Bishop Mate Supported by Rook",
+    "fen": "6bk/7p/5B2/8/8/8/8/2K3R1 w - - 0 1",
+    "move": "Bg7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 2,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_5/run_1",
+    "reasoning_length": 22305
+  },
+  {
+    "name": "Corner Mate with Rook and King",
+    "fen": "k7/2K5/8/8/8/8/8/R7 w - - 0 1",
+    "move": "Ra6#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 3,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_5/run_1",
+    "reasoning_length": 22305
+  },
+  {
+    "name": "Promotion Mate with Pawn",
+    "fen": "6rk/6P1/6K1/8/2B5/8/8/8 w - - 0 1",
+    "move": "g8=Q#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 4,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_5/run_1",
+    "reasoning_length": 22305
+  }
+]

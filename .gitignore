@@ -1,0 +1,6 @@
+trash
+*/.env
+*/.claude
+.RData
+.Rhistory
+bench/img/chesspieces/wikipedia

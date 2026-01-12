@@ -1,0 +1,19 @@
+Here are 3 distinct mate-in-1 scenarios for white.
+
+```
+Back Rank Mate
+6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1
+Re8#
+```
+
+```
+Smothered Mate
+6rk/6pp/7N/8/8/8/5PPP/6K1 w - - 0 1
+Nf7#
+```
+
+```
+The Kiss of Death (Queen & King Support Mate)
+4k3/8/4K3/8/8/8/8/4Q3 w - - 0 1
+Qe7#
+```

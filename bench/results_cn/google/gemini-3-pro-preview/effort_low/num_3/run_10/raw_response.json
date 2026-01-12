@@ -1,0 +1,47 @@
+{
+  "id": "gen-1764371953-uzsJILS5j3rc9U2s2iPS",
+  "provider": "Google",
+  "model": "google/gemini-3-pro-preview",
+  "object": "chat.completion",
+  "created": 1764371953,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Here are three distinct mate-in-1 scenarios for White.\n\n```\nBack Rank Checkmate\n6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1\nRe8#\n```\n\n```\nScholar's Mate\nr1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 4 4\nQxf7#\n```\n\n```\nSmothered Mate\n6rk/6pp/8/6N1/8/8/8/7K w - - 0 1\nNf7#\n```",
+        "refusal": null,
+        "reasoning": "**Analyzing the Request's Scope**\n\nI'm focused on grasping the specific requirements of the request. The core task revolves around identifying three distinct \"mate-in-one\" scenarios for White. My goal is to ensure each scenario is presented correctly, in its own code block using three backticks. I'm taking care to format each line of the scenarios correctly.\n\n\n**Refining Scenario Selection**\n\nI'm now carefully curating the chess scenarios. The emphasis is on finding diverse mate-in-one positions that highlight different tactical motifs. I will focus on the most impactful winning move in each case. The positions themselves need to be legal and represent different phases of the game.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Analyzing the Request's Scope**\n\nI'm focused on grasping the specific requirements of the request. The core task revolves around identifying three distinct \"mate-in-one\" scenarios for White. My goal is to ensure each scenario is presented correctly, in its own code block using three backticks. I'm taking care to format each line of the scenarios correctly.\n\n\n**Refining Scenario Selection**\n\nI'm now carefully curating the chess scenarios. The emphasis is on finding diverse mate-in-one positions that highlight different tactical motifs. I will focus on the most impactful winning move in each case. The positions themselves need to be legal and represent different phases of the game.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "CiUB4/H/Xh5C0x9iGUD0Aacjz8OmnbKshQO/U0a5xY53eYEE+ykQCm8B4/H/XvCiucvJ/k3mpy6Yj6NYgQWfzhiNFUTc7o//R+xVcunxXw2cVAD8bQ2fCcRERUz40ejkhOW5DW1Upa7Dq+WROQLPw6NsX1t6/oX4TxGM8ehZqTlP6RbcvvpkJ/x/Um4+oW70tji6I9EuD/EKUgHj8f9eGtxERULIR9Ywh5LxhdKCO01iX3RyLoAiCrACbn7aQN1Gk1Cl3yR2oKZzIDfX8T7IGx7f9P5h/Tc/qKK7vFK5uFLJIf3zsLxLe8l7i4cKkwEB4/H/XuUe/dS6yo/NfRygXxj4DnxFjayKKQ4NAtopi7kMIi1Cm7Lo8O+nagIzpRjtiJEw0dUoqOJLpGKswRT3GF8vSizDLAuBbE8tc4a9dV5zZD01mVoLhblMcz1vpnxEqnxUIfIdkY58eGNbdqycI6znSnrLC9K2LohOFvdtJz9SQNcTjTjBhcROENR64SI8tX8KoQEB4/H/Xoa/QwvnjpKvOtPid0RkllQiDzw6b4NHrKMduRMh8ukI45RG/H6LxomcAqTgFef/U8lKE5wrGRh1P0N7GYdoUn0pmcuchA/kNeYQ3DaNnCYKrMmIqKImqXcFA88ZBlPRv9L6IVk5E3QTiqwqe0syiN2p2ammbVV5R2kv1d6YGUA+qBSg8aQaCSkOjan4WIep15DOtFeFGcbh/pDoZgpmAePx/15wj8N0KOhrytsLa2Zz9NYyaZWX+brLCMWbpfx6mqes1+3vZbttGD5aImHQmlQQ1c2aqTy0pPKQNEBAemFKJJK3dNwnayQW6ZUj78DK+HI1XtUMzdK+1dizjT7zCRrtibOT"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 70,
+    "completion_tokens": 284,
+    "total_tokens": 354,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 120,
+      "image_tokens": 0
+    }
+  }
+}

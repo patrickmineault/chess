@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Queen and King Mate",
+    "fen": "4k3/8/3QK3/8/8/8/8/8 w - - 0 1",
+    "move": "Qd8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move gives check but not checkmate",
+    "canonical_fen": "3k4/8/3KQ3/8/8/8/8/8",
+    "scenario_index": 0,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_10",
+    "reasoning_length": 9861,
+    "image_before": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_10/board_0_before.png",
+    "image_after": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_10/board_0_after.png"
+  },
+  {
+    "name": "Smothered Mate with Knight",
+    "fen": "6rk/6pp/5N2/8/8/8/8/6K1 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Illegal move: Nf7#",
+    "canonical_fen": "1K6/8/8/8/8/2N5/pp6/kr6",
+    "scenario_index": 1,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_10",
+    "reasoning_length": 9861,
+    "image_before": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_10/board_1_before.png"
+  },
+  {
+    "name": "Queen and Knight Checkmate",
+    "fen": "8/8/4K3/2N5/3k4/8/3Q4/8 w - - 0 1",
+    "move": "Qd3#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 2,
+    "run_dir": "results_cn/anthropic/claude-sonnet-4.5/effort_medium/num_3/run_10",
+    "reasoning_length": 9861
+  }
+]

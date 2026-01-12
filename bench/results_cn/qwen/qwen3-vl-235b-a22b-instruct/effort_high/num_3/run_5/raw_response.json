@@ -1,0 +1,29 @@
+{
+  "id": "gen-1764361279-09v0JBBPxGActe5aMqu2",
+  "provider": "Novita",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1764361279,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nCheckmate with Queen on h7\nrnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\nQh7#\n```\n\n```\nCheckmate with Rook on f8\nrnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\nRf8#\n```\n\n```\nCheckmate with Bishop on h7\nrnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\nBh7#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 78,
+    "completion_tokens": 169,
+    "total_tokens": 247,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": null
+  }
+}

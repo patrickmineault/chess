@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Pinned Rook Back-Rank Mate",
+    "fen": "6rk/7p/8/8/2B3Q1/8/6PP/6K1 w - - 0 1",
+    "move": "Qxg8#"
+  },
+  {
+    "name": "Corridor Mate with Queen and Knight",
+    "fen": "kN6/3Q4/2K5/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Queen and Bishop Diagonal Mate",
+    "fen": "7k/6pp/8/4Q3/8/2B5/6K1/8 w - - 0 1",
+    "move": "Qxg7#"
+  }
+]

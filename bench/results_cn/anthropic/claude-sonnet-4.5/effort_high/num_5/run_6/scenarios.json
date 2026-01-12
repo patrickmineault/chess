@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Rook and King Checkmate",
+    "fen": "7k/5R1p/6K1/8/8/8/8/8 w - - 0 1",
+    "move": "Rf8#"
+  },
+  {
+    "name": "Queen and King Checkmate",
+    "fen": "7k/7p/6p1/6QK/8/8/8/8 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "1k6/PP6/K7/8/8/8/8/8 w - - 0 1",
+    "move": "a8=Q#"
+  },
+  {
+    "name": "Rook Checkmate on File",
+    "fen": "k7/P7/KR6/8/8/8/8/8 w - - 0 1",
+    "move": "Rb8#"
+  }
+]

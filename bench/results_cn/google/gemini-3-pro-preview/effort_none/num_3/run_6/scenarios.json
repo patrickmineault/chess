@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Back Rank Mate (The Corridor)",
+    "fen": "6k1/5ppp/8/8/8/8/8/3R2K1 w - - 0 1",
+    "move": "Rd8#"
+  },
+  {
+    "name": "Attack on f7 (Queen & Bishop Battery)",
+    "fen": "r1bqk1nr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1",
+    "move": "Qxf7#"
+  },
+  {
+    "name": "Smothered Mate (Knight vs Trapped King)",
+    "fen": "6rk/6pp/7N/8/8/8/8/7K w - - 0 1",
+    "move": "Nf7#"
+  }
+]

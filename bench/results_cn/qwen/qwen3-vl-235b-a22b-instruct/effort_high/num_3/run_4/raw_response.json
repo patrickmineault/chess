@@ -1,0 +1,28 @@
+{
+  "id": "gen-1764361270-qFHT6U5x9Orr9m6rltqC",
+  "provider": "DeepInfra",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1764361270,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nQueen Sacrifice Checkmate\nr1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1\nQxf7#\n```\n\n```\nBack-Rank Mate\nr1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1\nRd1#\n```\n\n```\nSmothered Mate\nr1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1\nNf7#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 78,
+    "total_tokens": 268,
+    "completion_tokens": 190,
+    "estimated_cost": 0.00030649999999999997,
+    "prompt_tokens_details": null
+  }
+}

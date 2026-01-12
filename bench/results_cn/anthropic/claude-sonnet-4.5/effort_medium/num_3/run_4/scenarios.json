@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/K2R4 w - - 0 1",
+    "move": "Rd8#"
+  },
+  {
+    "name": "Two Rooks Mate",
+    "fen": "7k/6R1/8/8/8/8/8/K6R w - - 0 1",
+    "move": "Rh7#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6rk/6pp/3N4/8/8/8/8/K7 w - - 0 1",
+    "move": "Nf7#"
+  }
+]

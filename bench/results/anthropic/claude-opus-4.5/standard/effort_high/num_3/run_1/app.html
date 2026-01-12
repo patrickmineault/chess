@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Mate-in-1 Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            color: #a0aec0;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        .scenario-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .scenario-btn {
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #4a5568;
+            color: white;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .scenario-btn:hover {
+            background: #718096;
+            transform: translateY(-2px);
+        }
+        
+        .scenario-btn.active {
+            background: #48bb78;
+            border-color: #68d391;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+        }
+        
+        .reset-btn {
+            padding: 12px 35px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            color: white;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+        }
+        
+        .reset-btn:hover {
+            background: linear-gradient(135deg, #fc8181, #e53e3e);
+            transform: translateY(-2px);
+        }
+        
+        .board-container {
+            display: inline-block;
+            padding: 15px;
+            background: linear-gradient(145deg, #2d3748, #1a202c);
+            border-radius: 12px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+        }
+        
+        .board-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        
+        .rank-labels {
+            display: flex;
+            flex-direction: column;
+            margin-right: 5px;
+        }
+        
+        .rank-label {
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            width: 20px;
+        }
+        
+        .board-with-files {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .file-labels {
+            display: flex;
+            margin-top: 5px;
+        }
+        
+        .file-label {
+            width: 65px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #a0aec0;
+        }
+        
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 65px);
+            grid-template-rows: repeat(8, 65px);
+            border: 3px solid #4a5568;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .square {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .square.light {
+            background: #f0d9b5;
+        }
+        
+        .square.dark {
+            background: #b58863;
+        }
+        
+        .square.highlight {
+            box-shadow: inset 0 0 0 4px rgba(255, 255, 0, 0.8);
+        }
+        
+        .square.drag-over {
+            background: rgba(100, 200, 100, 0.5) !important;
+            box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .piece {
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.15s ease;
+            line-height: 1;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+        }
+        
+        .piece:hover {
+            transform: scale(1.1);
+        }
+        
+        .piece.dragging {
+            opacity: 0.4;
+            cursor: grabbing;
+        }
+        
+        .piece.not-draggable {
+            cursor: default;
+        }
+        
+        .feedback {
+            margin-top: 25px;
+            padding: 18px 35px;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.4s ease;
+        }
+        
+        .feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feedback.correct {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.4);
+        }
+        
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            color: white;
+            box-shadow: 0 5px 20px rgba(229, 62, 62, 0.4);
+        }
+        
+        .info {
+            margin-top: 20px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            color: #e2e8f0;
+            background: rgba(74, 85, 104, 0.5);
+            border-radius: 8px;
+            border-left: 4px solid #48bb78;
+        }
+        
+        .turn-indicator {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #ffd700;
+            font-weight: 600;
+        }
+        
+        @keyframes correctPulse {
+            0%, 100% { box-shadow: inset 0 0 0 4px rgba(72, 187, 120, 0.8); }
+            50% { box-shadow: inset 0 0 30px rgba(72, 187, 120, 0.6); }
+        }
+        
+        @keyframes incorrectShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .square.correct-animation {
+            animation: correctPulse 0.6s ease 3;
+            background: rgba(72, 187, 120, 0.5) !important;
+        }
+        
+        .square.incorrect-animation {
+            animation: incorrectShake 0.3s ease 2;
+        }
+        
+        .scenario-title {
+            font-size: 1.4rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♚ Mate in 1 Practice</h1>
+        <p class="subtitle">Find the winning move for White!</p>
+        
+        <div class="controls">
+            <div class="scenario-buttons">
+                <button class="scenario-btn active" onclick="loadScenario(0)">
+                    📍 Back Rank Mate
+                </button>
+                <button class="scenario-btn" onclick="loadScenario(1)">
+                    👑 Queen & King
+                </button>
+                <button class="scenario-btn" onclick="loadScenario(2)">
+                    🏰 Corner Trap
+                </button>
+            </div>
+            <button class="reset-btn" onclick="resetPosition()">🔄 Reset Position</button>
+        </div>
+        
+        <div class="scenario-title" id="scenario-title">Back Rank Mate</div>
+        
+        <div class="board-container">
+            <div class="board-wrapper">
+                <div class="rank-labels">
+                    <div class="rank-label">8</div>
+                    <div class="rank-label">7</div>
+                    <div class="rank-label">6</div>
+                    <div class="rank-label">5</div>
+                    <div class="rank-label">4</div>
+                    <div class="rank-label">3</div>
+                    <div class="rank-label">2</div>
+                    <div class="rank-label">1</div>
+                </div>
+                <div class="board-with-files">
+                    <div class="board" id="board"></div>
+                    <div class="file-labels">
+                        <div class="file-label">a</div>
+                        <div class="file-label">b</div>
+                        <div class="file-label">c</div>
+                        <div class="file-label">d</div>
+                        <div class="file-label">e</div>
+                        <div class="file-label">f</div>
+                        <div class="file-label">g</div>
+                        <div class="file-label">h</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="turn-indicator" id="turn-indicator">⚪ White to move - Find checkmate!</div>
+        
+        <div class="feedback" id="feedback"></div>
+        
+        <div class="info" id="scenario-info">
+            The black king is trapped behind its own pawns. Deliver the final blow!
+        </div>
+    </div>
+
+    <script>
+        // Chess piece Unicode symbols
+        const PIECES = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+
+        // Three mate-in-1 scenarios
+        const scenarios = [
+            {
+                name: "Back Rank Mate",
+                description: "The black king is trapped behind its own pawns. Use the queen to deliver checkmate on the back rank!",
+                position: {
+                    'g1': 'K', 'd1': 'Q',
+                    'g8': 'k', 'f7': 'p', 'g7': 'p', 'h7': 'p'
+                },
+                solution: { from: 'd1', to: 'd8' },
+                hint: "Qd8#"
+            },
+            {
+                name: "Queen & King Mate",
+                description: "Your king supports the queen. Cut off all escape squares and deliver checkmate!",
+                position: {
+                    'g6': 'K', 'h3': 'Q',
+                    'h8': 'k'
+                },
+                solution: { from: 'h3', to: 'h7' },
+                hint: "Qh7#"
+            },
+            {
+                name: "Corner Trap",
+                description: "The enemy king is cornered! Your king blocks the escape routes. Finish the game!",
+                position: {
+                    'c7': 'K', 'a2': 'Q',
+                    'a8': 'k'
+                },
+                solution: { from: 'a2', to: 'a7' },
+                hint: "Qa7#"
+            }
+        ];
+
+        let currentScenario = 0;
+        let currentPosition = {};
+        let draggedPiece = null;
+        let solved = false;
+
+        // Convert coordinates to square notation (e.g., "e4")
+        function coordsToSquare(file, rank) {
+            return String.fromCharCode('a'.charCodeAt(0) + file) + (rank + 1);
+        }
+
+        // Create the chess board
+        function createBoard() {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+            
+            for (let rank = 7; rank >= 0; rank--) {
+                for (let file = 0; file < 8; file++) {
+                    const square = document.createElement('div');
+                    const squareName = coordsToSquare(file, rank);
+                    const isLight = (file + rank) % 2 === 1;
+                    
+                    square.className = `square ${isLight ? 'light' : 'dark'}`;
+                    square.dataset.square = squareName;
+                    
+                    // Drag and drop event listeners
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('dragenter', handleDragEnter);
+                    square.addEventListener('dragleave', handleDragLeave);
+                    
+                    board.appendChild(square);
+                }
+            }
+        }
+
+        // Render pieces on the board
+        function renderPosition() {
+            // Clear all pieces first
+            document.querySelectorAll('.square').forEach(square => {
+                square.innerHTML = '';
+            });
+            
+            // Place each piece
+            for (const [squareName, piece] of Object.entries(currentPosition)) {
+                const square = document.querySelector(`[data-square="${squareName}"]`);
+                if (square) {
+                    const pieceElement = document.createElement('span');
+                    pieceElement.className = 'piece';
+                    pieceElement.textContent = PIECES[piece];
+                    pieceElement.dataset.piece = piece;
+                    pieceElement.dataset.square = squareName;
+                    
+                    // Only white pieces (uppercase) are draggable when not solved
+                    const isWhitePiece = piece === piece.toUpperCase();
+                    if (isWhitePiece && !solved) {
+                        pieceElement.draggable = true;
+                        pieceElement.addEventListener('dragstart', handleDragStart);
+                        pieceElement.addEventListener('dragend', handleDragEnd);
+                    } else {
+                        pieceElement.classList.add('not-draggable');
+                    }
+                    
+                    square.appendChild(pieceElement);
+                }
+            }
+        }
+
+        // Load a specific scenario
+        function loadScenario(index) {
+            currentScenario = index;
+            currentPosition = { ...scenarios[index].position };
+            solved = false;
+            
+            // Update button active states
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            
+            // Update scenario title and info
+            document.getElementById('scenario-title').textContent = scenarios[index].name;
+            document.getElementById('scenario-info').textContent = scenarios[index].description;
+            document.getElementById('turn-indicator').textContent = '⚪ White to move - Find checkmate!';
+            document.getElementById('turn-indicator').style.color = '#ffd700';
+            
+            // Hide feedback
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('show', 'correct', 'incorrect');
+            
+            // Clear any animations
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.classList.remove('correct-animation', 'incorrect-animation', 'highlight', 'drag-over');
+            });
+            
+            renderPosition();
+        }
+
+        // Reset to initial position
+        function resetPosition() {
+            loadScenario(currentScenario);
+        }
+
+        // Drag start handler
+        function handleDragStart(e) {
+            if (solved) {
+                e.preventDefault();
+                return;
+            }
+            
+            draggedPiece = {
+                piece: e.target.dataset.piece,
+                from: e.target.dataset.square
+            };
+            
+            e.target.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', ''); // Required for Firefox
+            
+            // Highlight source square
+            const sourceSquare = document.querySelector(`[data-square="${draggedPiece.from}"]`);
+            if (sourceSquare) {
+                sourceSquare.classList.add('highlight');
+            }
+        }
+
+        // Drag end handler
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            
+            // Remove all highlights
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.classList.remove('highlight', 'drag-over');
+            });
+            
+            draggedPiece = null;
+        }
+
+        // Drag over handler
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        // Drag enter handler
+        function handleDragEnter(e) {
+            e.preventDefault();
+            if (draggedPiece) {
+                const square = e.target.closest('.square');
+                if (square && square.dataset.square !== draggedPiece.from) {
+                    square.classList.add('drag-over');
+                }
+            }
+        }
+
+        // Drag leave handler
+        function handleDragLeave(e) {
+            const square = e.target.closest('.square');
+            if (square) {
+                square.classList.remove('drag-over');
+            }
+        }
+
+        // Drop handler - main game logic
+        function handleDrop(e) {
+            e.preventDefault();
+            
+            if (solved || !draggedPiece) return;
+            
+            const targetSquare = e.target.closest('.square');
+            if (!targetSquare) return;
+            
+            const to = targetSquare.dataset.square;
+            const from = draggedPiece.from;
+            
+            // Don't allow dropping on same square
+            if (from === to) return;
+            
+            // Remove visual highlights
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.classList.remove('highlight', 'drag-over');
+            });
+            
+            // Check if this move is the correct solution
+            const solution = scenarios[currentScenario].solution;
+            const isCorrect = from === solution.from && to === solution.to;
+            
+            if (isCorrect) {
+                // Execute the winning move
+                delete currentPosition[from];
+                currentPosition[to] = draggedPiece.piece;
+                renderPosition();
+                
+                // Visual success feedback
+                showFeedback(true);
+                targetSquare.classList.add('correct-animation');
+                
+                // Update turn indicator
+                document.getElementById('turn-indicator').textContent = '🏆 Checkmate! White wins!';
+                document.getElementById('turn-indicator').style.color = '#48bb78';
+                
+                solved = true;
+            } else {
+                // Visual error feedback
+                showFeedback(false);
+                targetSquare.classList.add('incorrect-animation');
+                
+                setTimeout(() => {
+                    targetSquare.classList.remove('incorrect-animation');
+                }, 600);
+            }
+            
+            draggedPiece = null;
+        }
+
+        // Display feedback message
+        function showFeedback(isCorrect) {
+            const feedback = document.getElementById('feedback');
+            const scenario = scenarios[currentScenario];
+            
+            if (isCorrect) {
+                feedback.innerHTML = `🎉 Checkmate! <strong>${scenario.hint}</strong> - Excellent!`;
+                feedback.className = 'feedback show correct';
+            } else {
+                feedback.innerHTML = '❌ That\'s not checkmate. Try again!';
+                feedback.className = 'feedback show incorrect';
+                
+                // Hide error message after delay
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2500);
+            }
+        }
+
+        // Initialize the app
+        function init() {
+            createBoard();
+            loadScenario(0);
+        }
+
+        // Start the app when page loads
+        init();
+    </script>
+</body>
+</html>

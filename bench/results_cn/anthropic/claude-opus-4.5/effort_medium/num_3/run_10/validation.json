@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "1K1R4/8/8/8/8/8/ppp5/1k6",
+    "scenario_index": 0,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10",
+    "reasoning_length": 20299,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10/board_0_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10/board_0_after.png"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6rk/6pp/8/4N3/8/8/8/4K3 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "3K4/8/8/8/3N4/8/pp6/kr6",
+    "scenario_index": 1,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10",
+    "reasoning_length": 20299,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10/board_1_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10/board_1_after.png"
+  },
+  {
+    "name": "Rook and Pawn Mate",
+    "fen": "6k1/5pP1/8/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move gives check but not checkmate",
+    "canonical_fen": "1k6/1Pp5/8/8/8/8/8/R2K4",
+    "scenario_index": 2,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10",
+    "reasoning_length": 20299,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10/board_2_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_medium/num_3/run_10/board_2_after.png"
+  }
+]

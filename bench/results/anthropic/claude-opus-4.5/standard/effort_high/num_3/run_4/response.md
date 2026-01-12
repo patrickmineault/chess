@@ -1,0 +1,998 @@
+# Chess Mate-in-1 Practice App
+
+Here's a complete, self-contained HTML file with a chess endgame practice app:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Mate-in-1 Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #a0a0a0;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .scenario-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .scenario-btn {
+            padding: 12px 20px;
+            font-size: 14px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #2d2d4a;
+            color: #b0b0b0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .scenario-btn:hover {
+            background: #3d3d5a;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .scenario-btn.active {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            color: white;
+            border-color: #9d5df9;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+        }
+        
+        .scenario-btn.solved {
+            position: relative;
+        }
+        
+        .scenario-btn.solved::after {
+            content: '✓';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #22c55e;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .puzzle-info {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 450px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .puzzle-info h3 {
+            margin-bottom: 8px;
+            color: #a78bfa;
+            font-size: 20px;
+        }
+        
+        .puzzle-info p {
+            color: #c0c0c0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .status {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 350px;
+            transition: all 0.3s ease;
+        }
+        
+        .status.neutral {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .status.success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        .status.failure {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-8px); }
+            80% { transform: translateX(8px); }
+        }
+        
+        .board-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .board-container {
+            position: relative;
+        }
+        
+        .rank-labels {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 480px;
+            padding-right: 5px;
+        }
+        
+        .rank-labels span {
+            color: #888;
+            font-size: 14px;
+            font-weight: bold;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .file-labels {
+            display: flex;
+            justify-content: space-around;
+            width: 480px;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+        
+        .file-labels span {
+            color: #888;
+            font-size: 14px;
+            font-weight: bold;
+            width: 60px;
+            text-align: center;
+        }
+        
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            border: 3px solid #5a4a3a;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            position: relative;
+            transition: background-color 0.15s;
+        }
+        
+        .square.light {
+            background-color: #f0d9b5;
+        }
+        
+        .square.dark {
+            background-color: #b58863;
+        }
+        
+        .square.selected {
+            background-color: #f7ec5e !important;
+        }
+        
+        .square.last-move {
+            background-color: #cdd26a !important;
+        }
+        
+        .square.check {
+            background: radial-gradient(circle, #ff6b6b 0%, transparent 70%) !important;
+        }
+        
+        .square.checkmate-from {
+            background-color: #90EE90 !important;
+        }
+        
+        .square.checkmate-to {
+            background-color: #32CD32 !important;
+        }
+        
+        .square.drag-over {
+            background-color: #7fff7f !important;
+        }
+        
+        .square .move-hint {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .square .capture-hint {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border: 4px solid rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .piece {
+            cursor: grab;
+            user-select: none;
+            line-height: 1;
+            z-index: 1;
+        }
+        
+        .piece.white-piece {
+            color: #fff;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000,
+                0 2px 3px rgba(0,0,0,0.3);
+        }
+        
+        .piece.black-piece {
+            color: #333;
+            text-shadow: 
+                0 2px 3px rgba(0,0,0,0.2);
+        }
+        
+        .piece.dragging {
+            opacity: 0.4;
+            cursor: grabbing;
+        }
+        
+        .piece:not(.draggable) {
+            cursor: default;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 28px;
+            font-size: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-reset {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-reset:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+        
+        .btn-hint {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-hint:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+            z-index: 100;
+        }
+        
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .overlay-content {
+            text-align: center;
+            color: white;
+            animation: popIn 0.4s ease-out;
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .overlay-content h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .overlay-content p {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .overlay-content.success h2 {
+            color: #4ade80;
+        }
+        
+        .overlay-content .btn-next {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .overlay-content .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+        }
+        
+        .score-display {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .score-display span {
+            color: #4ade80;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>♔ Chess Mate-in-1 Trainer ♚</h1>
+    <p class="subtitle">White to move. Find the checkmate!</p>
+    
+    <div class="scenario-selector" id="scenario-buttons">
+        <button class="scenario-btn active" data-scenario="0">
+            #1 Back Rank Mate
+        </button>
+        <button class="scenario-btn" data-scenario="1">
+            #2 Queen Ladder
+        </button>
+        <button class="scenario-btn" data-scenario="2">
+            #3 King & Queen
+        </button>
+    </div>
+    
+    <div class="game-container">
+        <div class="puzzle-info">
+            <h3 id="puzzle-title">Back Rank Mate</h3>
+            <p id="puzzle-description">The black king is trapped behind its own pawns. Deliver checkmate with your rook!</p>
+        </div>
+        
+        <div class="status neutral" id="status">
+            ⚪ White to move — Drag a piece to make your move
+        </div>
+        
+        <div class="board-wrapper">
+            <div class="rank-labels">
+                <span>8</span><span>7</span><span>6</span><span>5</span>
+                <span>4</span><span>3</span><span>2</span><span>1</span>
+            </div>
+            <div>
+                <div class="board-container">
+                    <div class="board" id="board"></div>
+                    <div class="overlay" id="overlay">
+                        <div class="overlay-content success" id="overlay-content">
+                            <h2>✓ Checkmate!</h2>
+                            <p>Brilliant! You found the winning move.</p>
+                            <button class="btn-next" id="next-puzzle-btn">Next Puzzle →</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="file-labels">
+                    <span>a</span><span>b</span><span>c</span><span>d</span>
+                    <span>e</span><span>f</span><span>g</span><span>h</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-reset" id="reset-btn">
+                ↺ Reset
+            </button>
+            <button class="btn btn-hint" id="hint-btn">
+                💡 Hint
+            </button>
+        </div>
+        
+        <div class="score-display">
+            Puzzles Solved: <span id="score">0</span> / 3
+        </div>
+    </div>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        
+        const PIECES = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+        
+        const PUZZLES = [
+            {
+                id: 0,
+                title: "Back Rank Mate",
+                description: "The black king is trapped behind its own pawns. Deliver checkmate with your rook!",
+                position: {
+                    'g1': 'K', 'a1': 'R',
+                    'h8': 'k', 'f7': 'p', 'g7': 'p', 'h7': 'p'
+                },
+                solutions: [{ from: 'a1', to: 'a8' }],
+                hint: "The rook can attack along the back rank..."
+            },
+            {
+                id: 1,
+                title: "Queen Ladder",
+                description: "Use your queen and king together to trap the enemy king on the edge!",
+                position: {
+                    'f6': 'K', 'g4': 'Q',
+                    'h6': 'k'
+                },
+                solutions: [{ from: 'g4', to: 'g6' }],
+                hint: "The queen can get very close to the king when protected..."
+            },
+            {
+                id: 2,
+                title: "King & Queen Coordination",
+                description: "Coordinate your king and queen to deliver the final blow to the cornered king!",
+                position: {
+                    'b6': 'K', 'c7': 'Q',
+                    'a8': 'k'
+                },
+                solutions: [
+                    { from: 'c7', to: 'c8' },
+                    { from: 'c7', to: 'a7' }
+                ],
+                hint: "The queen can checkmate from multiple squares..."
+            }
+        ];
+        
+        // ==================== GAME STATE ====================
+        
+        let currentPuzzle = 0;
+        let board = {};
+        let selectedSquare = null;
+        let solved = false;
+        let solvedPuzzles = new Set();
+        let draggedFrom = null;
+        let validMoves = [];
+        
+        // ==================== DOM ELEMENTS ====================
+        
+        const boardEl = document.getElementById('board');
+        const statusEl = document.getElementById('status');
+        const overlayEl = document.getElementById('overlay');
+        const overlayContentEl = document.getElementById('overlay-content');
+        const puzzleTitleEl = document.getElementById('puzzle-title');
+        const puzzleDescEl = document.getElementById('puzzle-description');
+        const resetBtn = document.getElementById('reset-btn');
+        const hintBtn = document.getElementById('hint-btn');
+        const nextPuzzleBtn = document.getElementById('next-puzzle-btn');
+        const scoreEl = document.getElementById('score');
+        const scenarioBtns = document.querySelectorAll('.scenario-btn');
+        
+        // ==================== BOARD UTILITIES ====================
+        
+        function getSquareName(row, col) {
+            return 'abcdefgh'[col] + (8 - row);
+        }
+        
+        function getSquareCoords(squareName) {
+            return {
+                col: 'abcdefgh'.indexOf(squareName[0]),
+                row: 8 - parseInt(squareName[1])
+            };
+        }
+        
+        function isWhitePiece(piece) {
+            return piece && piece === piece.toUpperCase();
+        }
+        
+        function isBlackPiece(piece) {
+            return piece && piece === piece.toLowerCase();
+        }
+        
+        // ==================== MOVE GENERATION ====================
+        
+        function getValidMoves(from) {
+            const piece = board[from];
+            if (!piece || !isWhitePiece(piece)) return [];
+            
+            const moves = [];
+            const { row, col } = getSquareCoords(from);
+            const pieceType = piece.toUpperCase();
+            
+            const addMove = (r, c) => {
+                if (r >= 0 && r < 8 && c >= 0 && c < 8) {
+                    const sq = getSquareName(r, c);
+                    const target = board[sq];
+                    if (!isWhitePiece(target)) {
+                        moves.push(sq);
+                    }
+                }
+            };
+            
+            const addSlidingMoves = (directions) => {
+                for (const [dr, dc] of directions) {
+                    for (let i = 1; i < 8; i++) {
+                        const r = row + dr * i;
+                        const c = col + dc * i;
+                        if (r < 0 || r >= 8 || c < 0 || c >= 8) break;
+                        const sq = getSquareName(r, c);
+                        const target = board[sq];
+                        if (isWhitePiece(target)) break;
+                        moves.push(sq);
+                        if (target) break;
+                    }
+                }
+            };
+            
+            switch (pieceType) {
+                case 'K':
+                    for (let dr = -1; dr <= 1; dr++) {
+                        for (let dc = -1; dc <= 1; dc++) {
+                            if (dr !== 0 || dc !== 0) addMove(row + dr, col + dc);
+                        }
+                    }
+                    break;
+                case 'Q':
+                    addSlidingMoves([[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]);
+                    break;
+                case 'R':
+                    addSlidingMoves([[-1,0],[1,0],[0,-1],[0,1]]);
+                    break;
+                case 'B':
+                    addSlidingMoves([[-1,-1],[-1,1],[1,-1],[1,1]]);
+                    break;
+                case 'N':
+                    const knightMoves = [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]];
+                    for (const [dr, dc] of knightMoves) addMove(row + dr, col + dc);
+                    break;
+                case 'P':
+                    if (row > 0 && !board[getSquareName(row-1, col)]) {
+                        moves.push(getSquareName(row-1, col));
+                    }
+                    if (col > 0 && isBlackPiece(board[getSquareName(row-1, col-1)])) {
+                        moves.push(getSquareName(row-1, col-1));
+                    }
+                    if (col < 7 && isBlackPiece(board[getSquareName(row-1, col+1)])) {
+                        moves.push(getSquareName(row-1, col+1));
+                    }
+                    break;
+            }
+            
+            return moves;
+        }
+        
+        // ==================== BOARD RENDERING ====================
+        
+        function createBoard() {
+            boardEl.innerHTML = '';
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    const squareName = getSquareName(row, col);
+                    square.className = `square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+                    square.dataset.square = squareName;
+                    
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('dragleave', handleDragLeave);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('click', handleSquareClick);
+                    
+                    boardEl.appendChild(square);
+                }
+            }
+        }
+        
+        function updateBoard() {
+            const squares = boardEl.querySelectorAll('.square');
+            
+            squares.forEach(square => {
+                const squareName = square.dataset.square;
+                const piece = board[squareName];
+                const { row, col } = getSquareCoords(squareName);
+                
+                // Reset classes
+                square.className = `square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+                square.innerHTML = '';
+                
+                // Highlight selected square
+                if (squareName === selectedSquare) {
+                    square.classList.add('selected');
+                }
+                
+                // Add piece
+                if (piece) {
+                    const pieceEl = document.createElement('span');
+                    pieceEl.className = `piece ${isWhitePiece(piece) ? 'white-piece' : 'black-piece'}`;
+                    pieceEl.textContent = PIECES[piece];
+                    
+                    if (isWhitePiece(piece) && !solved) {
+                        pieceEl.classList.add('draggable');
+                        pieceEl.draggable = true;
+                        pieceEl.addEventListener('dragstart', handleDragStart);
+                        pieceEl.addEventListener('dragend', handleDragEnd);
+                    }
+                    
+                    square.appendChild(pieceEl);
+                }
+                
+                // Show move hints
+                if (validMoves.includes(squareName)) {
+                    const hint = document.createElement('div');
+                    hint.className = board[squareName] ? 'capture-hint' : 'move-hint';
+                    square.appendChild(hint);
+                }
+            });
+        }
+        
+        // ==================== DRAG AND DROP ====================
+        
+        function handleDragStart(e) {
+            if (solved) return;
+            
+            const square = e.target.closest('.square');
+            draggedFrom = square.dataset.square;
+            
+            if (!isWhitePiece(board[draggedFrom])) {
+                e.preventDefault();
+                return;
+            }
+            
+            e.target.classList.add('dragging');
+            selectedSquare = draggedFrom;
+            validMoves = getValidMoves(draggedFrom);
+            
+            // Create custom drag image
+            const dragImage = e.target.cloneNode(true);
+            dragImage.style.position = 'absolute';
+            dragImage.style.top = '-1000px';
+            document.body.appendChild(dragImage);
+            e.dataTransfer.setDragImage(dragImage, 30, 30);
+            setTimeout(() => document.body.removeChild(dragImage), 0);
+            
+            updateBoard();
+        }
+        
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            boardEl.querySelectorAll('.square').forEach(sq => sq.classList.remove('drag-over'));
+            
+            if (!solved) {
+                selectedSquare = null;
+                validMoves = [];
+                updateBoard();
+            }
+            draggedFrom = null;
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            const square = e.target.closest('.square');
+            if (square && validMoves.includes(square.dataset.square)) {
+                square.classList.add('drag-over');
+            }
+        }
+        
+        function handleDragLeave(e) {
+            const square = e.target.closest('.square');
+            if (square) {
+                square.classList.remove('drag-over');
+            }
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            if (solved || !draggedFrom) return;
+            
+            const square = e.target.closest('.square');
+            if (square) {
+                const targetSquare = square.dataset.square;
+                square.classList.remove('drag-over');
+                
+                if (validMoves.includes(targetSquare)) {
+                    attemptMove(draggedFrom, targetSquare);
+                }
+            }
+        }
+        
+        // ==================== CLICK TO MOVE ====================
+        
+        function handleSquareClick(e) {
+            if (solved) return;
+            
+            const square = e.target.closest('.square');
+            const squareName = square.dataset.square;
+            const piece = board[squareName];
+            
+            if (selectedSquare) {
+                if (validMoves.includes(squareName)) {
+                    attemptMove(selectedSquare, squareName);
+                } else if (isWhitePiece(piece)) {
+                    selectedSquare = squareName;
+                    validMoves = getValidMoves(squareName);
+                    updateBoard();
+                } else {
+                    selectedSquare = null;
+                    validMoves = [];
+                    updateBoard();
+                }
+            } else if (isWhitePiece(piece)) {
+                selectedSquare = squareName;
+                validMoves = getValidMoves(squareName);
+                updateBoard();
+            }
+        }
+        
+        // ==================== MOVE HANDLING ====================
+        
+        function attemptMove(from, to) {
+            const puzzle = PUZZLES[currentPuzzle];
+            const isCorrect = puzzle.solutions.some(s => s.from === from && s.to === to);
+            
+            // Make the move
+            const piece = board[from];
+            delete board[from];
+            board[to] = piece;
+            
+            selectedSquare = null;
+            validMoves = [];
+            updateBoard();
+            
+            // Highlight the move
+            setTimeout(() => {
+                const fromSquare = boardEl.querySelector(`[data-square="${from}"]`);
+                const toSquare = boardEl.querySelector(`[data-square="${to}"]`);
+                
+                if (isCorrect) {
+                    fromSquare.classList.add('checkmate-from');
+                    toSquare.classList.add('checkmate-to');
+                    showSuccess();
+                } else {
+                    showFailure();
+                }
+            }, 50);
+        }
+        
+        // ==================== FEEDBACK ====================
+        
+        function showSuccess() {
+            solved = true;
+            solvedPuzzles.add(currentPuzzle);
+            
+            statusEl.textContent = "✓ Checkmate! Excellent move!";
+            statusEl.className = 'status success';
+            
+            scoreEl.textContent = solvedPuzzles.size;
+            updateScenarioButtons();
+            
+            setTimeout(() => {
+                overlayEl.classList.add('show');
+                
+                if (solvedPuzzles.size === PUZZLES.length) {
+                    overlayContentEl.innerHTML = `
+                        <h2>🏆 All Puzzles Solved!</h2>
+                        <p>Congratulations! You've mastered all mate-in-1 puzzles!</p>
+                        <button class="btn-next" onclick="resetAllPuzzles()">Play Again</button>
+                    `;
+                } else {
+                    const nextUnsolved = PUZZLES.find(p => !solvedPuzzles.has(p.id));
+                    if (nextUnsolved) {
+                        nextPuzzleBtn.onclick = () => {
+                            overlayEl.classList.remove('show');
+                            loadPuzzle(nextUnsolved.id);
+                        };
+                    }
+                }
+            }, 800);
+        }
+        
+        function showFailure() {
+            statusEl.textContent = "✗ Not checkmate — Try again!";
+            statusEl.className = 'status failure';
+            
+            setTimeout(() => {
+                loadPuzzle(currentPuzzle);
+            }, 1200);
+        }
+        
+        function showHint() {
+            const puzzle = PUZZLES[currentPuzzle];
+            statusEl.textContent = `💡 ${puzzle.hint}`;
+            statusEl.className = 'status neutral';
+            
+            // Briefly highlight the piece that should move
+            const solution = puzzle.solutions[0];
+            const fromSquare = boardEl.querySelector(`[data-square="${solution.from}"]`);
+            fromSquare.classList.add('selected');
+            
+            setTimeout(() => {
+                fromSquare.classList.remove('selected');
+            }, 2000);
+        }
+        
+        // ==================== PUZZLE MANAGEMENT ====================
+        
+        function loadPuzzle(puzzleIndex) {
+            currentPuzzle = puzzleIndex;
+            const puzzle = PUZZLES[puzzleIndex];
+            
+            board = { ...puzzle.position };
+            solved = false;
+            selectedSquare = null;
+            validMoves = [];
+            
+            puzzleTitleEl.textContent = puzzle.title;
+            puzzleDescEl.textContent = puzzle.description;
+            statusEl.textContent = "⚪ White to move — Drag a piece to make your move";
+            statusEl.className = 'status neutral';
+            overlayEl.classList.remove('show');
+            
+            updateBoard();
+            updateScenarioButtons();
+        }
+        
+        function updateScenarioButtons() {
+            scenarioBtns.forEach((btn, index) => {
+                btn.classList.toggle('active', index === currentPuzzle);
+                btn.classList.toggle('solved', solvedPuzzles.has(index));
+            });
+        }
+        
+        function resetAllPuzzles() {
+            solvedPuzzles.clear();
+            scoreEl.textContent = '0';
+            overlayEl.classList.remove('show');
+            loadPuzzle(0);
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        
+        function setupEventListeners() {
+            resetBtn.addEventListener('click', () => loadPuzzle(currentPuzzle));
+            hintBtn.addEventListener('click', showHint);
+            
+            scenarioBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    loadPuzzle(parseInt(btn.dataset.scenario));
+                });
+            });
+        }
+        
+        // ==================== INITIALIZATION ====================
+        
+        function init() {
+            createBoard();
+            loadPuzzle(0);
+            setupEventListeners();
+        }
+        
+        init();
+    </script>
+</body>
+</html>
+```
+
+## Features Included:
+
+### 🎮 **3 Mate-in-1 Scenarios:**
+1. **Back Rank Mate** - Rook delivers checkmate (Ra8#)
+2. **Queen Ladder** - Queen mates with king support (Qg6#)
+3. **King & Queen Coordination** - Multiple solutions (Qc8# or Qa7#)
+
+### 🎯 **Interactive Features:**
+- **Drag & Drop** - Grab pieces and drop them on target squares
+- **Click-to-Move** - Click a piece, then click the destination
+- **Move Hints** - Visual dots show valid moves when selecting a piece
+- **Scenario Selection** - Three buttons to switch between puzzles
+
+### 📊 **Visual Feedback:**
+- **Green highlight** on successful checkmate
+- **Red shake animation** on incorrect moves
+- **Success overlay** with celebration message
+- **Progress tracking** (solved puzzles marked with ✓)
+- **Score counter** showing puzzles solved
+
+### 🔧 **Controls:**
+- **Reset Button** - Restart current puzzle
+- **Hint Button** - Get a helpful hint
+- **Next Puzzle** - Advance after solving
+
+### 🎨 **Visual Design:**
+- Modern dark theme with gradient background
+- Board with file/rank labels (a-h, 1-8)
+- Smooth animations and transitions
+- Responsive piece styling

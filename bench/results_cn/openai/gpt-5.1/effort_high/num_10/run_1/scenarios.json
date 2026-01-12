@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Scenario 1: Edge Box Mate with Queen",
+    "fen": "k7/p7/2KQ4/8/8/8/8/8 w - - 0 1",
+    "move": "Qd8#"
+  },
+  {
+    "name": "Scenario 2: Corner Mate with Queen",
+    "fen": "7k/8/5KQ1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Scenario 3: Back-Rank Mate with Rook",
+    "fen": "k7/p1K4R/8/8/8/8/8/8 w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Scenario 4: Box Mate from the Other Side",
+    "fen": "k7/p1K5/8/8/8/8/8/3Q4 w - - 0 1",
+    "move": "Qd8#"
+  },
+  {
+    "name": "Scenario 5: Vertical Rook Mate",
+    "fen": "7k/7p/5K2/8/8/8/8/5R2 w - - 0 1",
+    "move": "Rf8#"
+  },
+  {
+    "name": "Scenario 6: Diagonal Queen Mate on c8",
+    "fen": "1pk5/8/2K5/8/8/8/8/1Q6 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Scenario 7: Smothered Mate with a Knight",
+    "fen": "7k/6pp/5N1N/8/8/8/8/4K3 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Scenario 8: Promotion Mate",
+    "fen": "k7/p2P4/2K5/8/8/8/8/8 w - - 0 1",
+    "move": "d8=Q#"
+  },
+  {
+    "name": "Scenario 9: Ladder-Style Mate with Two Rooks",
+    "fen": "7k/6Rp/8/8/8/8/8/3K2R1 w - - 0 1",
+    "move": "Rg8#"
+  },
+  {
+    "name": "Scenario 10: Diagonal Corner Mate on g8",
+    "fen": "6k1/8/5K1Q/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#"
+  }
+]

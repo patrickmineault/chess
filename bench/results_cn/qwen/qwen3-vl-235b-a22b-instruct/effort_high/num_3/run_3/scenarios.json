@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Checkmate with Queen on d8",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "move": "Qd8#"
+  },
+  {
+    "name": "Checkmate with Rook on h8",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Checkmate with Bishop on h7",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "move": "Bh7#"
+  }
+]

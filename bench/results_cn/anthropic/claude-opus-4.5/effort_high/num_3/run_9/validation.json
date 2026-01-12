@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "1K1R4/8/8/8/8/8/ppp5/1k6",
+    "scenario_index": 0,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9",
+    "reasoning_length": 13592,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9/board_0_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9/board_0_after.png"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "6rk/6pp/8/6N1/8/8/8/K7 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "6rk/6pp/8/6N1/8/8/8/K7",
+    "scenario_index": 1,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9",
+    "reasoning_length": 13592,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9/board_1_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9/board_1_after.png"
+  },
+  {
+    "name": "Scholar's Mate",
+    "fen": "3qk3/3p4/8/8/2B5/5Q2/8/7K w - - 0 1",
+    "move": "Qf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "3kq3/4p3/8/8/5B2/2Q5/8/K7",
+    "scenario_index": 2,
+    "run_dir": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9",
+    "reasoning_length": 13592,
+    "image_before": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9/board_2_before.png",
+    "image_after": "results_cn/anthropic/claude-opus-4.5/effort_high/num_3/run_9/board_2_after.png"
+  }
+]

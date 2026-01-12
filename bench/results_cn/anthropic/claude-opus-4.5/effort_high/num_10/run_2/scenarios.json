@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/R3K3 w - - 0 1",
+    "move": "Ra8#"
+  },
+  {
+    "name": "Queen Diagonal Mate",
+    "fen": "7k/6pp/8/6Q1/8/8/8/4K3 w - - 0 1",
+    "move": "Qd8#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "3N2kr/6pp/8/8/8/8/8/4K3 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Scholar's Mate",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1",
+    "move": "Qxf7#"
+  },
+  {
+    "name": "Two Rooks Mate",
+    "fen": "k7/2R5/8/8/8/8/8/1R2K3 w - - 0 1",
+    "move": "Rb8#"
+  },
+  {
+    "name": "Queen and Bishop Mate",
+    "fen": "6kr/8/4Q3/8/2B5/8/8/4K3 w - - 0 1",
+    "move": "Qf7#"
+  },
+  {
+    "name": "Arabian Mate",
+    "fen": "7k/6p1/5N2/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh7#"
+  },
+  {
+    "name": "Boden's Mate",
+    "fen": "2kr4/p2p4/8/8/2B5/6B1/8/4K3 w - - 0 1",
+    "move": "Ba6#"
+  },
+  {
+    "name": "Epaulette Mate",
+    "fen": "3rkr2/8/8/8/8/8/8/4QK2 w - - 0 1",
+    "move": "Qe6#"
+  },
+  {
+    "name": "Bishop and Knight Mate",
+    "fen": "k7/8/B1N5/8/8/8/8/4K3 w - - 0 1",
+    "move": "Bb7#"
+  }
+]

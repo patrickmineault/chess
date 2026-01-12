@@ -1,0 +1,47 @@
+{
+  "id": "gen-1764362407-rgpFDLFABPTPPJKGpO4g",
+  "provider": "Google",
+  "model": "google/gemini-3-pro-preview",
+  "object": "chat.completion",
+  "created": 1764362407,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Here are three distinct mate-in-1 scenarios for White.\n\n```\nBack Rank Checkmate\n6k1/5ppp/8/8/8/8/8/4R1K1 w - - 0 1\nRe8#\n```\n\n```\nScholar's Mate (Checkmate on f7)\nr1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 0 1\nQxf7#\n```\n\n```\nSmothered Mate\n6rk/5Npp/8/8/8/8/8/7K w - - 0 1\nNh6#\n```",
+        "refusal": null,
+        "reasoning": "**Analyzing the Task's Nuances**\n\nI'm focused on breaking down the core elements of the request. My primary focus now is to ensure each mate-in-1 scenario is clearly presented within its own code block. I'm also ensuring the initial line of each code block clearly identifies the board's setup, just as requested.\n\n\n**Structuring the Scenarios**\n\nI'm now implementing the framework. Each scenario will have a specific FEN notation to set up the board. I'm focusing on providing the exact, concise winning move in each case, ensuring the structure aligns with the guidelines. I am aiming for clear and understandable output, catering to the user's expertise.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Analyzing the Task's Nuances**\n\nI'm focused on breaking down the core elements of the request. My primary focus now is to ensure each mate-in-1 scenario is clearly presented within its own code block. I'm also ensuring the initial line of each code block clearly identifies the board's setup, just as requested.\n\n\n**Structuring the Scenarios**\n\nI'm now implementing the framework. Each scenario will have a specific FEN notation to set up the board. I'm focusing on providing the exact, concise winning move in each case, ensuring the structure aligns with the guidelines. I am aiming for clear and understandable output, catering to the user's expertise.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "CiUB4/H/Xtyegz12UHafHDAuY8jZZ9kKR0duDvNH3zOxbHiWa4wSCm8B4/H/XmKqCmdCuipk7gdo4B1+H/GsUg9ur8YcTEYxGY2UE5H4hHx0AKK6mGSY4fydsMn+GbHImXCdkTCXElDi+qzCgZny+VqmH+VJHYFe5K4PC8sBEqxf44LgLJZVvzaiWMQWKK8F7SHl1ZyE4+sKUgHj8f9e1RI/+JXZaNqkFy9DuD3YFb7Y2W/oRUe9Nm/Z2JacNKjVrFz3+xdfZRGmmz3ewzeAmNTJO9mSRsdmYTOgiEAFQI5uhZCPcypFuOycAIwKlgEB4/H/Xl8Z17NsceQsEE9qwS7LS9Hs8t1wBKRugOroVGfcXAm0X4oB9yZHB4ekMLWVO9Tpegcopwhn9TcllqzM/csq64ePfqJZtt61wb5XO2xCoeoSUHXYaj9MHYbOZu2O50bxmK4Ky60wBcJRL7Gjb9hqJKOovyFyF6Llv4M+QuyFUY2rxc9Yf2BPDVMOmrTwzjmePDYKigEB4/H/XhoLdBBv+xc3MNfZld+39cz2wO6UxDbFGC0W6JzGUHqiE0e9etdH34roUtHbnhLGew+45CfqCzbY77Aay0eyd6gWTKOGhPhMC3wl2ahrq+INNoA6xJjtrDVm6pom9cL19Z+rVY3RuReuY3ElnNE5nVKHFArAVGU75vyYzIDoFh9PTND4dr4KtwEB4/H/Xr/hehSx6VUdrofg5p/8KD0QS2HeFOpNITmimjkiaFx/BDp5Zy3LGip9YC6s053ZKrzDrmEqlrYNHJi0cNjS7yrn0uFmp4b5slE+CnuEuhvgtYfICNghPw3zyZMPMmf9MZr214Vz2iGXJ4s+lwqUDKDJV+EGuX4bzqq1efdWnXFoGVT7zSVQAcdanDRoz3nzjMDT5j0YZAsPUbG7UqgIYUESVTfPTZ1Ob1rqtQ3aGncwDf4="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 70,
+    "completion_tokens": 308,
+    "total_tokens": 378,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 141,
+      "image_tokens": 0
+    }
+  }
+}

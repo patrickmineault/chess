@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Queen Mate",
+    "fen": "7k/5Qpp/8/8/8/8/8/7K w - - 0 1",
+    "move": "Qf8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Back Rank Rook Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4R2K w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/6pp/7N/8/8/8/8/7K w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Rook Mate on Eighth Rank",
+    "fen": "7k/R6p/6pK/8/8/8/8/8 w - - 0 1",
+    "move": "Ra8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "k7/P1P5/K7/8/8/8/8/8 w - - 0 1",
+    "move": "c8=Q#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  }
+]

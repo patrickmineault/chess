@@ -1,0 +1,284 @@
+Below is a single, self-contained HTML file that implements what you asked for:
+
+- 3 endgame scenarios (all “mate in 1 for White”).
+- Scenario selection via a dropdown.
+- Drag-and-drop pieces (using chessboard.js).
+- Checks whether the move is checkmate, just check, or neither, and gives **visual feedback**.
+- A **Reset** button to restore the current scenario.
+
+Save this as `endgame_trainer.html` (for example) and open it in a browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chess Endgame Mate-in-1 Trainer</title>
+
+  <!-- Chessboard.js CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard-1.0.0.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    select,
+    button {
+      padding: 6px 10px;
+      margin: 4px;
+      font-size: 14px;
+    }
+
+    #board {
+      width: 400px;
+      margin: 20px auto;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+    }
+
+    #status {
+      text-align: center;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 4px;
+      display: block;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 500;
+    }
+
+    .status-neutral {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .status-success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-fail {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .status-partial {
+      background: #fff3cd;
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+  <h2>Chess Endgame – Mate in 1 (White to Move)</h2>
+
+  <div class="controls">
+    <label for="puzzleSelect">Choose a scenario:</label>
+    <select id="puzzleSelect">
+      <option value="0">Puzzle 1 – Queen + King vs King</option>
+      <option value="1">Puzzle 2 – Rook + King vs King</option>
+      <option value="2">Puzzle 3 – Queen + King vs King (different pattern)</option>
+    </select>
+    <button id="resetBtn">Reset current position</button>
+  </div>
+
+  <div id="board"></div>
+
+  <div id="status" class="status-neutral">
+    White to move. Find checkmate in one move.
+  </div>
+
+  <!-- Chess.js (move legality & checkmate detection) -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <!-- Chessboard.js (board + drag-and-drop) -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard-1.0.0.min.js"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <script>
+    // --- Puzzle definitions ---------------------------------------------------
+    // All positions are: White to move, mate in 1.
+    // FEN format: pieces / side-to-move / castling / en-passant / halfmove / fullmove
+
+    const puzzles = [
+      {
+        name: "Puzzle 1 – Queen + King vs King",
+        fen: "7k/5K2/6Q1/8/8/8/8/8 w - - 0 1",
+        description: "Use the queen and king together to mate the lone black king."
+      },
+      {
+        name: "Puzzle 2 – Rook + King vs King",
+        fen: "k7/2K5/7R/8/8/8/8/8 w - - 0 1",
+        description: "Classic rook and king vs king mate. White to move and mate in one."
+      },
+      {
+        name: "Puzzle 3 – Queen + King vs King (different pattern)",
+        fen: "7k/5Q2/5K2/8/8/8/8/8 w - - 0 1",
+        description: "Another queen-and-king coordination. White to move and mate in one."
+      }
+    ];
+
+    // --- Globals --------------------------------------------------------------
+    let board = null;
+    let game = null;
+    let currentPuzzleIndex = 0;
+    let gameOver = false;
+
+    // --- Helpers --------------------------------------------------------------
+    function setStatus(text, type) {
+      const el = document.getElementById("status");
+      el.textContent = text;
+
+      // Clear previous type classes
+      el.classList.remove("status-neutral", "status-success", "status-fail", "status-partial");
+
+      switch (type) {
+        case "success":
+          el.classList.add("status-success");
+          break;
+        case "fail":
+          el.classList.add("status-fail");
+          break;
+        case "partial":
+          el.classList.add("status-partial");
+          break;
+        default:
+          el.classList.add("status-neutral");
+      }
+    }
+
+    function loadPuzzle(index) {
+      currentPuzzleIndex = index;
+      const fen = puzzles[index].fen;
+      game = new Chess(fen);
+      board.position(fen);
+      gameOver = false;
+
+      setStatus(
+        "White to move. " + puzzles[index].description,
+        "neutral"
+      );
+    }
+
+    function resetPuzzle() {
+      loadPuzzle(currentPuzzleIndex);
+    }
+
+    function evaluatePosition() {
+      // We only allow White to move; after one move it becomes Black's turn.
+      if (game.turn() === "b") {
+        if (game.in_checkmate()) {
+          setStatus("Correct! That move is checkmate.", "success");
+          gameOver = true;
+        } else if (game.in_check()) {
+          setStatus(
+            "That move gives check, but it is NOT checkmate. Click \"Reset current position\" to try again.",
+            "partial"
+          );
+          gameOver = true;
+        } else {
+          setStatus(
+            "That move is not checkmate. Click \"Reset current position\" to try again.",
+            "fail"
+          );
+          gameOver = true;
+        }
+      }
+    }
+
+    // --- Chessboard.js event handlers ----------------------------------------
+    function onDragStart(source, piece, position, orientation) {
+      // Do not pick up pieces if the puzzle is over.
+      if (gameOver) return false;
+
+      // Only allow white pieces to be moved.
+      if (piece[0] === "b") return false;
+
+      // Only allow moves when it's White's turn.
+      if (game.turn() !== "w") return false;
+
+      return true;
+    }
+
+    function onDrop(source, target) {
+      if (gameOver) return "snapback";
+
+      const move = game.move({
+        from: source,
+        to: target,
+        promotion: "q" // safe default; promotion won't occur in these puzzles
+      });
+
+      // Illegal move
+      if (move === null) return "snapback";
+
+      // Let the board snap to the new position, then evaluate.
+      window.setTimeout(evaluatePosition, 100);
+    }
+
+    function onSnapEnd() {
+      board.position(game.fen());
+    }
+
+    // --- Initialization -------------------------------------------------------
+    function init() {
+      const config = {
+        draggable: true,
+        position: "start",
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd
+      };
+
+      board = Chessboard("board", config);
+
+      // Load initial puzzle
+      loadPuzzle(0);
+
+      // UI: change puzzle
+      const select = document.getElementById("puzzleSelect");
+      select.addEventListener("change", function () {
+        const idx = parseInt(this.value, 10);
+        loadPuzzle(idx);
+      });
+
+      // UI: reset current puzzle
+      document.getElementById("resetBtn").addEventListener("click", resetPuzzle);
+
+      // Resize board when window size changes
+      window.addEventListener("resize", function () {
+        board.resize();
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
+```
+
+You can customize/add more scenarios easily by pushing new entries into the `puzzles` array with new FEN strings and descriptions.

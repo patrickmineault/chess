@@ -1,0 +1,29 @@
+{
+  "id": "gen-1764369913-Cw9xqgji0a0ByEjI2ltK",
+  "provider": "Parasail",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1764369913,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nKing and Queen Checkmate\nrnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\nQh5#\n```\n\n```\nBack-Rank Mate with Rook\nr1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1\nRd1#\n```\n\n```\nSmothered Mate with Knight\nr1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1\nNf7#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 78,
+    "total_tokens": 267,
+    "completion_tokens": 189,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  }
+}

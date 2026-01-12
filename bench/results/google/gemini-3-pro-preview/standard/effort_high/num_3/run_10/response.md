@@ -1,0 +1,259 @@
+Here is a complete, single-file solution. It uses **HTML**, **CSS**, and **JavaScript**.
+
+To handle the complexity of chess rules (dragging, legal moves, checkmate detection), this app utilizes two industry-standard libraries via CDN:
+1.  **Chessboard.js**: Handles the visual board and drag-and-drop interactions.
+2.  **Chess.js**: Handles the game logic (move validation, FEN parsing, checkmate detection).
+
+You can save this code as an `.html` file (e.g., `chess-practice.html`) and open it in any browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mate in 1 Practice</title>
+    
+    <!-- Dependencies: jQuery, Chessboard.js CSS/JS, Chess.js -->
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 { margin-bottom: 20px; }
+
+        .container {
+            background-color: #34495e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 440px;
+        }
+
+        #board {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        select, button {
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        button:hover { background-color: #2980b9; }
+
+        #resetBtn { background-color: #e67e22; }
+        #resetBtn:hover { background-color: #d35400; }
+
+        #status {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            height: 30px; /* Prevent layout shift */
+        }
+
+        .success { color: #2ecc71; }
+        .error { color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+    <h1>♟️ Mate in 1 Practice</h1>
+
+    <div class="container">
+        <!-- The Board Div -->
+        <div id="board"></div>
+
+        <!-- Feedback Area -->
+        <div id="status">Select a scenario to start</div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <select id="scenarioSelect">
+                <option value="0">Scenario 1: The Heavy Load</option>
+                <option value="1">Scenario 2: Scholar's Angle</option>
+                <option value="2">Scenario 3: Rook's Ladder</option>
+            </select>
+            <button id="resetBtn">Reset Board</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Define Scenarios (FEN Strings) ---
+        // FEN is a standard string format for chess positions.
+        const scenarios = [
+            {
+                name: "Back Rank",
+                // White Queen on c3, White King g1. Black King g8, Black Rooks trapped.
+                // Solution: Qc8#
+                fen: "2r3k1/5ppp/8/8/8/2Q5/8/6K1 w - - 0 1"
+            },
+            {
+                name: "Scholar's Theme",
+                // Classic Bishop/Queen attack on f7.
+                // Solution: Qf7#
+                fen: "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1"
+            },
+            {
+                name: "Corner Trap",
+                // King trapped in corner, Rook delivers mate.
+                // Solution: Rh4# (or similar)
+                // Let's use: White Rook h1, King f2. Black King h5, Pawn h6 blocks retreat.
+                fen: "8/8/7p/7k/8/5K2/8/7R w - - 0 1" 
+                // Wait, Rh1+ is met by Kg4. Let's adjust.
+                // Better: W: Kf6, Rh1. B: Kh7. Move: Rxh6 isn't mate.
+                // Let's do a pure Rook Mate: W: Kf6, Ra7. B: Kh8. Move: Ra8#
+                // Actual FEN:
+                fen: "7k/R7/5K2/8/8/8/8/8 w - - 0 1"
+            }
+        ];
+
+        // --- 2. Initialize Variables ---
+        var board = null;
+        var game = new Chess();
+        var currentScenarioIndex = 0;
+        var $status = $('#status');
+        var $selection = $('#scenarioSelect');
+
+        // --- 3. Configuration for Chessboard.js ---
+        function onDragStart (source, piece, position, orientation) {
+            // Do not pick up pieces if the game is over
+            if (game.game_over()) return false;
+
+            // Only pick up White pieces
+            if (piece.search(/^b/) !== -1) return false;
+        }
+
+        function onDrop (source, target) {
+            // See if the move is legal
+            var move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q' // NOTE: always promote to a queen for simplicity
+            });
+
+            // Illegal move
+            if (move === null) return 'snapback';
+
+            // Check Win Condition
+            updateStatus();
+        }
+
+        // Update the board position after the piece snap
+        // for castling, en passant, pawn promotion
+        function onSnapEnd () {
+            board.position(game.fen());
+        }
+
+        // --- 4. Game Logic & UI Updates ---
+        
+        function updateStatus () {
+            if (game.in_checkmate()) {
+                $status.text("🏆 CHECKMATE! Well done!").removeClass('error').addClass('success');
+                board.draggable = false; // Disable further moves
+            } else if (game.in_draw() || game.in_stalemate()){
+                 $status.text("Draw! (Stalemate or insufficient material)").addClass('error');
+            } else {
+                // Determine if the move was just a check or nothing special
+                if (game.in_check()) {
+                    $status.text("Check! But is it mate? Nope. Reseting...").removeClass('success').addClass('error');
+                } else {
+                    $status.text("Not Checkmate. Try again!").removeClass('success').addClass('error');
+                }
+                
+                // If it wasn't mate, we want to let the user see their mistake for a second, then undo or suggest reset
+                // For a strict "Mate in 1" trainer, we usually reset if they fail.
+                setTimeout(() => {
+                    if(!game.in_checkmate()) {
+                        game.undo();
+                        board.position(game.fen());
+                        $status.text("Try to find the mate in 1.");
+                    }
+                }, 1000);
+            }
+        }
+
+        function loadScenario(index) {
+            currentScenarioIndex = index;
+            let fen = scenarios[index].fen;
+            
+            game.load(fen);
+            board.position(fen);
+            $status.text("White to move. Find Mate in 1.").removeClass('success').removeClass('error');
+        }
+
+        // --- 5. Event Listeners ---
+
+        $('#resetBtn').on('click', function() {
+            loadScenario(currentScenarioIndex);
+        });
+
+        $selection.on('change', function() {
+            loadScenario(this.value);
+        });
+
+        // --- 6. Initialization ---
+        var config = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            onSnapEnd: onSnapEnd,
+            pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+        };
+        
+        board = Chessboard('board', config);
+        
+        // Start with the first scenario
+        loadScenario(0);
+
+    </script>
+</body>
+</html>
+```
+
+### Features of this Code:
+
+1.  **3 Distinct Scenarios:**
+    *   **The Heavy Load:** A back-rank style mate using the Queen (`Qxc8#`).
+    *   **Scholar's Theme:** The classic "Scholar's Mate" pattern (`Qf7#`).
+    *   **Rook's Ladder:** A pure endgame showing King and Rook cooperation (`Ra8#`).
+2.  **Drag and Drop:** Full drag-and-drop capability constrained to White pieces.
+3.  **Visual Feedback:**
+    *   If you find the mate: A **Green** "CHECKMATE!" message appears.
+    *   If you make a legal move that isn't mate: It tells you "Not Checkmate," waits 1 second, and automatically resets the move so you can try again immediately.
+    *   If you attempt an illegal move: The piece snaps back.
+4.  **Controls:** A dropdown to switch puzzles and a RESET button to restart the current puzzle.
+5.  **Rules Logic:** Uses `chess.js` to ensure moves are valid chess moves (prevents moving rooks diagonally, etc.).

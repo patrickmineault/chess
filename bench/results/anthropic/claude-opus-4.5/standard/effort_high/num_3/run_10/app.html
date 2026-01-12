@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Endgame Practice - Mate in 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #78e08f;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .scenario-btn, .reset-btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .scenario-btn {
+            background: #4a69bd;
+            color: white;
+        }
+        
+        .scenario-btn:hover {
+            background: #6a89cc;
+            transform: translateY(-2px);
+        }
+        
+        .scenario-btn.active {
+            background: #78e08f;
+            color: #1a1a2e;
+        }
+        
+        .reset-btn {
+            background: #eb4d4b;
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background: #ff6b6b;
+            transform: translateY(-2px);
+        }
+        
+        .board-container {
+            display: inline-block;
+            padding: 15px;
+            background: #2c3e50;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        
+        .file-labels, .rank-labels {
+            display: flex;
+            font-size: 14px;
+            color: #95a5a6;
+        }
+        
+        .file-labels {
+            justify-content: space-around;
+            padding: 5px 25px;
+        }
+        
+        .file-labels span {
+            width: 60px;
+            text-align: center;
+        }
+        
+        .board-wrapper {
+            display: flex;
+        }
+        
+        .rank-labels {
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 0 8px;
+        }
+        
+        .rank-labels span {
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            border: 3px solid #34495e;
+        }
+        
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            transition: background 0.2s;
+        }
+        
+        .white-square {
+            background: #f0d9b5;
+        }
+        
+        .black-square {
+            background: #b58863;
+        }
+        
+        .square.valid-move::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(100, 200, 100, 0.7);
+            border-radius: 50%;
+        }
+        
+        .square.valid-move.has-piece::after {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            background: rgba(255, 100, 100, 0.4);
+        }
+        
+        .square.highlight {
+            box-shadow: inset 0 0 0 4px rgba(255, 255, 0, 0.8);
+        }
+        
+        .square.last-move {
+            background: rgba(255, 255, 0, 0.3);
+        }
+        
+        .white-square.last-move {
+            background: #e8d174;
+        }
+        
+        .black-square.last-move {
+            background: #a89050;
+        }
+        
+        .piece {
+            cursor: grab;
+            transition: transform 0.1s;
+        }
+        
+        .piece:active {
+            cursor: grabbing;
+        }
+        
+        .piece.dragging {
+            opacity: 0.4;
+        }
+        
+        .piece.white-piece {
+            color: #fff;
+            text-shadow: 0 0 3px #000, 0 0 3px #000;
+        }
+        
+        .piece.black-piece {
+            color: #000;
+            text-shadow: 0 0 2px #fff;
+        }
+        
+        .status {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            min-height: 35px;
+            transition: all 0.3s;
+        }
+        
+        .status.success {
+            color: #78e08f;
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        .status.error {
+            color: #ff6b6b;
+            animation: shake 0.4s ease-in-out;
+        }
+        
+        .status.info {
+            color: #74b9ff;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .description {
+            margin-top: 15px;
+            font-size: 15px;
+            color: #bdc3c7;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+        
+        .scenario-name {
+            font-weight: bold;
+            color: #f39c12;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        /* Checkmate Overlay */
+        .checkmate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        
+        .checkmate-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .checkmate-content {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            padding: 50px 70px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+            border: 3px solid #78e08f;
+            animation: scaleIn 0.5s ease-out;
+        }
+        
+        .checkmate-overlay.show .checkmate-content {
+            animation: scaleIn 0.5s ease-out, glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(120, 224, 143, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(120, 224, 143, 0.6); }
+        }
+        
+        .checkmate-content h2 {
+            font-size: 42px;
+            color: #78e08f;
+            margin-bottom: 15px;
+        }
+        
+        .checkmate-content .trophy {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .checkmate-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #bdc3c7;
+        }
+        
+        .overlay-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .overlay-btn {
+            padding: 15px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .continue-btn {
+            background: #78e08f;
+            color: #1a1a2e;
+        }
+        
+        .continue-btn:hover {
+            background: #9aecb0;
+            transform: translateY(-2px);
+        }
+        
+        .next-btn {
+            background: #4a69bd;
+            color: white;
+        }
+        
+        .next-btn:hover {
+            background: #6a89cc;
+            transform: translateY(-2px);
+        }
+        
+        /* Move counter */
+        .move-counter {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♟️ Chess Endgame Practice</h1>
+        <h2>White to Play - Mate in 1</h2>
+        
+        <div class="controls">
+            <button class="scenario-btn active" onclick="loadScenario(1)">Scenario 1</button>
+            <button class="scenario-btn" onclick="loadScenario(2)">Scenario 2</button>
+            <button class="scenario-btn" onclick="loadScenario(3)">Scenario 3</button>
+            <button class="reset-btn" onclick="resetPosition()">🔄 Reset</button>
+        </div>
+        
+        <div class="board-container">
+            <div class="file-labels">
+                <span>a</span><span>b</span><span>c</span><span>d</span>
+                <span>e</span><span>f</span><span>g</span><span>h</span>
+            </div>
+            <div class="board-wrapper">
+                <div class="rank-labels">
+                    <span>8</span><span>7</span><span>6</span><span>5</span>
+                    <span>4</span><span>3</span><span>2</span><span>1</span>
+                </div>
+                <div class="board" id="board"></div>
+            </div>
+        </div>
+        
+        <div class="status" id="status"></div>
+        <div class="scenario-name" id="scenarioName"></div>
+        <div class="description" id="description"></div>
+        <div class="move-counter" id="moveCounter"></div>
+    </div>
+    
+    <div class="checkmate-overlay" id="overlay">
+        <div class="checkmate-content">
+            <div class="trophy">🏆</div>
+            <h2>CHECKMATE!</h2>
+            <p id="successMessage">Excellent! You found the winning move!</p>
+            <div class="overlay-buttons">
+                <button class="overlay-btn continue-btn" onclick="closeOverlay()">Continue</button>
+                <button class="overlay-btn next-btn" onclick="nextScenario()">Next Puzzle →</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Chess piece Unicode symbols
+        const PIECES = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+        
+        // Mate in 1 Scenarios
+        const scenarios = {
+            1: {
+                name: "Back Rank Mate",
+                description: "The black king is trapped behind its own pawns. Use your rook to deliver checkmate on the back rank! Hint: Control the 8th rank.",
+                position: [
+                    [null, null, null, null, null, null, 'k', null],
+                    [null, null, null, null, null, 'p', 'p', 'p'],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    ['R', null, null, null, null, null, 'K', null]
+                ]
+            },
+            2: {
+                name: "Queen Delivery Mate",
+                description: "The black king is cornered with pawns blocking its escape. Find the queen move that delivers checkmate! The king has nowhere to run.",
+                position: [
+                    [null, null, null, null, null, null, null, 'k'],
+                    [null, null, null, null, null, null, 'p', 'p'],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, 'Q', null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, 'K', null]
+                ]
+            },
+            3: {
+                name: "King & Rook Coordination",
+                description: "Your king and rook work together to trap the enemy king on the edge. The white king cuts off escape squares. Find the mating move!",
+                position: [
+                    [null, null, null, null, null, 'k', null, null],
+                    ['R', null, null, null, null, null, null, null],
+                    [null, null, null, null, null, 'K', null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null]
+                ]
+            }
+        };
+        
+        // Game state
+        let currentScenario = 1;
+        let board = [];
+        let draggedPiece = null;
+        let dragStartSquare = null;
+        let moveAttempts = 0;
+        let lastMove = null;
+        
+        // Initialize the app
+        function init() {
+            loadScenario(1);
+        }
+        
+        // Load a scenario
+        function loadScenario(num) {
+            currentScenario = num;
+            board = JSON.parse(JSON.stringify(scenarios[num].position));
+            moveAttempts = 0;
+            lastMove = null;
+            
+            // Update button states
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i + 1 === num);
+            });
+            
+            // Update info displays
+            document.getElementById('scenarioName').textContent = scenarios[num].name;
+            document.getElementById('description').textContent = scenarios[num].description;
+            document.getElementById('status').textContent = '';
+            document.getElementById('status').className = 'status';
+            updateMoveCounter();
+            
+            renderBoard();
+        }
+        
+        // Reset current position
+        function resetPosition() {
+            loadScenario(currentScenario);
+            showStatus("Position reset. Try again!", "info");
+        }
+        
+        // Update move counter display
+        function updateMoveCounter() {
+            document.getElementById('moveCounter').textContent = `Attempts: ${moveAttempts}`;
+        }
+        
+        // Render the chess board
+        function renderBoard() {
+            const boardEl = document.getElementById('board');
+            boardEl.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    const isWhiteSquare = (row + col) % 2 === 0;
+                    square.className = `square ${isWhiteSquare ? 'white-square' : 'black-square'}`;
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+                    
+                    // Highlight last move
+                    if (lastMove && 
+                        ((lastMove.from.row === row && lastMove.from.col === col) ||
+                         (lastMove.to.row === row && lastMove.to.col === col))) {
+                        square.classList.add('last-move');
+                    }
+                    
+                    const piece = board[row][col];
+                    if (piece) {
+                        square.textContent = PIECES[piece];
+                        square.classList.add('piece');
+                        square.classList.add(isWhitePiece(piece) ? 'white-piece' : 'black-piece');
+                        
+                        // Only white pieces are draggable
+                        if (isWhitePiece(piece)) {
+                            square.draggable = true;
+                            square.addEventListener('dragstart', handleDragStart);
+                            square.addEventListener('dragend', handleDragEnd);
+                        }
+                    }
+                    
+                    // Drop zone events
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('dragenter', handleDragEnter);
+                    square.addEventListener('dragleave', handleDragLeave);
+                    
+                    boardEl.appendChild(square);
+                }
+            }
+        }
+        
+        // Drag start handler
+        function handleDragStart(e) {
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+            
+            dragStartSquare = { row, col };
+            draggedPiece = board[row][col];
+            
+            e.target.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', '');
+            
+            // Show valid moves after a brief delay (for visual smoothness)
+            setTimeout(() => highlightValidMoves(row, col), 10);
+        }
+        
+        // Drag end handler
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            clearHighlights();
+        }
+        
+        // Drag over handler
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+        
+        // Drag enter handler
+        function handleDragEnter(e) {
+            e.preventDefault();
+            const square = e.target.closest('.square');
+            if (square && !square.classList.contains('dragging')) {
+                square.classList.add('highlight');
+            }
+        }
+        
+        // Drag leave handler
+        function handleDragLeave(e) {
+            const square = e.target.closest('.square');
+            if (square) {
+                square.classList.remove('highlight');
+            }
+        }
+        
+        // Drop handler
+        function handleDrop(e) {
+            e.preventDefault();
+            const square = e.target.closest('.square');
+            if (!square) return;
+            
+            square.classList.remove('highlight');
+            
+            const toRow = parseInt(square.dataset.row);
+            const toCol = parseInt(square.dataset.col);
+            
+            if (dragStartSquare && draggedPiece) {
+                attemptMove(dragStartSquare.row, dragStartSquare.col, toRow, toCol);
+            }
+            
+            clearHighlights();
+            dragStartSquare = null;
+            draggedPiece = null;
+        }
+        
+        // Highlight valid move squares
+        function highlightValidMoves(fromRow, fromCol) {
+            const piece = board[fromRow][fromCol];
+            if (!piece) return;
+            
+            const squares = document.querySelectorAll('.square');
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if (isValidMove(piece, fromRow, fromCol, row, col)) {
+                        const index = row * 8 + col;
+                        squares[index].classList.add('valid-move');
+                        if (board[row][col]) {
+                            squares[index].classList.add('has-piece');
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Clear all highlights
+        function clearHighlights() {
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.classList.remove('valid-move', 'highlight', 'has-piece');
+            });
+        }
+        
+        // Check if move is valid for the piece type
+        function isValidMove(piece, fromRow, fromCol, toRow, toCol) {
+            // Can't stay in place
+            if (fromRow === toRow && fromCol === toCol) return false;
+            
+            // Can't capture own piece
+            const targetPiece = board[toRow][toCol];
+            if (targetPiece && isWhitePiece(piece) === isWhitePiece(targetPiece)) return false;
+            
+            const pieceType = piece.toUpperCase();
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+            
+            switch (pieceType) {
+                case 'K':
+                    return rowDiff <= 1 && colDiff <= 1;
+                    
+                case 'Q':
+                    return (fromRow === toRow || fromCol === toCol || rowDiff === colDiff) && 
+                           isPathClear(fromRow, fromCol, toRow, toCol);
+                    
+                case 'R':
+                    return (fromRow === toRow || fromCol === toCol) && 
+                           isPathClear(fromRow, fromCol, toRow, toCol);
+                    
+                case 'B':
+                    return rowDiff === colDiff && isPathClear(fromRow, fromCol, toRow, toCol);
+                    
+                case 'N':
+                    return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+                    
+                case 'P':
+                    const direction = isWhitePiece(piece) ? -1 : 1;
+                    const startRow = isWhitePiece(piece) ? 6 : 1;
+                    
+                    // Forward move
+                    if (colDiff === 0 && !targetPiece) {
+                        if (toRow === fromRow + direction) return true;
+                        if (fromRow === startRow && toRow === fromRow + 2 * direction && !board[fromRow + direction][fromCol]) return true;
+                    }
+                    // Capture
+                    if (colDiff === 1 && toRow === fromRow + direction && targetPiece) return true;
+                    return false;
+            }
+            
+            return false;
+        }
+        
+        // Check if path is clear for sliding pieces
+        function isPathClear(fromRow, fromCol, toRow, toCol) {
+            const rowDir = Math.sign(toRow - fromRow);
+            const colDir = Math.sign(toCol - fromCol);
+            
+            let r = fromRow + rowDir;
+            let c = fromCol + colDir;
+            
+            while (r !== toRow || c !== toCol) {
+                if (board[r][c]) return false;
+                r += rowDir;
+                c += colDir;
+            }
+            
+            return true;
+        }
+        
+        // Check if piece is white
+        function isWhitePiece(piece) {
+            return piece === piece.toUpperCase();
+        }
+        
+        // Attempt to make a move
+        function attemptMove(fromRow, fromCol, toRow, toCol) {
+            const piece = board[fromRow][fromCol];
+            
+            if (!piece || !isWhitePiece(piece)) {
+                showStatus("You can only move white pieces!", "error");
+                return;
+            }
+            
+            if (!isValidMove(piece, fromRow, fromCol, toRow, toCol)) {
+                showStatus("Invalid move for this piece!", "error");
+                return;
+            }
+            
+            moveAttempts++;
+            updateMoveCounter();
+            
+            // Make the move temporarily
+            const capturedPiece = board[toRow][toCol];
+            board[toRow][toCol] = piece;
+            board[fromRow][fromCol] = null;
+            
+            // Store last move for highlighting
+            lastMove = { from: { row: fromRow, col: fromCol }, to: { row: toRow, col: toCol } };
+            
+            // Check result
+            if (isCheckmate()) {
+                renderBoard();
+                showCheckmate();
+            } else if (isKingInCheck(false)) {
+                showStatus("Check! But not checkmate. Try again!", "error");
+                // Undo move
+                board[fromRow][fromCol] = piece;
+                board[toRow][toCol] = capturedPiece;
+                lastMove = null;
+                renderBoard();
+            } else {
+                showStatus("Not checkmate. The king can escape! Try again.", "error");
+                // Undo move
+                board[fromRow][fromCol] = piece;
+                board[toRow][toCol] = capturedPiece;
+                lastMove = null;
+                renderBoard();
+            }
+        }
+        
+        // Find king position
+        function findKing(isWhite) {
+            const kingChar = isWhite ? 'K' : 'k';
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if (board[row][col] === kingChar) {
+                        return { row, col };
+                    }
+                }
+            }
+            return null;
+        }
+        
+        // Check if a square is attacked
+        function isSquareAttacked(row, col, byWhite) {
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const piece = board[r][c];
+                    if (piece && isWhitePiece(piece) === byWhite) {
+                        if (canPieceAttack(piece, r, c, row, col)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        
+        // Check if a piece can attack a square
+        function canPieceAttack(piece, fromRow, fromCol, toRow, toCol) {
+            if (fromRow === toRow && fromCol === toCol) return false;
+            
+            const pieceType = piece.toUpperCase();
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+            
+            switch (pieceType) {
+                case 'K':
+                    return rowDiff <= 1 && colDiff <= 1;
+                case 'Q':
+                    return (fromRow === toRow || fromCol === toCol || rowDiff === colDiff) && 
+                           isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'R':
+                    return (fromRow === toRow || fromCol === toCol) && 
+                           isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'B':
+                    return rowDiff === colDiff && isPathClear(fromRow, fromCol, toRow, toCol);
+                case 'N':
+                    return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+                case 'P':
+                    const direction = isWhitePiece(piece) ? -1 : 1;
+                    return rowDiff === 1 && colDiff === 1 && (toRow - fromRow) === direction;
+            }
+            return false;
+        }
+        
+        // Check if king is in check
+        function isKingInCheck(isWhite) {
+            const king = findKing(isWhite);
+            if (!king) return false;
+            return isSquareAttacked(king.row, king.col, !isWhite);
+        }
+        
+        // Check for checkmate
+        function isCheckmate() {
+            // Must be in check
+            if (!isKingInCheck(false)) return false;
+            
+            // Check if any black piece has a legal move
+            for (let fromRow = 0; fromRow < 8; fromRow++) {
+                for (let fromCol = 0; fromCol < 8; fromCol++) {
+                    const piece = board[fromRow][fromCol];
+                    if (piece && !isWhitePiece(piece)) {
+                        for (let toRow = 0; toRow < 8; toRow++) {
+                            for (let toCol = 0; toCol < 8; toCol++) {
+                                if (isValidMove(piece, fromRow, fromCol, toRow, toCol)) {
+                                    // Try the move
+                                    const captured = board[toRow][toCol];
+                                    board[toRow][toCol] = piece;
+                                    board[fromRow][fromCol] = null;
+                                    
+                                    const stillInCheck = isKingInCheck(false);
+                                    
+                                    // Undo
+                                    board[fromRow][fromCol] = piece;
+                                    board[toRow][toCol] = captured;
+                                    
+                                    if (!stillInCheck) return false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return true;
+        }
+        
+        // Show status message
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+        
+        // Show checkmate celebration
+        function showCheckmate() {
+            showStatus("🎉 CHECKMATE! 🎉", "success");
+            
+            const attemptsText = moveAttempts === 1 ? 
+                "Perfect! You found it on your first try!" : 
+                `You solved it in ${moveAttempts} attempts.`;
+            
+            document.getElementById('successMessage').textContent = attemptsText;
+            document.getElementById('overlay').classList.add('show');
+        }
+        
+        // Close overlay
+        function closeOverlay() {
+            document.getElementById('overlay').classList.remove('show');
+        }
+        
+        // Go to next scenario
+        function nextScenario() {
+            closeOverlay();
+            const next = currentScenario < 3 ? currentScenario + 1 : 1;
+            loadScenario(next);
+        }
+        
+        // Start the app
+        init();
+    </script>
+</body>
+</html>

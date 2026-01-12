@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Rook Mate",
+    "fen": "7k/6pp/8/8/8/8/8/R7 w - - 0 1",
+    "move": "Ra8#"
+  },
+  {
+    "name": "Queen Long Range Mate",
+    "fen": "8/8/8/8/8/8/6pp/Q6k w - - 0 1",
+    "move": "Qh8#"
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/6pp/8/4N3/8/8/8/8 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Bishop and Queen Mate",
+    "fen": "7k/8/8/8/3B4/8/8/6QR w - - 0 1",
+    "move": "Bf6#"
+  },
+  {
+    "name": "Pawn Promotion Mate",
+    "fen": "6rk/5Ppp/8/8/8/8/8/6R1 w - - 0 1",
+    "move": "fxg8=Q#"
+  },
+  {
+    "name": "Discovered Check Mate",
+    "fen": "k7/p7/8/8/N7/8/8/RR6 w - - 0 1",
+    "move": "Nc5#"
+  },
+  {
+    "name": "Epaulette Mate",
+    "fen": "3rkr2/8/8/8/8/B7/8/4Q3 w - - 0 1",
+    "move": "Qe7#"
+  },
+  {
+    "name": "Dovetail Mate",
+    "fen": "k7/1Q6/1K6/8/8/8/8/8 w - - 0 1",
+    "move": "Qa7#"
+  },
+  {
+    "name": "Back Rank Queen Mate",
+    "fen": "7k/5ppp/8/3Q4/8/8/8/8 w - - 0 1",
+    "move": "Qd8#"
+  },
+  {
+    "name": "Knight and Rook Mate",
+    "fen": "k7/pp6/8/3N5/8/8/8/1R6 w - - 0 1",
+    "move": "Nb6#"
+  }
+]

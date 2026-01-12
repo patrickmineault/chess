@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/4K2R w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Arabian Mate",
+    "fen": "7k/8/5N1R/8/8/8/8/4K3 w - - 0 1",
+    "move": "Rh7#"
+  },
+  {
+    "name": "Queen and King Mate",
+    "fen": "7k/8/5K2/8/8/8/8/7Q w - - 0 1",
+    "move": "Qh7#"
+  }
+]

@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Corner Queen Mate I",
+    "fen": "7k/8/5K1Q/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 0,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_none/num_3/run_7",
+    "reasoning_length": 10819
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/6pp/7N/8/8/8/8/6K1 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "1K6/8/8/8/8/N7/pp6/kr6",
+    "scenario_index": 1,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_none/num_3/run_7",
+    "reasoning_length": 10819,
+    "image_before": "results_cn/openai/gpt-5.1/effort_none/num_3/run_7/board_1_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_none/num_3/run_7/board_1_after.png"
+  },
+  {
+    "name": "Corner Queen Mate II",
+    "fen": "k7/8/1QK4/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid FEN: expected 8 columns per row in position part of fen: 'k7/8/1QK4/8/8/8/8/8'",
+    "canonical_fen": "",
+    "scenario_index": 2,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_none/num_3/run_7",
+    "reasoning_length": 10819
+  }
+]

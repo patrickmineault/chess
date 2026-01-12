@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Back Rank Rook Mate",
+    "fen": "6kr/5ppp/8/8/8/8/5PPP/3QR1K1 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/5ppp/8/6N1/8/8/8/6K1 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Bishop Diagonal Mate",
+    "fen": "4R1rk/6pp/5B2/8/3Q4/8/8/6K1 w - - 0 1",
+    "move": "Bxg7#"
+  },
+  {
+    "name": "Queen\u2013Bishop Battery Mate on h7",
+    "fen": "5rk1/5ppp/8/7Q/2B5/3B4/8/6K1 w - - 0 1",
+    "move": "Qxh7#"
+  },
+  {
+    "name": "Arabian-Style Rook and Knight Mate",
+    "fen": "5bk1/5Npp/8/8/2B5/8/8/6KR w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Queen and Knight Mate on g7",
+    "fen": "6k1/6pp/3N4/8/3Q4/8/8/6K1 w - - 0 1",
+    "move": "Qxg7#"
+  },
+  {
+    "name": "Double-Check Bishop and Rook Mate",
+    "fen": "3rkb2/5p2/8/2N2N2/4B3/8/8/4R1K1 w - - 0 1",
+    "move": "Bc6#"
+  },
+  {
+    "name": "Underpromotion to Knight Mate",
+    "fen": "6rk/6pP/8/8/2B5/8/8/6KR w - - 0 1",
+    "move": "hxg8=N#"
+  },
+  {
+    "name": "Quiet Queen Mate on h7",
+    "fen": "5rk1/5pp1/8/7Q/8/3B4/8/5RK1 w - - 0 1",
+    "move": "Qh7#"
+  },
+  {
+    "name": "Discovered Pawn Mate Opening a Bishop Diagonal",
+    "fen": "6k1/4Q1pp/6N1/3P4/2B5/8/8/6K1 w - - 0 1",
+    "move": "d6#"
+  }
+]

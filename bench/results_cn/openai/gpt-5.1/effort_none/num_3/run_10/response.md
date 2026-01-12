@@ -1,0 +1,17 @@
+```text
+Simple Back-Rank Mate
+6k1/5ppp/8/8/8/8/4Q3/6K1 w - - 0 1
+Qe8#
+```
+
+```text
+Smothered Mate with Knight
+6rk/6pp/7N/8/8/8/8/6K1 w - - 0 1
+Nf7#
+```
+
+```text
+Bishop–Queen Battery Mate
+5rk1/5ppp/8/7Q/8/8/2B5/6K1 w - - 0 1
+Qxh7#
+```

@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Scenario 1: Back-rank rook mate",
+    "fen": "4r2k/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 2: Smothered knight mate",
+    "fen": "6rk/6pp/8/6N1/8/8/8/7K w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 3: Queen sacrifice on h7 mate",
+    "fen": "5rk1/5ppp/6Q1/8/8/8/8/6KR w - - 0 1",
+    "move": "Qxh7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 4: Corner mate with Qb7#",
+    "fen": "k7/2K5/1Q6/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 5: Edge mate with Qg2#",
+    "fen": "8/8/8/8/8/6Q1/5K2/7k w - - 0 1",
+    "move": "Qg2#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 6: Minimal K+Q vs K mate with Qg7#",
+    "fen": "7k/8/5KQ1/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 7: Promotion capture mate hxg8=Q#",
+    "fen": "6rk/7P/7K/8/8/8/8/6R1 w - - 0 1",
+    "move": "hxg8=Q#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 8: Corner mate on h8 with Qh7#",
+    "fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+    "move": "Qh7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 9: Corner mate with Qb2# vs king on a1",
+    "fen": "8/8/8/8/8/1Q6/2K5/k7 w - - 0 1",
+    "move": "Qb2#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 10: Corner mate on h1 with Qh2#",
+    "fen": "8/8/8/8/8/6K1/2Q5/7k w - - 0 1",
+    "move": "Qh2#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  }
+]

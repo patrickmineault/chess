@@ -1,0 +1,44 @@
+[
+  {
+    "name": "The Back Rank",
+    "fen": "7k/5ppp/8/8/8/8/6R1/8 w - - 0 1",
+    "move": "Rg8#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 0,
+    "run_dir": "results_cn/moonshotai/kimi-k2-thinking/effort_high/num_3/run_1",
+    "reasoning_length": 17225
+  },
+  {
+    "name": "The Knight's Path",
+    "fen": "6k1/5p1p/6N1/8/8/8/8/8 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 1,
+    "run_dir": "results_cn/moonshotai/kimi-k2-thinking/effort_high/num_3/run_1",
+    "reasoning_length": 17225
+  },
+  {
+    "name": "The Queen's Strike",
+    "fen": "4k3/4p3/8/8/8/8/4Q3/8 w - - 0 1",
+    "move": "Qxe7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 2,
+    "run_dir": "results_cn/moonshotai/kimi-k2-thinking/effort_high/num_3/run_1",
+    "reasoning_length": 17225
+  }
+]

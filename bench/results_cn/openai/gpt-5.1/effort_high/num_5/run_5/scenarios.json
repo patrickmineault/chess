@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Rook Back-Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/6K1/4R3 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/6pp/7N/8/8/8/8/6K1 w - - 0 1",
+    "move": "Nf7#"
+  },
+  {
+    "name": "Scholar's Mate Finish",
+    "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/pppp1ppp/RNB1K1NR w KQkq - 0 4",
+    "move": "Qxf7#"
+  },
+  {
+    "name": "Queen and Bishop Mate",
+    "fen": "5Bnk/7p/6Q1/8/8/8/8/6K1 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Promotion Pawn Mate",
+    "fen": "5rkr/5pPp/8/8/8/2B2K2/8/8 w - - 0 1",
+    "move": "gxh8=Q#"
+  }
+]

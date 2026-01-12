@@ -1,0 +1,16 @@
+{
+  "model": "moonshotai/kimi-k2-thinking",
+  "effort": "high",
+  "num_scenarios_requested": 3,
+  "num_scenarios_parsed": 3,
+  "run": 3,
+  "timestamp": "2025-11-28T15:30:15.473578",
+  "usage": {
+    "prompt_tokens": 77,
+    "total_tokens": 32684,
+    "completion_tokens": 32607,
+    "estimated_cost": 0.08155984999999999,
+    "prompt_tokens_details": null
+  },
+  "has_reasoning": true
+}

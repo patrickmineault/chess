@@ -1,0 +1,468 @@
+# Chess Endgame Practice App
+
+Here's a complete chess endgame practice app with drag-and-drop functionality:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Endgame Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .scenarios {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            min-width: 150px;
+        }
+
+        .scenario-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .scenario-btn.active {
+            background: #764ba2;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+
+        .info {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            border: 3px solid #333;
+            margin: 0 auto 20px;
+            width: fit-content;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+
+        .square.light {
+            background-color: #f0d9b5;
+        }
+
+        .square.dark {
+            background-color: #b58863;
+        }
+
+        .square.highlight {
+            background-color: #baca44 !important;
+        }
+
+        .square.dragging {
+            opacity: 0.5;
+        }
+
+        .piece {
+            cursor: grab;
+            transition: transform 0.1s;
+        }
+
+        .piece:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+
+        .piece.white {
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+
+        .piece.black {
+            filter: drop-shadow(0 2px 2px rgba(255,255,255,0.3));
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .reset-btn {
+            padding: 12px 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .feedback {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feedback.show {
+            opacity: 1;
+        }
+
+        .feedback.success {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .feedback.error {
+            background: #e74c3c;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .chessboard {
+                grid-template-columns: repeat(8, 45px);
+                grid-template-rows: repeat(8, 45px);
+            }
+
+            .square {
+                width: 45px;
+                height: 45px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♔ Chess Endgame Practice ♔</h1>
+        
+        <div class="scenarios">
+            <button class="scenario-btn active" onclick="loadScenario(1)">Scenario 1<br>Back Rank Mate</button>
+            <button class="scenario-btn" onclick="loadScenario(2)">Scenario 2<br>Queen Mate</button>
+            <button class="scenario-btn" onclick="loadScenario(3)">Scenario 3<br>Rook Mate</button>
+        </div>
+
+        <div class="info">White to move and checkmate in 1!</div>
+        
+        <div class="feedback" id="feedback"></div>
+        
+        <div class="chessboard" id="chessboard"></div>
+        
+        <div class="controls">
+            <button class="reset-btn" onclick="resetPosition()">Reset Position</button>
+        </div>
+    </div>
+
+    <script>
+        // Chess pieces Unicode characters
+        const pieces = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+
+        // Scenarios - using FEN-like notation simplified
+        const scenarios = {
+            1: {
+                name: "Back Rank Mate",
+                // Rook on a8 can take on h8 for checkmate
+                position: {
+                    'a8': 'R', 'h8': 'r', 'f8': 'k',
+                    'f7': 'p', 'g7': 'p', 'h7': 'p',
+                    'e1': 'K'
+                },
+                solution: { from: 'a8', to: 'f8' }
+            },
+            2: {
+                name: "Queen Mate",
+                // Queen on d7 can move to g7 for checkmate
+                position: {
+                    'd7': 'Q', 'h8': 'k',
+                    'h7': 'p', 'f6': 'K'
+                },
+                solution: { from: 'd7', to: 'g7' }
+            },
+            3: {
+                name: "Rook Mate",
+                // Rook on a7 can move to a8 for checkmate
+                position: {
+                    'a7': 'R', 'c8': 'k',
+                    'c7': 'p', 'b6': 'K'
+                },
+                solution: { from: 'a7', to: 'a8' }
+            }
+        };
+
+        let currentScenario = 1;
+        let currentPosition = {};
+        let initialPosition = {};
+        let draggedPiece = null;
+        let draggedFrom = null;
+
+        function initBoard() {
+            const board = document.getElementById('chessboard');
+            board.innerHTML = '';
+
+            // Create 8x8 board (a1 is bottom-left)
+            for (let row = 7; row >= 0; row--) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    const squareName = String.fromCharCode(97 + col) + (row + 1);
+                    
+                    square.className = 'square ' + ((row + col) % 2 === 0 ? 'dark' : 'light');
+                    square.dataset.square = squareName;
+                    
+                    // Add drag and drop event listeners
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('dragenter', handleDragEnter);
+                    square.addEventListener('dragleave', handleDragLeave);
+                    
+                    board.appendChild(square);
+                }
+            }
+
+            loadScenario(currentScenario);
+        }
+
+        function loadScenario(num) {
+            currentScenario = num;
+            currentPosition = { ...scenarios[num].position };
+            initialPosition = { ...scenarios[num].position };
+            
+            // Update active button
+            document.querySelectorAll('.scenario-btn').forEach((btn, index) => {
+                btn.classList.toggle('active', index + 1 === num);
+            });
+
+            hideFeedback();
+            renderPosition();
+        }
+
+        function renderPosition() {
+            // Clear all pieces
+            document.querySelectorAll('.square').forEach(square => {
+                square.innerHTML = '';
+                square.classList.remove('highlight');
+            });
+
+            // Place pieces
+            for (let [square, piece] of Object.entries(currentPosition)) {
+                const squareElement = document.querySelector(`[data-square="${square}"]`);
+                if (squareElement) {
+                    const pieceElement = document.createElement('div');
+                    pieceElement.className = 'piece ' + (piece === piece.toUpperCase() ? 'white' : 'black');
+                    pieceElement.textContent = pieces[piece];
+                    pieceElement.draggable = piece === piece.toUpperCase(); // Only white pieces draggable
+                    pieceElement.dataset.piece = piece;
+                    
+                    if (pieceElement.draggable) {
+                        pieceElement.addEventListener('dragstart', handleDragStart);
+                        pieceElement.addEventListener('dragend', handleDragEnd);
+                    }
+                    
+                    squareElement.appendChild(pieceElement);
+                }
+            }
+        }
+
+        function handleDragStart(e) {
+            draggedPiece = e.target.dataset.piece;
+            draggedFrom = e.target.parentElement.dataset.square;
+            e.target.parentElement.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', e.target.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            e.target.parentElement.classList.remove('dragging');
+            document.querySelectorAll('.square').forEach(square => {
+                square.classList.remove('highlight');
+            });
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            if (e.target.classList.contains('square')) {
+                e.target.classList.add('highlight');
+            } else if (e.target.parentElement.classList.contains('square')) {
+                e.target.parentElement.classList.add('highlight');
+            }
+        }
+
+        function handleDragLeave(e) {
+            if (e.target.classList.contains('square')) {
+                e.target.classList.remove('highlight');
+            }
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            const targetSquare = e.target.classList.contains('square') 
+                ? e.target 
+                : e.target.parentElement;
+            
+            const targetSquareName = targetSquare.dataset.square;
+
+            if (draggedFrom && targetSquareName && draggedFrom !== targetSquareName) {
+                // Make the move
+                makeMove(draggedFrom, targetSquareName);
+            }
+
+            return false;
+        }
+
+        function makeMove(from, to) {
+            // Update position
+            const piece = currentPosition[from];
+            delete currentPosition[from];
+            currentPosition[to] = piece;
+
+            renderPosition();
+
+            // Check if this is the winning move
+            const solution = scenarios[currentScenario].solution;
+            if (from === solution.from && to === solution.to) {
+                showFeedback('success', '🎉 Checkmate! Well done!');
+            } else {
+                showFeedback('error', '❌ Not quite! Try again.');
+                // Reset after a delay
+                setTimeout(() => {
+                    resetPosition();
+                }, 1500);
+            }
+        }
+
+        function showFeedback(type, message) {
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback show ' + type;
+            feedback.textContent = message;
+        }
+
+        function hideFeedback() {
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback';
+        }
+
+        function resetPosition() {
+            currentPosition = { ...initialPosition };
+            hideFeedback();
+            renderPosition();
+        }
+
+        // Initialize the board when page loads
+        initBoard();
+    </script>
+</body>
+</html>
+```
+
+## Features:
+
+1. **Three Mate-in-1 Scenarios:**
+   - **Scenario 1 (Back Rank Mate)**: White Rook on a8 takes the rook on f8, delivering checkmate to the black king
+   - **Scenario 2 (Queen Mate)**: White Queen moves from d7 to g7 for checkmate
+   - **Scenario 3 (Rook Mate)**: White Rook moves from a7 to a8 for checkmate
+
+2. **Drag and Drop:**
+   - Only white pieces are draggable
+   - Visual feedback when dragging (highlighted squares)
+   - Smooth animations
+
+3. **Visual Feedback:**
+   - Green success message when correct move is found
+   - Red error message for incorrect moves
+   - Auto-reset after wrong move
+
+4. **Scenario Selection:**
+   - Three buttons to switch between scenarios
+   - Active scenario highlighted in purple
+
+5. **Reset Functionality:**
+   - Red reset button restores the current scenario's initial position
+
+6. **Responsive Design:**
+   - Works on mobile devices
+   - Beautiful gradient background
+   - Modern UI with smooth transitions
+
+Simply save this as an HTML file and open it in your browser to play!

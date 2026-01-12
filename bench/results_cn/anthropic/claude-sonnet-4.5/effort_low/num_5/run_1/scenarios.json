@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/3R4 w - - 0 1",
+    "move": "Rd8#"
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6kr/5ppp/8/5N2/8/8/8/8 w - - 0 1",
+    "move": "Ne7#"
+  },
+  {
+    "name": "Queen Mate with King Support",
+    "fen": "6k1/8/5KP1/8/8/8/8/6Q1 w - - 0 1",
+    "move": "Qg7#"
+  },
+  {
+    "name": "Rook Mate on the 8th Rank",
+    "fen": "6k1/5K2/8/8/8/8/8/7R w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Queen and Bishop Coordination",
+    "fen": "5k2/8/4Q3/3B4/8/8/8/4K3 w - - 0 1",
+    "move": "Qe7#"
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "id": "gen-1764362407-YesuwgQXbgcqRnFxhYXV",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3-pro-preview",
+  "object": "chat.completion",
+  "created": 1764362407,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Here are three distinct mate-in-1 scenarios for White.\n\n```text\nBack Rank Checkmate\n6k1/5ppp/8/8/8/8/4Q3/4K3 w - - 0 1\nQe8#\n```\n\n```text\nScholar's Mate (Variation)\nr1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 4 4\nQxf7#\n```\n\n```text\nSmothered Mate (The Classic Philidor Legacy finish)\n6rk/6pp/7N/8/8/8/6PP/7K w - - 0 1\nNf7#\n```",
+        "refusal": null,
+        "reasoning": "**Developing Mate Scenarios**\n\nI'm currently focused on crafting distinct mate-in-one scenarios for White. The priority is ensuring each scenario is unique and self-contained, presented clearly within its own code block. I'm aiming for varied piece combinations and board positions to offer a diverse range of tactical challenges.\n\n\n**Formalizing Scenario Structure**\n\nI've refined the structure of each mate scenario. Now, each code block includes the scenario's name on the first line, the FEN notation on the second, and the winning move in SAN on the third. The focus is on upholding validity and ensuring each scenario uniquely contributes to the set. The classic back-rank mate is the first scenario I've created.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Developing Mate Scenarios**\n\nI'm currently focused on crafting distinct mate-in-one scenarios for White. The priority is ensuring each scenario is unique and self-contained, presented clearly within its own code block. I'm aiming for varied piece combinations and board positions to offer a diverse range of tactical challenges.\n\n\n**Formalizing Scenario Structure**\n\nI've refined the structure of each mate scenario. Now, each code block includes the scenario's name on the first line, the FEN notation on the second, and the winning move in SAN on the third. The focus is on upholding validity and ensuring each scenario uniquely contributes to the set. The classic back-rank mate is the first scenario I've created.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "Eq0FCqoFAXLI2nxf2ZGcHdYfgvWwsL8wuBcFK0pYFvOOSkBy2A0P18LD52sOBAoB/SsmVAAtourAvx3Tcn3f7T9X9oUQpe9woYJrkvxu9ni3jV26W6zSTpo7Lo71h+FyNk7At7P10qUKtKJ/KifF+vqH44nn/YctKC0XRKKWLphS6mCJRBOBzUasxLv/eOSWP6H4/rFaKxga04gOMtbiU5xPAXd+tR7HMg8vrNX70SuEYHL7Je1UhZTc/K8T5aMUBmd9oNQDn69bgqALggTwMa4Wayb5iYr1/kdmwa8Vo9qRvhEneDlxSKpoeVesfwUS3kUHmS2BbOMw1I+x+e6l0Dmv/1brNMWbjvxMZWbvIgenYboYkg1KlsBe3wRfN7zrkJw4zdYwGrGFrCmq4j94Qp9F+Co7F+8EV7A5NFs18YV5VseCcaED/+ilhBmoheqfW7qUmusy5TA3nFvk2EipqZPtDU9UrjNJX01jOVXH9ZCtU8VZyCdaDpG7VEiCMtdLCqdrb4YEWElDfaXsr9Us+eQJkwaYNyRvtte0xGvGjYgNwqFopPPc62qgGePp5AJpTJFTkwdZABFlXtduLZihiCQAlPRgilWFT8ZEmUC0KE12UinqZ5+Rvi+VqJh2x3A55QWVGNb0+2GnAmMiXjTchIf7+SZmjNOvSfqsk717OPe6KzIhP85MGGqa87CCs13vMXdZif/aTKpth1xSyec5Qm+cSRUa9PhtU2pyWkjNt6HoIDRctnyrXWH1j0DQOjuXzrntIbSI5CdSZ1xJsv3Az15NiuomgcE85lGrXitcdoP68IRVas0N4uylQ8ddPtCG3QmWx0AjCAFVcFkaq1pHLxXuhTRylEAts5/YaKdSPfwKnDnVxvYbYjbDnyzU7drwRbCaJ9KvKRLy5PGeoEhC7A=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 72,
+    "completion_tokens": 322,
+    "total_tokens": 394,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 147,
+      "image_tokens": 0
+    }
+  }
+}

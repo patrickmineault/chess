@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Simple Queen Mate",
+    "fen": "7k/5Q2/5K2/8/8/8/8/8 w - - 0 1",
+    "move": "Qg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "7k/5Q2/5K2/8/8/8/8/8",
+    "scenario_index": 0,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9",
+    "reasoning_length": 5853,
+    "image_before": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9/board_0_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9/board_0_after.png"
+  },
+  {
+    "name": "Queen and Pieces vs Cornered King",
+    "fen": "7k/6pp/5KQ1/8/8/2B5/8/7R w - - 0 1",
+    "move": "Qxg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "7R/8/2B5/8/8/5KQ1/6pp/7k",
+    "scenario_index": 1,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9",
+    "reasoning_length": 5853,
+    "image_before": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9/board_1_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9/board_1_after.png"
+  },
+  {
+    "name": "Smothered Mate with a Knight",
+    "fen": "6rk/6pp/6QN/8/8/2B5/7K/R7 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "6rk/6pp/6QN/8/8/2B5/7K/R7",
+    "scenario_index": 2,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9",
+    "reasoning_length": 5853,
+    "image_before": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9/board_2_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_low/num_3/run_9/board_2_after.png"
+  }
+]

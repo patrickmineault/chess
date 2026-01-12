@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Back Rank Mate",
+    "fen": "7k/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "move": "Re8#"
+  },
+  {
+    "name": "Queen and King Mate",
+    "fen": "k7/8/KQ6/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Ladder Mate",
+    "fen": "7k/6R1/8/8/8/8/8/R6K w - - 0 1",
+    "move": "Ra8#"
+  },
+  {
+    "name": "Smothered Mate",
+    "fen": "5rrk/4N1pp/8/8/8/8/8/K7 w - - 0 1",
+    "move": "Ng6#"
+  },
+  {
+    "name": "Support Mate",
+    "fen": "6rk/8/5Q2/8/8/8/8/K5R1 w - - 0 1",
+    "move": "Qxg8#"
+  }
+]

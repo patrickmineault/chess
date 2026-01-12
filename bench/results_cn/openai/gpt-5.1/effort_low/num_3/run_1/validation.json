@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Corner clamp",
+    "fen": "7k/6p1/3K2Q1/8/8/8/8/8 w - - 0 1",
+    "move": "Qxg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": false,
+    "error": "Move gives check but not checkmate",
+    "canonical_fen": "7k/6p1/3K2Q1/8/8/8/8/8",
+    "scenario_index": 0,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_low/num_3/run_1",
+    "reasoning_length": 2913,
+    "image_before": "results_cn/openai/gpt-5.1/effort_low/num_3/run_1/board_0_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_low/num_3/run_1/board_0_after.png"
+  },
+  {
+    "name": "Queen ladder mate",
+    "fen": "7k/6p1/8/7Q/8/8/6K1/8 w - - 0 1",
+    "move": "Qxh7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid position (illegal board state)",
+    "canonical_fen": "",
+    "scenario_index": 1,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_low/num_3/run_1",
+    "reasoning_length": 2913
+  },
+  {
+    "name": "Rook and king net",
+    "fen": "7k/5K1p/8/8/8/8/6R1/8 w - - 0 1",
+    "move": "Rg8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "7k/5K1p/8/8/8/8/6R1/8",
+    "scenario_index": 2,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_low/num_3/run_1",
+    "reasoning_length": 2913,
+    "image_before": "results_cn/openai/gpt-5.1/effort_low/num_3/run_1/board_2_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_low/num_3/run_1/board_2_after.png"
+  }
+]

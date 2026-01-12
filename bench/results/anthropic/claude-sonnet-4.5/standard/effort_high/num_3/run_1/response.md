@@ -1,0 +1,430 @@
+# Chess Endgame Practice App
+
+Here's a complete chess endgame practice app with 3 mate-in-1 scenarios:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Endgame Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .scenario-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .scenario-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .scenario-btn.active {
+            background: #2196F3;
+        }
+
+        .reset-btn {
+            background: #ff9800;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #e68900;
+            transform: translateY(-2px);
+        }
+
+        #chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            gap: 0;
+            margin: 20px auto;
+            border: 3px solid #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .square.light {
+            background-color: #f0d9b5;
+        }
+
+        .square.dark {
+            background-color: #b58863;
+        }
+
+        .square.highlight {
+            background-color: #baca44 !important;
+        }
+
+        .square.valid-move {
+            box-shadow: inset 0 0 0 3px #7cb342;
+        }
+
+        .piece {
+            cursor: grab;
+            transition: transform 0.1s;
+        }
+
+        .piece:hover {
+            transform: scale(1.1);
+        }
+
+        .piece.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .feedback {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback.success {
+            background-color: #4CAF50;
+            color: white;
+            animation: celebrate 0.5s ease;
+        }
+
+        .feedback.info {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            #chessboard {
+                grid-template-columns: repeat(8, 45px);
+                grid-template-rows: repeat(8, 45px);
+            }
+            
+            .square {
+                width: 45px;
+                height: 45px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♔ Chess Endgame Practice ♔</h1>
+        <p class="description">Find the mate in 1 for White!</p>
+        
+        <div class="controls">
+            <button class="scenario-btn active" onclick="loadScenario(0)">Scenario 1: Back Rank</button>
+            <button class="scenario-btn" onclick="loadScenario(1)">Scenario 2: Queen Mate</button>
+            <button class="scenario-btn" onclick="loadScenario(2)">Scenario 3: Rook Mate</button>
+            <button class="reset-btn" onclick="resetPosition()">Reset Position</button>
+        </div>
+
+        <div id="chessboard"></div>
+        
+        <div id="feedback" class="feedback info">
+            Select a white piece and make your move!
+        </div>
+    </div>
+
+    <script>
+        // Chess pieces using Unicode characters
+        const pieces = {
+            'wK': '♔', 'wQ': '♕', 'wR': '♖', 'wB': '♗', 'wN': '♘', 'wP': '♙',
+            'bK': '♚', 'bQ': '♛', 'bR': '♜', 'bB': '♝', 'bN': '♞', 'bP': '♟'
+        };
+
+        // Chess scenarios (8x8 grid, row 0 = rank 8, row 7 = rank 1)
+        const scenarios = [
+            {
+                name: "Back Rank Mate",
+                position: [
+                    ['', '', '', '', '', 'bR', 'bK', ''],      // Rank 8
+                    ['', '', '', '', '', 'bP', 'bP', 'bP'],    // Rank 7
+                    ['', '', '', '', '', '', '', ''],          // Rank 6
+                    ['', '', '', '', '', '', '', ''],          // Rank 5
+                    ['', '', '', '', '', '', '', ''],          // Rank 4
+                    ['', '', '', '', '', '', '', ''],          // Rank 3
+                    ['', '', '', '', '', '', '', ''],          // Rank 2
+                    ['wR', '', '', '', '', '', '', 'wK']       // Rank 1
+                ],
+                solution: { from: [7, 0], to: [0, 0] } // Rook from a1 to a8
+            },
+            {
+                name: "Queen Mate on the Edge",
+                position: [
+                    ['', '', '', '', '', '', '', 'bK'],        // Rank 8
+                    ['', '', '', '', '', '', 'wK', ''],        // Rank 7
+                    ['', '', '', '', '', '', '', ''],          // Rank 6
+                    ['', '', '', '', '', '', '', ''],          // Rank 5
+                    ['', '', '', '', '', '', '', ''],          // Rank 4
+                    ['', '', '', '', '', '', '', ''],          // Rank 3
+                    ['', '', '', '', '', '', '', ''],          // Rank 2
+                    ['', '', '', '', '', '', 'wQ', '']         // Rank 1
+                ],
+                solution: { from: [7, 6], to: [0, 6] } // Queen from g1 to g8
+            },
+            {
+                name: "Rook Mate on 7th Rank",
+                position: [
+                    ['', '', '', '', '', '', '', 'bK'],        // Rank 8
+                    ['', '', '', '', '', '', '', ''],          // Rank 7
+                    ['', '', '', '', '', 'wK', '', ''],        // Rank 6
+                    ['', '', '', '', '', '', '', ''],          // Rank 5
+                    ['', '', '', '', '', '', '', ''],          // Rank 4
+                    ['', '', '', '', '', '', '', ''],          // Rank 3
+                    ['', '', '', '', '', '', '', ''],          // Rank 2
+                    ['wR', '', '', '', '', '', '', '']         // Rank 1
+                ],
+                solution: { from: [7, 0], to: [1, 0] } // Rook from a1 to a7
+            }
+        ];
+
+        let currentScenario = 0;
+        let board = [];
+        let draggedPiece = null;
+        let draggedFrom = null;
+        let solved = false;
+
+        function initBoard() {
+            const chessboard = document.getElementById('chessboard');
+            chessboard.innerHTML = '';
+            
+            board = JSON.parse(JSON.stringify(scenarios[currentScenario].position));
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    square.className = `square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+                    
+                    const piece = board[row][col];
+                    if (piece) {
+                        const pieceEl = document.createElement('span');
+                        pieceEl.className = 'piece';
+                        pieceEl.textContent = pieces[piece];
+                        pieceEl.draggable = true;
+                        pieceEl.dataset.piece = piece;
+                        
+                        pieceEl.addEventListener('dragstart', handleDragStart);
+                        pieceEl.addEventListener('dragend', handleDragEnd);
+                        
+                        square.appendChild(pieceEl);
+                    }
+                    
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('dragleave', handleDragLeave);
+                    
+                    chessboard.appendChild(square);
+                }
+            }
+            
+            solved = false;
+            updateFeedback('Select a white piece and make your move!', 'info');
+        }
+
+        function handleDragStart(e) {
+            const piece = e.target.dataset.piece;
+            
+            // Only allow white pieces to be moved
+            if (!piece.startsWith('w')) {
+                e.preventDefault();
+                return;
+            }
+            
+            draggedPiece = e.target;
+            draggedFrom = {
+                row: parseInt(e.target.parentElement.dataset.row),
+                col: parseInt(e.target.parentElement.dataset.col)
+            };
+            
+            e.target.classList.add('dragging');
+            e.target.parentElement.classList.add('highlight');
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.classList.remove('highlight', 'valid-move');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('valid-move');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('valid-move');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('valid-move');
+            
+            if (!draggedPiece || solved) return;
+            
+            const targetRow = parseInt(e.currentTarget.dataset.row);
+            const targetCol = parseInt(e.currentTarget.dataset.col);
+            
+            // Check if dropping on a white piece (not allowed)
+            const targetPiece = board[targetRow][targetCol];
+            if (targetPiece && targetPiece.startsWith('w')) {
+                return;
+            }
+            
+            // Make the move
+            const piece = board[draggedFrom.row][draggedFrom.col];
+            board[draggedFrom.row][draggedFrom.col] = '';
+            board[targetRow][targetCol] = piece;
+            
+            // Check if it's the correct solution
+            const solution = scenarios[currentScenario].solution;
+            const isCorrect = 
+                draggedFrom.row === solution.from[0] &&
+                draggedFrom.col === solution.from[1] &&
+                targetRow === solution.to[0] &&
+                targetCol === solution.to[1];
+            
+            if (isCorrect) {
+                solved = true;
+                updateFeedback('🎉 Checkmate! Well done! 🎉', 'success');
+            } else {
+                updateFeedback('❌ Not quite! Try again or reset.', 'info');
+            }
+            
+            // Redraw board
+            initBoard();
+        }
+
+        function loadScenario(index) {
+            currentScenario = index;
+            
+            // Update active button
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            
+            initBoard();
+        }
+
+        function resetPosition() {
+            initBoard();
+        }
+
+        function updateFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${type}`;
+        }
+
+        // Initialize on load
+        initBoard();
+    </script>
+</body>
+</html>
+```
+
+## Features:
+
+### 🎯 **3 Mate-in-1 Scenarios:**
+1. **Back Rank Mate** - Classic rook checkmate on the back rank
+2. **Queen Mate** - Queen delivers mate on the edge of the board
+3. **Rook Mate** - Rook checkmate on the 7th rank
+
+### 🎮 **Functionality:**
+- ✅ **Drag & Drop** - Drag white pieces to make moves
+- ✅ **Visual Feedback** - Green highlight for correct mate, blue for hints
+- ✅ **Scenario Selection** - Click buttons to switch between puzzles
+- ✅ **Reset Button** - Reset current position at any time
+- ✅ **Move Validation** - Only white pieces can move, can't capture own pieces
+- ✅ **Responsive Design** - Works on mobile and desktop
+
+### 🎨 **Visual Elements:**
+- Beautiful gradient background
+- Animated success feedback
+- Hover effects on pieces
+- Valid move indicators
+- Clean, modern UI
+
+Simply save this as an `.html` file and open it in any modern browser. No dependencies required!

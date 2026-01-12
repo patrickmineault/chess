@@ -1,0 +1,813 @@
+# Chess Mate-in-1 Practice App
+
+Here's a complete chess endgame practice app with 3 mate-in-1 scenarios for white:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Mate-in-1 Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #a5b1c2;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .scenario-buttons {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .scenario-btn {
+            padding: 12px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #4a69bd;
+            color: white;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .scenario-btn:hover {
+            background: #6a89cc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 105, 189, 0.4);
+        }
+        
+        .scenario-btn.active {
+            background: #1e3799;
+            box-shadow: 0 0 15px rgba(30, 55, 153, 0.6);
+        }
+        
+        .board-container {
+            display: inline-block;
+            padding: 20px;
+            background: #2c2c54;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        .board-wrapper {
+            position: relative;
+        }
+        
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 65px);
+            grid-template-rows: repeat(8, 65px);
+            border: 4px solid #1a1a2e;
+            border-radius: 4px;
+        }
+        
+        .file-labels, .rank-labels {
+            display: flex;
+            color: #a5b1c2;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .file-labels {
+            justify-content: space-around;
+            padding: 5px 0;
+        }
+        
+        .file-labels span {
+            width: 65px;
+            text-align: center;
+        }
+        
+        .rank-labels {
+            position: absolute;
+            left: -20px;
+            top: 0;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-around;
+        }
+        
+        .rank-labels span {
+            height: 65px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .square {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .square.light {
+            background-color: #f0d9b5;
+        }
+        
+        .square.dark {
+            background-color: #b58863;
+        }
+        
+        .square.selected {
+            box-shadow: inset 0 0 0 4px #ffeb3b;
+        }
+        
+        .square.valid-move::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+        }
+        
+        .square.valid-move.has-piece::after {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: 4px solid rgba(0, 0, 0, 0.2);
+            border-radius: 0;
+            box-sizing: border-box;
+        }
+        
+        .square.last-move {
+            background-color: #cdd26a !important;
+        }
+        
+        .square.check {
+            background: radial-gradient(ellipse at center, #ff0000 0%, transparent 70%);
+        }
+        
+        .square.checkmate {
+            animation: checkmate-pulse 0.5s ease infinite alternate;
+        }
+        
+        @keyframes checkmate-pulse {
+            from { background-color: #ff6b6b; }
+            to { background-color: #ee5a5a; }
+        }
+        
+        .piece {
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.1s ease;
+            line-height: 1;
+        }
+        
+        .piece:active {
+            cursor: grabbing;
+        }
+        
+        .piece.dragging {
+            transform: scale(1.2);
+            opacity: 0.9;
+            z-index: 1000;
+        }
+        
+        .piece.white {
+            color: #fff;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.5);
+        }
+        
+        .piece.black {
+            color: #000;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+        }
+        
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .reset-btn {
+            background: #e55039;
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background: #eb4d4b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(229, 80, 57, 0.4);
+        }
+        
+        .hint-btn {
+            background: #20bf6b;
+            color: white;
+        }
+        
+        .hint-btn:hover {
+            background: #26de81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(32, 191, 107, 0.4);
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feedback.success {
+            background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(32, 191, 107, 0.4);
+        }
+        
+        .feedback.error {
+            background: linear-gradient(135deg, #fc5c65 0%, #eb3b5a 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(235, 59, 90, 0.4);
+        }
+        
+        .feedback.info {
+            background: linear-gradient(135deg, #4b7bec 0%, #3867d6 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(56, 103, 214, 0.4);
+        }
+        
+        .hint {
+            color: #a5b1c2;
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 14px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .status {
+            color: #fff;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.02) rotate(-1deg); }
+            75% { transform: scale(1.02) rotate(1deg); }
+        }
+        
+        .celebrate {
+            animation: celebrate 0.3s ease 3;
+        }
+        
+        .move-indicator {
+            color: #ffd32a;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♚ Chess Mate-in-1 Practice ♔</h1>
+        <p class="subtitle">White to move and checkmate in one!</p>
+        
+        <div class="scenario-buttons">
+            <button class="scenario-btn active" onclick="loadScenario(0)">
+                1: Back Rank Mate
+            </button>
+            <button class="scenario-btn" onclick="loadScenario(1)">
+                2: Queen + King Mate
+            </button>
+            <button class="scenario-btn" onclick="loadScenario(2)">
+                3: Smothered Mate
+            </button>
+        </div>
+        
+        <div class="move-indicator">⚪ White to move</div>
+        
+        <div class="board-container">
+            <div class="board-wrapper">
+                <div class="rank-labels">
+                    <span>8</span><span>7</span><span>6</span><span>5</span>
+                    <span>4</span><span>3</span><span>2</span><span>1</span>
+                </div>
+                <div class="board" id="board"></div>
+                <div class="file-labels">
+                    <span>a</span><span>b</span><span>c</span><span>d</span>
+                    <span>e</span><span>f</span><span>g</span><span>h</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn reset-btn" onclick="resetPosition()">
+                🔄 Reset
+            </button>
+            <button class="btn hint-btn" onclick="showHint()">
+                💡 Hint
+            </button>
+        </div>
+        
+        <div class="feedback" id="feedback"></div>
+        <div class="hint" id="hint"></div>
+        <div class="status" id="status"></div>
+    </div>
+    
+    <script>
+        // Unicode chess pieces
+        const PIECES = {
+            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+        };
+        
+        // Scenarios with positions and solutions
+        const scenarios = [
+            {
+                name: "Back Rank Mate",
+                description: "The black king is trapped behind its pawns!",
+                position: [
+                    [null, null, null, null, null, 'k', null, null],  // rank 8
+                    [null, null, null, null, 'p', 'p', 'p', null],    // rank 7
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, 'K'],  // rank 2
+                    ['R', null, null, null, null, null, null, null]   // rank 1
+                ],
+                solution: { fromRow: 7, fromCol: 0, toRow: 0, toCol: 0 },
+                solutionNotation: "Ra8#",
+                hint: "The back rank is weak! Deliver check on the 8th rank where the king cannot escape."
+            },
+            {
+                name: "Queen + King Mate",
+                description: "Use your king to support the queen's attack!",
+                position: [
+                    ['k', null, null, null, null, null, null, null],  // rank 8
+                    [null, null, null, null, null, null, null, null],
+                    ['K', 'Q', null, null, null, null, null, null],   // rank 6
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null]
+                ],
+                solution: { fromRow: 2, fromCol: 1, toRow: 1, toCol: 1 },
+                solutionNotation: "Qb7#",
+                hint: "Your king protects b7. Move the queen there to deliver checkmate!"
+            },
+            {
+                name: "Smothered Mate",
+                description: "The knight delivers a special checkmate!",
+                position: [
+                    [null, null, null, null, null, null, 'r', 'k'],   // rank 8
+                    [null, null, null, null, null, null, 'p', 'p'],   // rank 7
+                    [null, null, null, null, null, null, null, 'N'], // rank 6
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, null, null],
+                    [null, null, null, null, null, null, 'K', null]   // rank 1
+                ],
+                solution: { fromRow: 2, fromCol: 7, toRow: 1, toCol: 5 },
+                solutionNotation: "Nf7#",
+                hint: "The black king is smothered by its own pieces! Find the knight move that gives checkmate."
+            }
+        ];
+        
+        // Game state
+        let currentScenario = 0;
+        let board = [];
+        let selectedSquare = null;
+        let gameOver = false;
+        let lastMove = null;
+        
+        // Initialize the board UI
+        function initBoard() {
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    const isLight = (row + col) % 2 === 0;
+                    square.className = `square ${isLight ? 'light' : 'dark'}`;
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+                    
+                    // Event listeners
+                    square.addEventListener('dragover', handleDragOver);
+                    square.addEventListener('drop', handleDrop);
+                    square.addEventListener('click', handleSquareClick);
+                    
+                    boardElement.appendChild(square);
+                }
+            }
+        }
+        
+        // Render the current board state
+        function renderBoard() {
+            const squares = document.querySelectorAll('.square');
+            
+            squares.forEach(square => {
+                const row = parseInt(square.dataset.row);
+                const col = parseInt(square.dataset.col);
+                const piece = board[row][col];
+                
+                // Reset square classes
+                const isLight = (row + col) % 2 === 0;
+                square.className = `square ${isLight ? 'light' : 'dark'}`;
+                
+                // Add last move highlight
+                if (lastMove) {
+                    if ((row === lastMove.fromRow && col === lastMove.fromCol) ||
+                        (row === lastMove.toRow && col === lastMove.toCol)) {
+                        square.classList.add('last-move');
+                    }
+                }
+                
+                // Clear content
+                square.innerHTML = '';
+                
+                if (piece) {
+                    const pieceElement = document.createElement('span');
+                    const isWhite = piece === piece.toUpperCase();
+                    pieceElement.className = `piece ${isWhite ? 'white' : 'black'}`;
+                    pieceElement.textContent = PIECES[piece];
+                    pieceElement.draggable = !gameOver && isWhite;
+                    
+                    if (isWhite && !gameOver) {
+                        pieceElement.addEventListener('dragstart', handleDragStart);
+                        pieceElement.addEventListener('dragend', handleDragEnd);
+                    }
+                    
+                    square.appendChild(pieceElement);
+                    
+                    if (piece !== null) {
+                        square.classList.add('has-piece');
+                    }
+                }
+            });
+        }
+        
+        // Load a scenario
+        function loadScenario(index) {
+            currentScenario = index;
+            gameOver = false;
+            selectedSquare = null;
+            lastMove = null;
+            
+            // Deep copy the position
+            board = scenarios[index].position.map(row => [...row]);
+            
+            // Update UI
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            
+            showFeedback('', '');
+            document.getElementById('hint').textContent = '';
+            document.getElementById('status').textContent = scenarios[index].description;
+            document.querySelector('.move-indicator').textContent = '⚪ White to move';
+            
+            renderBoard();
+        }
+        
+        // Reset current position
+        function resetPosition() {
+            loadScenario(currentScenario);
+        }
+        
+        // Show hint
+        function showHint() {
+            if (!gameOver) {
+                document.getElementById('hint').textContent = '💡 ' + scenarios[currentScenario].hint;
+            }
+        }
+        
+        // Drag and drop handlers
+        let draggedPiece = null;
+        
+        function handleDragStart(e) {
+            if (gameOver) return;
+            
+            const square = e.target.closest('.square');
+            const row = parseInt(square.dataset.row);
+            const col = parseInt(square.dataset.col);
+            
+            draggedPiece = { row, col, piece: board[row][col] };
+            e.target.classList.add('dragging');
+            
+            // Highlight valid moves
+            highlightValidMoves(row, col);
+            square.classList.add('selected');
+            
+            // Set drag image
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', '');
+        }
+        
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            clearHighlights();
+            draggedPiece = null;
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            if (!draggedPiece || gameOver) return;
+            
+            const toRow = parseInt(e.currentTarget.dataset.row);
+            const toCol = parseInt(e.currentTarget.dataset.col);
+            
+            attemptMove(draggedPiece.row, draggedPiece.col, toRow, toCol);
+            clearHighlights();
+        }
+        
+        // Click handler for click-to-move
+        function handleSquareClick(e) {
+            if (gameOver) return;
+            
+            const square = e.currentTarget;
+            const row = parseInt(square.dataset.row);
+            const col = parseInt(square.dataset.col);
+            const piece = board[row][col];
+            
+            if (selectedSquare) {
+                // Try to make a move
+                if (selectedSquare.row !== row || selectedSquare.col !== col) {
+                    attemptMove(selectedSquare.row, selectedSquare.col, row, col);
+                }
+                clearHighlights();
+                selectedSquare = null;
+            } else if (piece && piece === piece.toUpperCase()) {
+                // Select a white piece
+                selectedSquare = { row, col };
+                square.classList.add('selected');
+                highlightValidMoves(row, col);
+            }
+        }
+        
+        // Highlight possible move squares (simplified)
+        function highlightValidMoves(fromRow, fromCol) {
+            const piece = board[fromRow][fromCol];
+            if (!piece) return;
+            
+            document.querySelectorAll('.square').forEach(square => {
+                const row = parseInt(square.dataset.row);
+                const col = parseInt(square.dataset.col);
+                
+                if (row === fromRow && col === fromCol) return;
+                
+                // Simple validation - can't capture own pieces
+                const targetPiece = board[row][col];
+                if (!targetPiece || targetPiece === targetPiece.toLowerCase()) {
+                    if (isValidPieceMove(piece, fromRow, fromCol, row, col)) {
+                        square.classList.add('valid-move');
+                    }
+                }
+            });
+        }
+        
+        // Basic piece movement validation
+        function isValidPieceMove(piece, fromRow, fromCol, toRow, toCol) {
+            const pieceType = piece.toUpperCase();
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+            
+            switch (pieceType) {
+                case 'K': // King
+                    return rowDiff <= 1 && colDiff <= 1;
+                case 'Q': // Queen
+                    return isValidRookMove(fromRow, fromCol, toRow, toCol) ||
+                           isValidBishopMove(fromRow, fromCol, toRow, toCol);
+                case 'R': // Rook
+                    return isValidRookMove(fromRow, fromCol, toRow, toCol);
+                case 'B': // Bishop
+                    return isValidBishopMove(fromRow, fromCol, toRow, toCol);
+                case 'N': // Knight
+                    return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+                case 'P': // Pawn
+                    return colDiff === 0 && (fromRow - toRow === 1);
+                default:
+                    return false;
+            }
+        }
+        
+        function isValidRookMove(fromRow, fromCol, toRow, toCol) {
+            if (fromRow !== toRow && fromCol !== toCol) return false;
+            return isPathClear(fromRow, fromCol, toRow, toCol);
+        }
+        
+        function isValidBishopMove(fromRow, fromCol, toRow, toCol) {
+            if (Math.abs(toRow - fromRow) !== Math.abs(toCol - fromCol)) return false;
+            return isPathClear(fromRow, fromCol, toRow, toCol);
+        }
+        
+        function isPathClear(fromRow, fromCol, toRow, toCol) {
+            const rowStep = toRow > fromRow ? 1 : (toRow < fromRow ? -1 : 0);
+            const colStep = toCol > fromCol ? 1 : (toCol < fromCol ? -1 : 0);
+            
+            let row = fromRow + rowStep;
+            let col = fromCol + colStep;
+            
+            while (row !== toRow || col !== toCol) {
+                if (board[row][col] !== null) return false;
+                row += rowStep;
+                col += colStep;
+            }
+            return true;
+        }
+        
+        // Clear all highlights
+        function clearHighlights() {
+            document.querySelectorAll('.square').forEach(square => {
+                square.classList.remove('selected', 'valid-move');
+            });
+        }
+        
+        // Attempt to make a move
+        function attemptMove(fromRow, fromCol, toRow, toCol) {
+            const piece = board[fromRow][fromCol];
+            
+            // Only white pieces can move
+            if (!piece || piece !== piece.toUpperCase()) return;
+            
+            // Can't capture own pieces
+            const targetPiece = board[toRow][toCol];
+            if (targetPiece && targetPiece === targetPiece.toUpperCase()) {
+                showFeedback('Cannot capture your own piece!', 'error');
+                return;
+            }
+            
+            // Check if valid piece move
+            if (!isValidPieceMove(piece, fromRow, fromCol, toRow, toCol)) {
+                showFeedback('Invalid move for this piece!', 'error');
+                return;
+            }
+            
+            // Check if this is the solution
+            const solution = scenarios[currentScenario].solution;
+            const isCorrect = (
+                fromRow === solution.fromRow &&
+                fromCol === solution.fromCol &&
+                toRow === solution.toRow &&
+                toCol === solution.toCol
+            );
+            
+            // Make the move
+            board[toRow][toCol] = piece;
+            board[fromRow][fromCol] = null;
+            lastMove = { fromRow, fromCol, toRow, toCol };
+            
+            if (isCorrect) {
+                gameOver = true;
+                renderBoard();
+                
+                // Highlight checkmate
+                setTimeout(() => {
+                    highlightCheckmate();
+                    showFeedback(`🎉 Checkmate! ${scenarios[currentScenario].solutionNotation} is correct!`, 'success');
+                    document.querySelector('.move-indicator').textContent = '✓ Checkmate!';
+                    document.querySelector('.board-container').classList.add('celebrate');
+                    
+                    setTimeout(() => {
+                        document.querySelector('.board-container').classList.remove('celebrate');
+                    }, 1000);
+                }, 100);
+            } else {
+                renderBoard();
+                showFeedback('Not checkmate. Try again!', 'error');
+                
+                // Reset after delay
+                setTimeout(() => {
+                    resetPosition();
+                }, 1500);
+            }
+        }
+        
+        // Highlight the king in checkmate
+        function highlightCheckmate() {
+            document.querySelectorAll('.square').forEach(square => {
+                const row = parseInt(square.dataset.row);
+                const col = parseInt(square.dataset.col);
+                const piece = board[row][col];
+                
+                if (piece === 'k') {
+                    square.classList.add('checkmate');
+                }
+            });
+        }
+        
+        // Show feedback message
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${type}`;
+            
+            if (message) {
+                feedback.classList.add('show');
+            } else {
+                feedback.classList.remove('show');
+            }
+        }
+        
+        // Initialize on load
+        initBoard();
+        loadScenario(0);
+    </script>
+</body>
+</html>
+```
+
+## Features
+
+### Three Mate-in-1 Scenarios:
+
+1. **Back Rank Mate** - The classic back rank checkmate where the rook delivers mate on the 8th rank while the black king is trapped by its own pawns (Ra8#)
+
+2. **Queen + King Mate** - The queen delivers checkmate supported by the king (Qb7#)
+
+3. **Smothered Mate** - The knight delivers checkmate when the enemy king is surrounded by its own pieces (Nf7#)
+
+### Functionality:
+
+- **Drag and Drop**: Click and drag white pieces to make moves
+- **Click-to-Move**: Click a piece to select it, then click the destination square
+- **Visual Feedback**: 
+  - Green celebration on correct checkmate
+  - Red pulsing on the checkmated king
+  - Last move highlighting
+  - Valid move indicators
+- **Reset Button**: Reset to the starting position
+- **Hint Button**: Shows a helpful hint for the current puzzle
+- **Scenario Selection**: Switch between puzzles with dedicated buttons
+
+### Visual Elements:
+
+- Classic wooden board colors
+- Clear piece symbols
+- Move validation with highlighting
+- Animated celebration on success
+- File and rank labels

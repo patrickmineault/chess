@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Scenario 1: The Back Rank Mate",
+    "fen": "6k1/5ppp/8/8/8/8/8/3R2K1 w - - 0 1",
+    "move": "Rd8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 2: Scholar's Mate",
+    "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 4",
+    "move": "Qxf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 3: Corner Smothered Mate",
+    "fen": "6rk/6pp/8/6N1/8/8/8/7K w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 4: Arabian Mate",
+    "fen": "7k/2R5/5N2/8/8/8/8/7K w - - 0 1",
+    "move": "Rh7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 5: Back Rank Mate via Promotion",
+    "fen": "6k1/3P1ppp/8/8/8/8/8/6K1 w - - 0 1",
+    "move": "d8=Q#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 6: Damiano's Mate",
+    "fen": "6rk/7p/6PQ/8/8/8/8/7K w - - 0 1",
+    "move": "Qxh7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 7: Side Ladder Mate",
+    "fen": "8/8/8/k7/8/8/2R5/1R5K w - - 0 1",
+    "move": "Ra2#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 8: Anastasia's Mate",
+    "fen": "7k/4N1p1/8/8/R7/8/8/7K w - - 0 1",
+    "move": "Rh4#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 9: Battery Mate (Queen & Bishop)",
+    "fen": "6k1/5ppp/8/8/8/2Q5/1B6/7K w - - 0 1",
+    "move": "Qxg7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  },
+  {
+    "name": "Scenario 10: Epaulette Mate",
+    "fen": "3rkr2/8/7Q/8/8/8/8/4K3 w - - 0 1",
+    "move": "Qe6#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": ""
+  }
+]

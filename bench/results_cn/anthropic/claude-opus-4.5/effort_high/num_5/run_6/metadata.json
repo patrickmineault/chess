@@ -1,0 +1,14 @@
+{
+  "model": "anthropic/claude-opus-4.5",
+  "effort": "high",
+  "num_scenarios_requested": 5,
+  "num_scenarios_parsed": 5,
+  "run": 6,
+  "timestamp": "2025-11-28T18:28:47.124209",
+  "usage": {
+    "prompt_tokens": 112,
+    "completion_tokens": 9231,
+    "total_tokens": 9343
+  },
+  "has_reasoning": true
+}

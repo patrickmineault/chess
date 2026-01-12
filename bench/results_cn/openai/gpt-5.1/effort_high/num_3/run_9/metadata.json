@@ -1,0 +1,17 @@
+{
+  "model": "openai/gpt-5.1",
+  "effort": "high",
+  "num_scenarios_requested": 3,
+  "num_scenarios_parsed": 3,
+  "run": 9,
+  "timestamp": "2025-11-28T17:50:52.775808",
+  "usage": {
+    "prompt_tokens": 76,
+    "completion_tokens": 12773,
+    "total_tokens": 12849,
+    "completion_tokens_details": {
+      "reasoning_tokens": 12607
+    }
+  },
+  "has_reasoning": true
+}

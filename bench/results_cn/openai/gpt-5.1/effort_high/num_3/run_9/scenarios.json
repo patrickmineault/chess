@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Cornered king (Queen + King vs King)",
+    "fen": "k7/4Q3/2K5/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#"
+  },
+  {
+    "name": "Rook mate with King support",
+    "fen": "k7/7R/1K5/8/8/8/8/8 w - - 0 1",
+    "move": "Rh8#"
+  },
+  {
+    "name": "Scholar's Mate (Qxf7#)",
+    "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+    "move": "Qxf7#"
+  }
+]

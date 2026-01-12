@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Mate in 1 – Endgame Trainer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chessboard.js styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css"
+    integrity="sha512-OM4OwZGPL0fWDqGqaLHhZ6i1wcHxzck6Z4vMjA1er3a44ceaqjmQ00MohWGBnFt3Tz/wCsLm5tpqtYiMkrY5GQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    #board {
+      width: 480px;
+      max-width: 90vw;
+      margin: 20px auto;
+      box-shadow: 0 0 0 3px #444;
+      transition: box-shadow 0.25s ease;
+    }
+
+    #board.success {
+      box-shadow: 0 0 0 4px #2e7d32;
+    }
+
+    #board.error {
+      box-shadow: 0 0 0 4px #c62828;
+    }
+
+    .controls {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .controls span {
+      margin-right: 8px;
+      font-weight: 600;
+    }
+
+    button {
+      margin: 0 4px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #ffffff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #eeeeee;
+    }
+
+    button.selected {
+      background: #1565c0;
+      color: #ffffff;
+      border-color: #0d47a1;
+    }
+
+    #resetBtn {
+      margin-left: 16px;
+      font-weight: 600;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-weight: 600;
+      min-height: 1.2em;
+    }
+
+    .message.success {
+      color: #2e7d32;
+    }
+
+    .message.error {
+      color: #c62828;
+    }
+
+    .hint {
+      margin-top: 4px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Mate in 1 – Endgame Trainer</h1>
+
+  <div class="controls">
+    <span>Choose scenario:</span>
+    <button data-scenario="0">Scenario 1 (Q vs K)</button>
+    <button data-scenario="1">Scenario 2 (Q vs K)</button>
+    <button data-scenario="2">Scenario 3 (R+K vs K)</button>
+    <button id="resetBtn">Reset Position</button>
+  </div>
+
+  <div id="board"></div>
+  <div id="message" class="message"></div>
+  <div class="hint">White to move. Find a checkmate in one move.</div>
+
+  <!-- chess.js for rules/validation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"
+    integrity="sha512-Q6q9GP7kjpugdS6kNQN9htmyXvZMkMBwxjhdnof4tu6ZR54RO99GdGrxqFSVmqYWcxbSamgqzYsMv5wU/1cXwg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" type="module"></script>
+
+  <!-- chessboard.js for drag-and-drop board UI -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"
+    integrity="sha512-r+db2af7fnDMSdFH91tsWHdhbfRfczxiYd1oOFj6zEzIi0i0RE+X1i1QQ4Wx7PUx129GfsG8pACPn+y+AXWPuw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    // Three "mate in 1" scenarios for White
+    // Each object: { name, fen }
+    const scenarios = [
+      {
+        name: "Scenario 1 – Simple queen mate",
+        // White: Kd2, Qe3; Black: Kd1. White to move: e.g. Qe1#
+        fen: "8/8/8/8/8/4Q3/3K4/3k4 w - - 0 1",
+      },
+      {
+        name: "Scenario 2 – Queen and king vs king",
+        // White: Kg6, Qg5; Black: Kg8. White to move: Qd8#.
+        fen: "6k1/8/6K1/6Q1/8/8/8/8 w - - 0 1",
+      },
+      {
+        name: "Scenario 3 – Rook and king vs king",
+        // White: Kc7, Rb6; Black: Ka8. White to move: Ra6#.
+        fen: "k7/2K5/1R5/8/8/8/8/8 w - - 0 1",
+      },
+    ];
+
+    let board = null;
+    let game = null;
+    let currentScenarioIndex = 0;
+    let finished = false;
+
+    function setMessage(text, type) {
+      const msgEl = document.getElementById("message");
+      msgEl.textContent = text || "";
+
+      msgEl.className = "message"; // reset
+      if (type) msgEl.classList.add(type);
+
+      const boardEl = document.getElementById("board");
+      boardEl.classList.remove("success", "error");
+      if (type) boardEl.classList.add(type);
+    }
+
+    function loadScenario(index) {
+      currentScenarioIndex = index;
+      finished = false;
+
+      const scenario = scenarios[index];
+      game = new Chess(scenario.fen);
+      board.position(scenario.fen);
+
+      setMessage("White to move: find a checkmate in one move.", "");
+
+      // Highlight selected button
+      document
+        .querySelectorAll("button[data-scenario]")
+        .forEach((btn) => btn.classList.remove("selected"));
+      const activeBtn = document.querySelector(
+        'button[data-scenario="' + index + '"]'
+      );
+      if (activeBtn) activeBtn.classList.add("selected");
+    }
+
+    function onDragStart(source, piece, position, orientation) {
+      // Stop dragging after one attempt
+      if (finished) return false;
+
+      // Only allow White to move
+      if (game.turn() !== "w") return false;
+
+      // Only drag white pieces
+      if (piece[0] === "b") return false;
+
+      return true;
+    }
+
+    function onDrop(source, target) {
+      if (finished) return "snapback";
+
+      // Attempt the move using chess.js
+      const move = game.move({
+        from: source,
+        to: target,
+        promotion: "q", // not needed here, but safe default
+      });
+
+      // Illegal move
+      if (move === null) return "snapback";
+
+      // Let the board animate the move, then evaluate
+      window.setTimeout(evaluateAfterMove, 100);
+    }
+
+    function onSnapEnd() {
+      // Update board to match game state
+      board.position(game.fen());
+    }
+
+    function evaluateAfterMove() {
+      // After White moves, it's Black's turn in game.turn()
+      if (game.in_checkmate()) {
+        finished = true;
+        setMessage("Correct – checkmate in one! ✅", "success");
+        return;
+      }
+
+      if (game.in_stalemate()) {
+        finished = true;
+        setMessage(
+          "This is stalemate, not checkmate. Press Reset and try again.",
+          "error"
+        );
+        return;
+      }
+
+      if (game.in_check()) {
+        finished = true;
+        setMessage(
+          "That move gives check, but it's not checkmate. Press Reset and try again.",
+          "error"
+        );
+        return;
+      }
+
+      finished = true;
+      setMessage(
+        "That is not checkmate. Press Reset to try this position again.",
+        "error"
+      );
+    }
+
+    function init() {
+      // Initialize chess.js with first scenario
+      game = new Chess(scenarios[0].fen);
+
+      // Initialize chessboard.js
+      board = Chessboard("board", {
+        draggable: true,
+        position: scenarios[0].fen,
+        orientation: "white",
+        pieceTheme:
+          "https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/img/chesspieces/wikipedia/{piece}.png",
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd,
+      });
+
+      setMessage("White to move: find a checkmate in one move.", "");
+
+      // Scenario selection buttons
+      document
+        .querySelectorAll("button[data-scenario]")
+        .forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const index = parseInt(btn.getAttribute("data-scenario"), 10);
+            loadScenario(index);
+          });
+        });
+
+      // Reset button
+      document
+        .getElementById("resetBtn")
+        .addEventListener("click", () => loadScenario(currentScenarioIndex));
+
+      // Mark first scenario as selected
+      const firstBtn = document.querySelector('button[data-scenario="0"]');
+      if (firstBtn) firstBtn.classList.add("selected");
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>

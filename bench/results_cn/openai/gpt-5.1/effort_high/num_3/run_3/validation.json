@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Corner Queen Mate",
+    "fen": "k7/8/1QK5/8/8/8/8/8 w - - 0 1",
+    "move": "Qb7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "7k/8/5KQ1/8/8/8/8/8",
+    "scenario_index": 0,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3",
+    "reasoning_length": 16111,
+    "image_before": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3/board_0_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3/board_0_after.png"
+  },
+  {
+    "name": "Back Rank Rook Mate",
+    "fen": "6kr/4Rppp/8/8/8/8/4K3/8 w - - 0 1",
+    "move": "Re8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "6kr/4Rppp/8/8/8/8/4K3/8",
+    "scenario_index": 1,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3",
+    "reasoning_length": 16111,
+    "image_before": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3/board_1_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3/board_1_after.png"
+  },
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/6pp/8/6N1/8/8/8/6K1 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "1K6/8/8/8/1N6/8/pp6/kr6",
+    "scenario_index": 2,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3",
+    "reasoning_length": 16111,
+    "image_before": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3/board_2_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_high/num_3/run_3/board_2_after.png"
+  }
+]

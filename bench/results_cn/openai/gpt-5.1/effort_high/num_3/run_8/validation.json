@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Smothered Knight Mate",
+    "fen": "6rk/6pp/8/5N1/8/8/5PP1/4K3 w - - 0 1",
+    "move": "Nf7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid FEN: expected 8 columns per row in position part of fen: '6rk/6pp/8/5N1/8/8/5PP1/4K3'",
+    "canonical_fen": "",
+    "scenario_index": 0,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_3/run_8",
+    "reasoning_length": 11981
+  },
+  {
+    "name": "Queen Epaulette Mate",
+    "fen": "5rkr/6pp/5Q1/8/8/2B5/8/4K3 w - - 0 1",
+    "move": "Qxg7#",
+    "fen_valid": false,
+    "white_to_move": false,
+    "move_valid": false,
+    "is_checkmate": false,
+    "error": "Invalid FEN: expected 8 columns per row in position part of fen: '5rkr/6pp/5Q1/8/8/2B5/8/4K3'",
+    "canonical_fen": "",
+    "scenario_index": 1,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_3/run_8",
+    "reasoning_length": 11981
+  },
+  {
+    "name": "Back-Rank Rook Mate",
+    "fen": "4r1k1/5ppp/8/8/2B5/8/8/4R1K1 w - - 0 1",
+    "move": "Rxe8#",
+    "fen_valid": true,
+    "white_to_move": true,
+    "move_valid": true,
+    "is_checkmate": true,
+    "error": "",
+    "canonical_fen": "1K1R4/8/8/5B2/8/8/ppp5/1k1r4",
+    "scenario_index": 2,
+    "run_dir": "results_cn/openai/gpt-5.1/effort_high/num_3/run_8",
+    "reasoning_length": 11981,
+    "image_before": "results_cn/openai/gpt-5.1/effort_high/num_3/run_8/board_2_before.png",
+    "image_after": "results_cn/openai/gpt-5.1/effort_high/num_3/run_8/board_2_after.png"
+  }
+]

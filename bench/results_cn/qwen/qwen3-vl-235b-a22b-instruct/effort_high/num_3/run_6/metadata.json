@@ -1,0 +1,26 @@
+{
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "effort": "high",
+  "num_scenarios_requested": 3,
+  "num_scenarios_parsed": 3,
+  "run": 6,
+  "timestamp": "2025-11-28T17:45:19.023370",
+  "usage": {
+    "prompt_tokens": 78,
+    "completion_tokens": 177,
+    "total_tokens": 255,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "has_reasoning": false
+}

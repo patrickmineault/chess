@@ -1,0 +1,22 @@
+{
+  "model": "google/gemini-3-pro-preview",
+  "prompt": "standard",
+  "effort": "high",
+  "num_scenarios": 3,
+  "run": 8,
+  "timestamp": "2025-11-28T19:48:12.291366",
+  "usage": {
+    "prompt_tokens": 64,
+    "completion_tokens": 4495,
+    "total_tokens": 4559,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 2054,
+      "image_tokens": 0
+    }
+  },
+  "html_extracted": true,
+  "has_reasoning": true
+}

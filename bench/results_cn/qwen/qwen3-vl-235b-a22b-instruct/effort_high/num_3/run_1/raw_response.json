@@ -1,0 +1,28 @@
+{
+  "id": "gen-1764361250-4m7KrVwRVKkkkSQg3JR5",
+  "provider": "DeepInfra",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1764361250,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```\nQueen Checkmate on h7\nrnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\nQh7#\n```\n\n```\nBishop Fork and Mate on f7\nrnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\nBf7#\n```\n\n```\nRook Checkmate on a8\nrnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\nRa8#\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 78,
+    "total_tokens": 245,
+    "completion_tokens": 167,
+    "estimated_cost": 0.00027223,
+    "prompt_tokens_details": null
+  }
+}

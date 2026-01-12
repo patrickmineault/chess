@@ -452,11 +452,11 @@ ggsave("results/plot11_ui_logic_aggregate.png", p11, width = 10, height = 6, dpi
 
 # Plot 12: Scenario pass rates (individual vs all)
 p12 <- scores_long %>%
-  filter(metric %in% c("Scenario Pass Rate", "All Scenarios Valid")) %>%
+  filter(metric %in% c("Individual Scenario Pass Rate", " % All Scenarios Valid")) %>%
   ggplot(aes(x = model, y = rate, fill = metric)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
   scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
-  scale_fill_manual(values = c("Scenario Pass Rate" = "#a6d854", "All Scenarios Valid" = "#e78ac3")) +
+  scale_fill_manual(values = c("Individual Scenario Pass Rate" = "#a6d854", " % All Scenarios Valid" = "#e78ac3")) +
   labs(
     title = "Scenario Validity by Model",
     subtitle = "Individual scenario pass rate vs runs with all 3 scenarios valid",

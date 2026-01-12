@@ -4,3 +4,5 @@ trash
 .RData
 .Rhistory
 bench/img/chesspieces/wikipedia
+*/.DS_Store
+.DS_Store

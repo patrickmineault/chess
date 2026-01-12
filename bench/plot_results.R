@@ -41,7 +41,7 @@ p1 <- success_df %>%
   )
 p1
 
-ggsave("results/plot1_success_by_num.png", p1, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot1_success_by_num.png", p1, width = 8, height = 6, dpi = 150)
 
 p15 <- success_df %>%
   filter(model %in% plot1_models, effort == "high") %>%
@@ -63,7 +63,7 @@ p15 <- success_df %>%
     legend.text = element_text(size = 8)
   )
 p15
-ggsave("results/plot15_reasoning_length.png", p15, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot15_reasoning_length.png", p15, width = 8, height = 6, dpi = 150)
 
 # Plot 2: Success rate as a function of effort for num = 3
 # Models: anthropic/claude-sonnet-4.5, anthropic/claude-opus-4.5, google/gemini-3-pro-preview, openai/gpt-5.1
@@ -94,7 +94,7 @@ p2 <- success_df %>%
   )
 p2
 
-ggsave("results/plot2_success_by_effort.png", p2, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot2_success_by_effort.png", p2, width = 8, height = 6, dpi = 150)
 
 # Plot 3: Success rate for all models with effort=high, num=3
 p3 <- success_df %>%
@@ -118,7 +118,7 @@ p3 <- success_df %>%
   coord_flip()
 p3
 
-ggsave("results/plot3_success_all_models.png", p3, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot3_success_all_models.png", p3, width = 8, height = 6, dpi = 150)
 
 # ============================================================================
 # Plots 4-6: Perfect run rate (all scenarios pass in a run)
@@ -161,7 +161,7 @@ p4 <- perfect_run_df %>%
   )
 p4
 
-ggsave("results/plot4_perfect_by_num.png", p4, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot4_perfect_by_num.png", p4, width = 8, height = 6, dpi = 150)
 
 # Plot 5: Perfect run rate as a function of effort for num = 3
 p5 <- perfect_run_df %>%
@@ -186,7 +186,7 @@ p5 <- perfect_run_df %>%
   )
 p5
 
-ggsave("results/plot5_perfect_by_effort.png", p5, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot5_perfect_by_effort.png", p5, width = 8, height = 6, dpi = 150)
 
 # Plot 6: Perfect run rate for all models with effort=high, num=3
 p6 <- perfect_run_df %>%
@@ -210,7 +210,7 @@ p6 <- perfect_run_df %>%
   coord_flip()
 p6
 
-ggsave("results/plot6_perfect_all_models.png", p6, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot6_perfect_all_models.png", p6, width = 8, height = 6, dpi = 150)
 
 print("Plots saved: plot1_success_by_num.png, plot2_success_by_effort.png, plot3_success_all_models.png")
 print("             plot4_perfect_by_num.png, plot5_perfect_by_effort.png, plot6_perfect_all_models.png")
@@ -282,7 +282,7 @@ p7 <- comparison_long %>%
   )
 p7
 
-ggsave("results/plot7_perfect_vs_expected_by_num.png", p7, width = 10, height = 6, dpi = 150)
+ggsave("results_cn/plot7_perfect_vs_expected_by_num.png", p7, width = 10, height = 6, dpi = 150)
 
 # Plot 8: Observed vs expected perfect rate by effort for num = 3
 p8 <- comparison_long %>%
@@ -320,7 +320,7 @@ p8 <- comparison_long %>%
   )
 p8
 
-ggsave("results/plot8_perfect_vs_expected_by_effort.png", p8, width = 10, height = 6, dpi = 150)
+ggsave("results_cn/plot8_perfect_vs_expected_by_effort.png", p8, width = 10, height = 6, dpi = 150)
 
 # Plot 9: Observed vs expected for all models with effort=high, num=3
 p9 <- comparison_long %>%
@@ -344,7 +344,7 @@ p9 <- comparison_long %>%
   coord_flip()
 p9
 
-ggsave("results/plot9_perfect_vs_expected_all_models.png", p9, width = 8, height = 6, dpi = 150)
+ggsave("results_cn/plot9_perfect_vs_expected_all_models.png", p9, width = 8, height = 6, dpi = 150)
 
 print("             plot7_perfect_vs_expected_by_num.png, plot8_perfect_vs_expected_by_effort.png, plot9_perfect_vs_expected_all_models.png")
 

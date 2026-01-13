@@ -767,3 +767,177 @@ print("  results_cni/plot16_iterations_dotplot.png")
 print("  results_cni/plot17_iterations_faceted.png")
 print("  results_cni/plot18_iterations_observed_vs_expected.png")
 
+# ============================================================================
+# Plots 19-21: Meta calibration (predicted vs actual performance)
+# ============================================================================
+
+# Read meta predictions from summary.json
+library(jsonlite)
+meta_raw <- fromJSON("results_meta/summary.json")
+
+# Convert to tibble and filter successful parses
+meta_df <- as_tibble(meta_raw) %>%
+  filter(parse_success == TRUE, !is.na(predicted_p)) %>%
+  select(model, effort, num_requested, predicted_p, run)
+
+# Aggregate meta predictions by model/effort/num
+meta_summary <- meta_df %>%
+  group_by(model, effort, num_requested) %>%
+  summarize(
+    mean_predicted_p = mean(predicted_p, na.rm = TRUE),
+    sd_predicted_p = sd(predicted_p, na.rm = TRUE),
+    n_predictions = n(),
+    .groups = "drop"
+  )
+
+# Join with actual success rates from success_df
+calibration_df <- meta_summary %>%
+  left_join(success_df, by = c("model", "effort", "num_requested")) %>%
+  filter(!is.na(success_rate)) %>%
+  mutate(
+    # Extract model provider for coloring
+    model_type = model,
+    # Calculate calibration error
+    calibration_error = mean_predicted_p - success_rate
+  )
+
+# Plot 19: Scatter plot of predicted vs actual success rate
+p19 <- calibration_df %>%
+  ggplot(aes(x = mean_predicted_p, y = success_rate, color = model_type)) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "gray50") +
+  geom_point(aes(size = num_requested), alpha = 0.7) +
+  scale_x_continuous(labels = scales::percent, limits = c(0, 1)) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
+  scale_color_brewer(palette = "Set1") +
+  labs(
+    title = "Model Calibration: Predicted vs Actual Success Rate",
+    subtitle = "Dashed line = perfect calibration; points above = overconfident",
+    x = "Predicted Success Rate (p)",
+    y = "Actual Success Rate",
+    color = "Model Type",
+    size = "Num Scenarios"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "right"
+  )
+p19
+
+ggsave("results/plot19_calibration_scatter.png", p19, width = 10, height = 8, dpi = 150)
+
+# Plot 20: Calibration error by model (bar chart)
+calibration_by_model <- calibration_df %>%
+  group_by(model, model_type) %>%
+  summarize(
+    mean_calibration_error = mean(calibration_error, na.rm = TRUE),
+    mean_predicted = mean(mean_predicted_p, na.rm = TRUE),
+    mean_actual = mean(success_rate, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+p20 <- calibration_by_model %>%
+  ggplot(aes(x = reorder(model, mean_calibration_error), y = mean_calibration_error, fill = model_type)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray50") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(
+    title = "Calibration Error by Model",
+    subtitle = "Positive = overconfident (predicted > actual), Negative = underconfident",
+    x = "Model",
+    y = "Mean Calibration Error (Predicted - Actual)",
+    fill = "Model Type"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom"
+  ) +
+  coord_flip()
+p20
+
+ggsave("results/plot20_calibration_error_by_model.png", p20, width = 10, height = 6, dpi = 150)
+
+# Plot 21: Predicted vs Actual by num_requested (faceted)
+p21 <- calibration_df %>%
+  pivot_longer(
+    cols = c(mean_predicted_p, success_rate),
+    names_to = "type",
+    values_to = "rate"
+  ) %>%
+  mutate(
+    type = factor(type,
+      levels = c("mean_predicted_p", "success_rate"),
+      labels = c("Predicted", "Actual")
+    )
+  ) %>%
+  ggplot(aes(x = model, y = rate, fill = type)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
+  facet_wrap(~num_requested, labeller = labeller(num_requested = function(x) paste("N =", x))) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
+  scale_fill_manual(values = c("Predicted" = "#fc8d62", "Actual" = "#66c2a5")) +
+  labs(
+    title = "Predicted vs Actual Success Rate by Number of Scenarios",
+    subtitle = "Orange = model's prediction, Green = actual performance",
+    x = "Model",
+    y = "Success Rate",
+    fill = ""
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold")
+  )
+p21
+
+ggsave("results/plot21_predicted_vs_actual_by_num.png", p21, width = 14, height = 8, dpi = 150)
+
+# Plot 22: Calibration curve (binned)
+# Bin predictions and compute actual rates within each bin
+calibration_binned <- calibration_df %>%
+  mutate(
+    predicted_bin = cut(mean_predicted_p,
+                        breaks = seq(0, 1, by = 0.1),
+                        include.lowest = TRUE,
+                        labels = seq(0.05, 0.95, by = 0.1))
+  ) %>%
+  group_by(predicted_bin, model_type) %>%
+  summarize(
+    mean_predicted = mean(mean_predicted_p, na.rm = TRUE),
+    mean_actual = mean(success_rate, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(predicted_bin))
+
+p22 <- calibration_binned %>%
+  ggplot(aes(x = mean_predicted, y = mean_actual, color = model_type)) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "gray50") +
+  geom_point(aes(size = n), alpha = 0.7) +
+  geom_line(alpha = 0.5) +
+  scale_x_continuous(labels = scales::percent, limits = c(0, 1)) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
+  scale_color_brewer(palette = "Set1") +
+  scale_size_continuous(range = c(2, 8)) +
+  labs(
+    title = "Calibration Curve by Model Type",
+    subtitle = "Dashed line = perfect calibration; connected points show calibration trend",
+    x = "Mean Predicted Success Rate",
+    y = "Mean Actual Success Rate",
+    color = "Model Type",
+    size = "N observations"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "right"
+  )
+p22
+
+ggsave("results/plot22_calibration_curve.png", p22, width = 10, height = 8, dpi = 150)
+
+print("Meta calibration plots saved:")
+print("  results/plot19_calibration_scatter.png")
+print("  results/plot20_calibration_error_by_model.png")
+print("  results/plot21_predicted_vs_actual_by_num.png")
+print("  results/plot22_calibration_curve.png")
+

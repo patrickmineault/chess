@@ -6,3 +6,4 @@ trash
 bench/img/chesspieces/wikipedia
 */.DS_Store
 .DS_Store
+bench/results_meta

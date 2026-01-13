@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 """
-Benchmark models on generating mate-in-1 chess scenarios in FEN notation.
+Meta-benchmark: Ask models to predict their own performance on chess mate-in-1 generation.
 
-This script asks models to describe mate-in-1 scenarios with:
-- A creative name for the scenario
-- FEN notation for the board position
-- The winning move for white
+This script asks models how well they think they would do on the mate-in-1 task,
+requesting a probability estimate and explanation.
 
 Usage:
-    python bench_chess_notation.py --num 3 --models anthropic/claude-sonnet-4.5
-    python bench_chess_notation.py --num 5 --all-models
-    python bench_chess_notation.py --list-models
+    python bench_meta.py --num 3 --models anthropic/claude-sonnet-4.5
+    python bench_meta.py --num 5 --all-models
+    python bench_meta.py --list-models
 """
 
 import argparse
@@ -42,8 +40,9 @@ AVAILABLE_MODELS = {
     "qwen/qwen3-vl-235b-a22b-instruct",
 }
 
+PROMPT_TEMPLATE = """If I was to ask you a question like this, how well do you think you think you would be able to succesfully complete the task? Write your answer as a json string, {{"p": float, "explanation": str}}
 
-PROMPT_TEMPLATE = """Describe {num} mate-in-1 scenarios for white. Put each scenario in its own code fences (three backticks); for each scenario, the first line should be the name of the scenario, the second line the FEN notation for the setup, the third line the winning move for white. The scenarios should be valid and distinct from each other."""
+Describe {num} mate-in-1 scenarios for white. Put each scenario in its own code fences (three backticks); for each scenario, the first line should be the name of the scenario, the second line the FEN notation for the setup, the third line the winning move for white. The scenarios should be valid and distinct from each other."""
 
 # Reasoning effort levels
 EFFORT_LEVELS = ["none", "low", "medium", "high"]
@@ -126,45 +125,46 @@ def call_openrouter(
     return result
 
 
-def parse_scenarios(content: str) -> list[dict]:
+def parse_meta_response(content: str) -> dict:
     """
-    Parse mate-in-1 scenarios from model response.
+    Parse the meta prediction response from the model.
 
-    Expected format in code fences:
-    ```
-    Scenario Name
-    FEN notation
-    Winning move
-    ```
+    Expected format: JSON with keys "p" (float) and "explanation" (str)
 
-    Returns list of dicts with keys: name, fen, move
+    Returns dict with keys: p, explanation, parse_success
     """
-    scenarios = []
+    result = {
+        "p": None,
+        "explanation": None,
+        "parse_success": False,
+    }
 
-    # Find all code blocks
-    code_block_pattern = r"```(?:\w*\n)?([\s\S]*?)```"
+    # Try to find JSON in the response
+    # First, try to find JSON in code blocks
+    code_block_pattern = r"```(?:json)?\s*([\s\S]*?)```"
     matches = re.findall(code_block_pattern, content)
 
-    for match in matches:
-        lines = [line.strip() for line in match.strip().split("\n") if line.strip()]
+    json_str = None
+    if matches:
+        json_str = matches[0].strip()
+    else:
+        # Try to find raw JSON object in text
+        json_pattern = r'\{[^{}]*"p"\s*:\s*[\d.]+[^{}]*\}'
+        json_match = re.search(json_pattern, content)
+        if json_match:
+            json_str = json_match.group(0)
 
-        if len(lines) >= 3:
-            scenario = {
-                "name": lines[0],
-                "fen": lines[1],
-                "move": lines[2],
-            }
-            scenarios.append(scenario)
-        elif len(lines) == 2:
-            # Sometimes move might be missing or combined
-            scenario = {
-                "name": lines[0],
-                "fen": lines[1],
-                "move": "",
-            }
-            scenarios.append(scenario)
+    if json_str:
+        try:
+            parsed = json.loads(json_str)
+            if "p" in parsed:
+                result["p"] = float(parsed["p"])
+                result["explanation"] = parsed.get("explanation", "")
+                result["parse_success"] = True
+        except (json.JSONDecodeError, ValueError, TypeError):
+            pass
 
-    return scenarios
+    return result
 
 
 def get_next_run_number(base_dir: Path) -> int:
@@ -197,7 +197,7 @@ def save_results(
     num: int,
     content: str,
     reasoning: str | None,
-    scenarios: list[dict],
+    parsed: dict,
     usage: dict,
     raw_response: dict,
 ) -> int:
@@ -214,15 +214,16 @@ def save_results(
     if reasoning:
         (result_dir / "reasoning.md").write_text(reasoning)
 
-    # Save parsed scenarios as JSON
-    (result_dir / "scenarios.json").write_text(json.dumps(scenarios, indent=2))
+    # Save parsed prediction as JSON
+    (result_dir / "prediction.json").write_text(json.dumps(parsed, indent=2))
 
     # Save metadata
     metadata = {
         "model": model_name,
         "effort": effort,
         "num_scenarios_requested": num,
-        "num_scenarios_parsed": len(scenarios),
+        "predicted_p": parsed.get("p"),
+        "parse_success": parsed.get("parse_success", False),
         "run": run_number,
         "timestamp": datetime.now().isoformat(),
         "usage": usage,
@@ -264,7 +265,7 @@ def execute_single_run(
         result = call_openrouter(model_name, prompt, api_key, effort)
         elapsed = time.time() - start_time
 
-        scenarios = parse_scenarios(result["content"])
+        parsed = parse_meta_response(result["content"])
 
         run_number = save_results(
             output_dir=output_dir,
@@ -273,7 +274,7 @@ def execute_single_run(
             num=num,
             content=result["content"],
             reasoning=result["reasoning"],
-            scenarios=scenarios,
+            parsed=parsed,
             usage=result["usage"],
             raw_response=result["raw_response"],
         )
@@ -282,9 +283,10 @@ def execute_single_run(
             "model": model_name,
             "effort": effort,
             "num_requested": num,
-            "num_parsed": len(scenarios),
+            "predicted_p": parsed.get("p"),
+            "parse_success": parsed.get("parse_success", False),
+            "explanation": parsed.get("explanation"),
             "run": run_number,
-            "success": len(scenarios) >= num,
             "has_reasoning": result["reasoning"] is not None,
             "elapsed_seconds": elapsed,
             "tokens": result["usage"],
@@ -296,9 +298,10 @@ def execute_single_run(
             "model": model_name,
             "effort": effort,
             "num_requested": num,
-            "num_parsed": 0,
+            "predicted_p": None,
+            "parse_success": False,
+            "explanation": None,
             "run": None,
-            "success": False,
             "has_reasoning": False,
             "elapsed_seconds": 0,
             "tokens": {},
@@ -374,14 +377,11 @@ def run_benchmark(
             if result["error"]:
                 print(f"    ERROR: {result['error']}")
             else:
-                status = (
-                    "OK"
-                    if result["success"]
-                    else f"PARTIAL ({result['num_parsed']}/{result['num_requested']})"
-                )
+                p_str = f"p={result['predicted_p']:.2f}" if result["predicted_p"] is not None else "p=N/A"
+                parse_status = "parsed" if result["parse_success"] else "PARSE FAILED"
                 reasoning = "with reasoning" if result["has_reasoning"] else ""
                 print(
-                    f"    {status} (run_{result['run']}, {result['elapsed_seconds']:.1f}s) {reasoning}"
+                    f"    {p_str} ({parse_status}, run_{result['run']}, {result['elapsed_seconds']:.1f}s) {reasoning}"
                 )
 
             results_summary.append(result)
@@ -414,17 +414,14 @@ def run_benchmark(
                     )
                     print(f"    ERROR: {result['error']}")
                 else:
-                    status = (
-                        "OK"
-                        if result["success"]
-                        else f"PARTIAL ({result['num_parsed']}/{result['num_requested']})"
-                    )
+                    p_str = f"p={result['predicted_p']:.2f}" if result["predicted_p"] is not None else "p=N/A"
+                    parse_status = "parsed" if result["parse_success"] else "PARSE FAILED"
                     reasoning = "with reasoning" if result["has_reasoning"] else ""
                     print(
                         f"[{completed}/{len(tasks)}] {task['model_name']} | effort={task['effort']} | num={task['num']}"
                     )
                     print(
-                        f"    {status} (run_{result['run']}, {result['elapsed_seconds']:.1f}s) {reasoning}"
+                        f"    {p_str} ({parse_status}, run_{result['run']}, {result['elapsed_seconds']:.1f}s) {reasoning}"
                     )
 
                 results_summary.append(result)
@@ -447,18 +444,120 @@ def run_benchmark(
     return results_summary
 
 
+def recompile_summary(output_dir: Path) -> list[dict]:
+    """
+    Recompile summary.json from all cached metadata.json files.
+
+    Walks through the output directory structure and rebuilds the summary
+    from individual run metadata files.
+    """
+    results = []
+
+    if not output_dir.exists():
+        print(f"Output directory does not exist: {output_dir}")
+        return results
+
+    # Walk through directory structure: model/effort_X/num_Y/run_Z/
+    for model_dir in output_dir.iterdir():
+        if not model_dir.is_dir() or model_dir.name == "summary.json":
+            continue
+
+        # Handle nested model names like "anthropic/claude-sonnet-4.5"
+        # which become "anthropic/claude-sonnet-4.5" directories
+        model_name = model_dir.name
+
+        # Check if this is a provider directory (contains model subdirs)
+        subdirs = [d for d in model_dir.iterdir() if d.is_dir()]
+        if subdirs and not any(d.name.startswith("effort_") for d in subdirs):
+            # This is a provider dir, iterate through model subdirs
+            for submodel_dir in subdirs:
+                model_name = f"{model_dir.name}/{submodel_dir.name}"
+                results.extend(_collect_runs_from_model_dir(submodel_dir, model_name))
+        else:
+            results.extend(_collect_runs_from_model_dir(model_dir, model_name))
+
+    # Save the recompiled summary
+    if results:
+        summary_path = output_dir / "summary.json"
+        summary_path.write_text(json.dumps(results, indent=2))
+        print(f"Recompiled {len(results)} results to {summary_path}")
+
+    return results
+
+
+def _collect_runs_from_model_dir(model_dir: Path, model_name: str) -> list[dict]:
+    """Collect all run results from a model directory."""
+    results = []
+
+    for effort_dir in model_dir.iterdir():
+        if not effort_dir.is_dir() or not effort_dir.name.startswith("effort_"):
+            continue
+
+        effort = effort_dir.name.replace("effort_", "")
+
+        for num_dir in effort_dir.iterdir():
+            if not num_dir.is_dir() or not num_dir.name.startswith("num_"):
+                continue
+
+            try:
+                num_requested = int(num_dir.name.replace("num_", ""))
+            except ValueError:
+                continue
+
+            for run_dir in num_dir.iterdir():
+                if not run_dir.is_dir() or not run_dir.name.startswith("run_"):
+                    continue
+
+                metadata_path = run_dir / "metadata.json"
+                prediction_path = run_dir / "prediction.json"
+
+                if not metadata_path.exists():
+                    continue
+
+                try:
+                    metadata = json.loads(metadata_path.read_text())
+
+                    # Load prediction if available
+                    prediction = {}
+                    if prediction_path.exists():
+                        prediction = json.loads(prediction_path.read_text())
+
+                    # Reconstruct result entry
+                    result = {
+                        "model": model_name,
+                        "effort": effort,
+                        "num_requested": num_requested,
+                        "predicted_p": metadata.get("predicted_p") or prediction.get("p"),
+                        "parse_success": metadata.get("parse_success", prediction.get("parse_success", False)),
+                        "explanation": prediction.get("explanation"),
+                        "run": metadata.get("run"),
+                        "has_reasoning": metadata.get("has_reasoning", False),
+                        "elapsed_seconds": 0,  # Not stored in metadata
+                        "tokens": metadata.get("usage", {}),
+                        "error": None,
+                    }
+                    results.append(result)
+
+                except (json.JSONDecodeError, KeyError) as e:
+                    print(f"Warning: Could not parse {metadata_path}: {e}")
+                    continue
+
+    return results
+
+
 def print_summary(results: list[dict]):
     """Print a formatted summary table."""
-    print("\n" + "=" * 100)
-    print("BENCHMARK SUMMARY - Chess Notation (FEN) Generation")
-    print("=" * 100)
+    print("\n" + "=" * 110)
+    print("BENCHMARK SUMMARY - Meta Prediction (Self-Confidence)")
+    print("=" * 110)
     print(
-        f"{'Model':<35} {'Effort':<8} {'Req':<5} {'Got':<5} {'Run':<5} {'OK':<6} {'Reasoning':<10} {'Time':<8}"
+        f"{'Model':<35} {'Effort':<8} {'Num':<5} {'Pred P':<8} {'Parsed':<8} {'Run':<5} {'Reasoning':<10} {'Time':<8}"
     )
-    print("-" * 100)
+    print("-" * 110)
 
     for r in results:
-        ok_status = "Yes" if r.get("success") else "No"
+        p_str = f"{r.get('predicted_p'):.2f}" if r.get("predicted_p") is not None else "N/A"
+        parse_status = "Yes" if r.get("parse_success") else "No"
         reasoning_status = "Yes" if r.get("has_reasoning") else "No"
         time_str = (
             f"{r.get('elapsed_seconds', 0):.1f}s" if "elapsed_seconds" in r else "N/A"
@@ -466,37 +565,37 @@ def print_summary(results: list[dict]):
         run_str = str(r.get("run", "N/A"))
         model_short = r["model"][:34] if len(r["model"]) > 34 else r["model"]
         print(
-            f"{model_short:<35} {r.get('effort', 'N/A'):<8} {r['num_requested']:<5} {r['num_parsed']:<5} {run_str:<5} {ok_status:<6} {reasoning_status:<10} {time_str:<8}"
+            f"{model_short:<35} {r.get('effort', 'N/A'):<8} {r['num_requested']:<5} {p_str:<8} {parse_status:<8} {run_str:<5} {reasoning_status:<10} {time_str:<8}"
         )
 
-    # Print consistency stats if there are multiple runs
+    # Print average predictions by model if there are multiple runs
     if len(results) > 1:
-        print("\n" + "-" * 100)
-        print("CONSISTENCY STATS")
-        print("-" * 100)
+        print("\n" + "-" * 110)
+        print("AVERAGE PREDICTIONS BY MODEL")
+        print("-" * 110)
 
-        # Group by model/effort/num
         from collections import defaultdict
 
         groups = defaultdict(list)
         for r in results:
-            key = (r["model"], r.get("effort", "N/A"), r["num_requested"])
-            groups[key].append(r.get("success", False))
+            if r.get("predicted_p") is not None:
+                key = (r["model"], r.get("effort", "N/A"), r["num_requested"])
+                groups[key].append(r["predicted_p"])
 
-        for (model, effort, num), successes in sorted(groups.items()):
-            if len(successes) > 1:
-                success_rate = sum(successes) / len(successes) * 100
+        for (model, effort, num), predictions in sorted(groups.items()):
+            if predictions:
+                avg_p = sum(predictions) / len(predictions)
                 model_short = model[:34] if len(model) > 34 else model
                 print(
-                    f"{model_short:<35} {effort:<8} {num:<5} {success_rate:>5.0f}% success ({sum(successes)}/{len(successes)} runs)"
+                    f"{model_short:<35} {effort:<8} {num:<5} avg_p={avg_p:.2f} ({len(predictions)} runs)"
                 )
 
-    print("=" * 100)
+    print("=" * 110)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Benchmark models on generating mate-in-1 chess scenarios in FEN notation",
+        description="Meta-benchmark: Ask models to predict their own performance on chess mate-in-1 generation",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -511,7 +610,7 @@ Examples:
         type=int,
         nargs="+",
         default=[3],
-        help="Number of scenarios to request (can specify multiple)",
+        help="Number of scenarios to ask about (can specify multiple)",
     )
     parser.add_argument(
         "--runs",
@@ -556,8 +655,13 @@ Examples:
     parser.add_argument(
         "--output",
         type=str,
-        default="./results_cn",
-        help="Output directory for results (default: ./results_cn)",
+        default="./results_meta",
+        help="Output directory for results (default: ./results_meta)",
+    )
+    parser.add_argument(
+        "--recompile",
+        action="store_true",
+        help="Recompile summary.json from cached results without running any new requests",
     )
 
     args = parser.parse_args()
@@ -571,6 +675,14 @@ Examples:
         print("Available models:")
         for model_id in sorted(AVAILABLE_MODELS):
             print(f"  {model_id}")
+        return
+
+    output_dir = Path(args.output)
+
+    if args.recompile:
+        print(f"Recompiling summary from cached results in {output_dir}...")
+        results = recompile_summary(output_dir)
+        print_summary(results)
         return
 
     # Determine which models to run
@@ -594,11 +706,10 @@ Examples:
         efforts = args.effort
 
     api_key = get_api_key()
-    output_dir = Path(args.output)
 
     total_combinations = len(models) * len(args.num) * len(efforts) * args.runs
     print(
-        f"Benchmarking {len(models)} models × {len(efforts)} efforts × {len(args.num)} nums × {args.runs} runs = {total_combinations} total"
+        f"Meta-benchmarking {len(models)} models × {len(efforts)} efforts × {len(args.num)} nums × {args.runs} runs = {total_combinations} total"
     )
     print(f"Output directory: {output_dir}")
 

@@ -1,0 +1,42 @@
+{
+  "id": "gen-1768244759-nLhhzQnZ4iwvXBCYUL5j",
+  "provider": "DeepInfra",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1768244759,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"p\": 0.98,\n  \"explanation\": \"I can generate 10 distinct, valid mate-in-1 scenarios for White with accurate FEN notation and correct winning moves. I have extensive knowledge of chess positions and checkmate patterns, and I can construct positions that are legal and non-redundant. The only minor risk is a rare oversight in FEN formatting or move legality, but my training data and internal validation make such errors extremely unlikely.\"\n}",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 126,
+    "completion_tokens": 101,
+    "total_tokens": 227,
+    "cost": 0.0001464,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 2.52e-05,
+      "upstream_inference_completions_cost": 0.0001212
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

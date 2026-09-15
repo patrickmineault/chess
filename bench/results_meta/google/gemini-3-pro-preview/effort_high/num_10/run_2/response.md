@@ -1,0 +1,6 @@
+```json
+{
+  "p": 0.98,
+  "explanation": "I have extensive training on chess mechanics, FEN notation, and tactical patterns. Generating 10 distinct, valid, and correctly formatted mate-in-1 scenarios is a task I can perform with high reliability, as it involves standard logic and structured text generation."
+}
+```

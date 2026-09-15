@@ -1,0 +1,4 @@
+{
+"p": 1.0,
+"explanation": "I have extensive training data on chess rules, FEN notation, and common tactical patterns (such as Back Rank, Smothered, and Scholar's mates). Constructing five distinct, valid scenarios and strictly adhering to the specified formatting constraints is a task I can perform with high accuracy."
+}

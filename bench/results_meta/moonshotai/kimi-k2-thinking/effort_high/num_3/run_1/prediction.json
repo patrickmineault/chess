@@ -1,0 +1,5 @@
+{
+  "p": 0.98,
+  "explanation": "I have strong knowledge of chess rules, FEN notation, and checkmate patterns. I can generate three distinct, valid mate-in-1 scenarios using different mating themes (back-rank, queen support, and promotion). I've verified each position ensures the move results in actual checkmate with no legal escapes for the black king.",
+  "parse_success": true
+}

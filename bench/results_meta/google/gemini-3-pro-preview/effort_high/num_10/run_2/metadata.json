@@ -1,0 +1,31 @@
+{
+  "model": "google/gemini-3-pro-preview",
+  "effort": "high",
+  "num_scenarios_requested": 10,
+  "predicted_p": 0.98,
+  "parse_success": true,
+  "run": 2,
+  "timestamp": "2026-01-12T14:05:54.945176",
+  "usage": {
+    "prompt_tokens": 119,
+    "completion_tokens": 2062,
+    "total_tokens": 2181,
+    "cost": 0.024982,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.000238,
+      "upstream_inference_completions_cost": 0.024744
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1984,
+      "image_tokens": 0
+    }
+  },
+  "has_reasoning": true
+}

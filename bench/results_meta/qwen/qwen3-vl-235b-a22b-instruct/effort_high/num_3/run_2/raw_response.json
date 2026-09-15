@@ -1,0 +1,42 @@
+{
+  "id": "gen-1768244750-2qdtjySBbK7Zjbmpsufk",
+  "provider": "DeepInfra",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1768244750,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"p\": 0.98,\n  \"explanation\": \"I am highly confident in generating valid mate-in-1 scenarios for white. I can construct three distinct, legally valid chess positions with FEN notation and correct winning moves. These will be simple, clear, and adhere to chess rules \u2014 for example, using common checkmate patterns like back-rank mate, smothered mate, or queen/bishop mates. My training data includes extensive chess knowledge, so I can reliably produce accurate and diverse examples.\"\n}",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 125,
+    "completion_tokens": 109,
+    "total_tokens": 234,
+    "cost": 0.0001558,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 2.5e-05,
+      "upstream_inference_completions_cost": 0.0001308
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

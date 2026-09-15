@@ -1,0 +1,31 @@
+{
+  "model": "moonshotai/kimi-k2-thinking",
+  "effort": "high",
+  "num_scenarios_requested": 5,
+  "predicted_p": 0.95,
+  "parse_success": true,
+  "run": 1,
+  "timestamp": "2026-01-12T14:01:35.457278",
+  "usage": {
+    "prompt_tokens": 143,
+    "completion_tokens": 641,
+    "total_tokens": 784,
+    "cost": 0.001674,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 7.15e-05,
+      "upstream_inference_completions_cost": 0.0016025
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 646,
+      "image_tokens": 0
+    }
+  },
+  "has_reasoning": true
+}

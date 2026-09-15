@@ -1,0 +1,57 @@
+{
+  "id": "gen-1768244611-7omL0NZHMYnrHlWYdYF3",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1",
+  "object": "chat.completion",
+  "created": 1768244611,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"p\": 0.86, \"explanation\": \"I can usually follow formatting instructions precisely and I understand both FEN notation and basic mate-in-1 patterns well enough to construct 10 distinct positions with correct winning moves for White. However, there is a non-trivial chance of subtle errors: an illegal FEN (e.g., impossible castling rights), overlooking a defensive resource so the move is not actually mate, accidentally repeating a pattern, or making a small formatting mistake (like misordering the FEN fields). Those risks keep the probability of a completely correct, first-try answer below 1.\"}",
+        "refusal": null,
+        "reasoning": "**Crafting the JSON explanation**\n\nI want to provide a concise explanation as the user requested JSON with an explanation string. While I'm pretty good with FEN and chess, I need to be cautious about subtle illegal positions, oversight of defensive resources, or formatting mistakes. I think setting p=0.86 strikes a good balance between showing confidence and keeping it realistic. Also, I need to make sure that the JSON is formatted correctly by escaping double quotes or using single quotes instead. Alright, let's finalize this!",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Crafting the JSON explanation**\n\nI want to provide a concise explanation as the user requested JSON with an explanation string. While I'm pretty good with FEN and chess, I need to be cautious about subtle illegal positions, oversight of defensive resources, or formatting mistakes. I think setting p=0.86 strikes a good balance between showing confidence and keeping it realistic. Also, I need to make sure that the JSON is formatted correctly by escaping double quotes or using single quotes instead. Alright, let's finalize this!"
+          },
+          {
+            "id": "rs_09671de99e3586c80169654583f5988197af9f3be56e44869a",
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpZUWRKBSxKaSHw4h6jJuFhpuAf_WB0RKp6yMg4VXBSXGhySoya_50Gar0lmXm3U3AmEUBxUE_xK8gk93Sd5K0cPNLFZo7oMnvM1wqkHSM4wuUTfVgB6xWGC2nsPdlzbjlW0bVITvt7h8K3ubn11AtvamU3yhKZXAsmWDC48TnS2SK4h13vMDc-7q_x0YD8bbCqoChLzmiqIidX-i4RAcf7ipinrH5uajqfLs4xz583W82Xljg8c27p16ZWHK9ZRZ7xhNMi0o10Nq-4sokeoDU55dsTl2FKXRcGJzvSxuUQTwpVEGzJxeGE68RkUamYOa8TvY5FdGXOqBp7avgFBiYIegUusYsLVMNHL6pYO0KRQn0T4oIZmLVx_liojukGR7Kz88khHumRdLIAyQq0igWi27QLYPFDxI9tENfFvhJjd7Iq_prdbYu5-C96I2yb4Gj49qvOClmy6HeRVh685yt1jKDrNwClJJ2YtmzuFT1KykOw-xzAvtbLSBwqyV5GXkkWNWiXhllUh-vOhbKwxbx0ES4VoF32eQSXDpHNGBfHai_YnE3dS6xwjhGlBg4DlPQeAKVgZmesFK7QKqb7_iZYehShEPs7E3fBVJ03RSzVNtikJe2eQQyyJBMNG0flWzVK-t1_-B4g1TfxgjBI8hVQtw0akMx1ol8hzOi7dZmLclwFooUMdc8BT5ksaGLESIHCqaBNCrP2DnmPO7ivvUaSzW3c-nfVTWhdXYWzXfrkS5kiDkZmLjqRtUvNlryCeXA80nBcKMAcBvGpRf1ZPuvW8Fgvp171HiPQFZyB9LzNgqyXqjXH0sTP-5tViFeDRFgaTj3muFe_r7d074oeoI-t7yvo5MAAwa9BmaWmLk1tRp4e2yxfiYFwlLh8_I7jP8IOlHlAujZnKRjKpJ0ZWuG-K_lV_3FEnDGa1mtCgzyZUj8dTq2g_Yc-TBv7U5_nQ0l8qcqsiGMSBEZ0jUL70mWhIVjye6ScItimW78CIQo3aRULchBEdXiRCZlhlEcgBbhBramaKvuj3_VTavgBLMCDtgjlePJx17j8ys-_qRD3kx3d58QCNCbA6LRAMiSmoOFACLFpI4dCgMvGzwha48KICEpr8k1DcjVdhv2BJLDpQWim-6Eud0IWVgVnt5gd6B5U4E5eG_kWp5KXVoVq7RyD5upWoN1VDGZn1sw9SkezFTjMgkx5uQ_JZISW8goTpVFKi7tR7GPt-RlqE5anGCc7EyxA3i2iG3XNJ-j-n3gTO6TCu0JOwMfBOsUCRdBH5cWCWw5cbtDZvTBZVdI1Xpg_bxu_i2nHjq-AiCPwrVyO4UT6ArPBFOtsR1CTBRo2PauE11HHmTqdTmP6haN_OEP8jSEwHrYKT2ejXhxM0I2faLhNtoDdilKob7f-9Cbcr2pGL9ympecUwSh9EnT_jh02F229P5V9s06NQpkze-Nu4tG5KmqFvp8OWwau62GSFLokzbIJ3lZ8r4yUNhWJiXFJmCGDmMlMi4b8obrP6Z7vqrkUBwo9oGdcSnIzNZ8gClePBUlYo6lPcsD2RJmVwVoB-55yMKhExb_f5qC5x-9Vo_LpUOW_0cYr-mty-_GkleTS7WQ2MBSIFWw4zm0odKQAWMa-PMvmu1XhiAhZZv7kwd9kixsve2Gtbo6_UDC6PmvJ4ds9RBHZ1qzJaqfm6MulLRVtvfVZRQ0NaGOw7PSuO4SoJ8xcyNVCCyzPrmsMp2i33IK-AzroIgltl32ksbzMhKNStH-QTmuX_j8LoYIPp5jIyQMZxuMJkMVmyitjRwLSMqlolUdzl1v7nVt2KmqFhvTnOU210-atJefzaYbhSAQXpsyDhPyuUe3_9appR_mI-7zQR97ewvx9-EBMiE0beRB43jL0n9tl_LFr7tmXR5N2la3ebIfZSLwK7vr93Yt_PJhSligBnqOaGbvCkL4CVxIxiqiUObDzTkyKBUjUsKiFblZDHxLWVUmNr0phkfXfRzSu7cIHm5ej21zN3fUbygd3tXzfDdSlwHn_mx02kb9XG0ABvZKXRlTQ0ZMcWCGxwvpizpRZldBw7a2peYhC4rUEdRCsAnNwKvhdgxxPGI7uQZ6DJ1yk1RusPB1e7eWgLUc3aYlDXB9oTLTLMLpJyDL3hpfpctCBLj7EiCZsNYbvhaNnFklGRWCqK0VbfTQH4ZxDAxFtxQERa3sLwpL2nBktTmveXhVb15Hm4m6rm5PIZD0hLY--u5tk7uIP29B_ptmRFIRoMoANC92kIkasi4zMx2hGdk4c984dOJiFzfmxQ6U8Z76W8DW4GOy1A6K24TERZkR_-sYupCa87KeLLns7_Bq4NARGgUFj0CRSQ8dQj9CVxioVCFq-280EQbT5Zq4GrD-w6F64jreJJHAm5A-ig9bZzjMUT1gX7MbBD-RW27ZTeNlCmClVP034DY-aCmx_3oLMLMOViCK_zzt7M-WjFDps-Se8C_l748wX8szIM8aL0LSYX14y0oyzX2_qhNSuEC82fUtnwABtzKBb5eJKHsgegUQcij5dK4GsP7W-86ZdpDg0_uU2mlKy-vy6kX9bT2zatX5jDmjxTe6RYfmuhj226zrRfP3nwgds7F0hjSceEAi_qKEoQOr6gJRUcH4v0qmh6tZwDDTyf9iusOimx8ZxKVT9QoKVxyzYJLrt29t47NOU7OTODvbEPazrMeoCdsMxaUBhxRvb7LXB6EmgI2gESAnoGVtuTU32naCQxysB1_I0HaM77-qQfIepnbcU0Yn64_GxkFhsXXAqzhnkE-CkRUA4Rk2Jc8acmtdQPX0PBcoVRg3d_iJvJFwrFJaml6ZhSzjcX3TJ6MBd5eCfJjfFstCUE3B6tGdbp8w7ilR7nhwXcJGkmWbxYvG5GTXkafODsWqG2_4ZF4m8S6lVALsTZcjNNHSSp2Awpk5wGHf_ZldBZGzKT9hMEM3t-PpEzpMKerB4wA3eYxwKs1VdIUPl9FN1Rp_EnPFAuBHlixojh6eJ1lY5p4Xcha3bWVV4IY3L_R4VtL11sB3DB7Dh20vkLo0WcW20pJrYiFrK2lASr4u4K5HapHllVOvyUohYGApLH8vEQ1vXIUyUQrzMFdmqcoIbEH8KfG8GrGvtUdE2J-cQ2z6VJNoak9cEBWhE0XmfWXua0A9wLk-dxMDqG_A6fxNHo62-SsSb4k2OcKbBMxYMdkN15G-xmWJFkzy2pdkPIxDb78VeksokgpHniNhHcGTGWNs8iJqUcfoU3Eird41dQI3u7-oWa_bV0Sj4XQEdYCA_P5yYKeaCNSg2_1XyLAYG2kDIBU01rdCTFHxeJ581rJc0i6q4Qr5zfJO_8Ru9axJ4Av7g_jt9q6535kugIU0WXViA-LGkXWKWzGBsujrPF9Aebv8jB5t_W-ONKbQQvVSIWjfNzWaJFdfFXlj2Nkxgtg0D-brYxtxsJ2ftaCkQLihtvRDozpE3hZiHmVUwdnVMsrnlYQpTCNOwNvXspNUUNdsKjYCQkCt-bJxQcc7BxToBywHkM7oRIIY8cjiP9xHAZB-0wKyDFyMExGFJNhlL9enl86KjhFhHUvCef38Jp_corfik7y61KHg_0WVGFk4QX6bSgXLdkKkd_MrXi8sbEtJ4r1EMgtato0trB8jRyWmZZF6fTSGZheUWI__F-eJ3LQa8EQ4GAfBPSzULz8VWp4wMC3d4Yiwt2dHWijX_2VAoD8EDsn2AY0oyf9qZf_YEo6prYQpivv-QMj7Cg_xGKhMi6CjO_pS_pudORSBM5Ym9pU740SqqeBqULzdWKKoA0SyM5CeLx7uH43E9NOkosL-wB2tKCJxcDDX-Wnd8JdgmyTdbkchMPPhTSC0s0cOtjd8XM76Zif3aSoODLXjPmyCj_GeOaJyVyDp62tc3Ynrbd-VEnC0CEYuFr-jPRFnijYmp3NSIE9Uu_4bOn0WkYAi2U7ZHzkXw94jRLdSzG7iYCJi2clGAp-y2420-RRXakmV-hOvXq9w-dLjh0olQSZV8rNaQ_SJLZ87sDWfqOfyJc2ThTWroIWGH8pmt4fgPY5Q_iA3wggM2w78wh0NhhiwdC6HCZXRr7MJNom3ZdJ0YyiQWcG60gKW1D-1F65YBV1zWmif3GhfFlFtaS6C5jQX86Cm1kHLA-59yuhKhTF7CEUCp41ApriCf75B9zklakdN2x4P2JP0IKN6asFJpvWjj7--NeqGK6Wj3w_DdVKM5DlddNiOL7wtwU4lJO9WYuQ4tK4Mp9ntP6lBzYjJhhXOLQZrsA8YFk5soVt1glN5rLgjwQVxUsbR-nqALsH-ctf-Uh3bj8bwQ0wqfTpM6kMJ0j7Xluj4E5N3wrsU8vm0RfB3kJG0rWkqlzhcfYyHduSQ6H7Eb_nHC1U-CpB5frd68B1JHXhXahek1D4PdvlXa24aTKwPKbTC4vEaJ_CqUAatw_YUGwM1AsvFTVvdaxSRUo6_OTI6qSdTcxb9nx7Asv1AvQMB5-p8N0IQpq_kzYl4tliIcq0LD82J2QOerwKn9DbzwYH2t6Z7TqzObQ2NIsjBdpY_NgkbkOSIzEd3MDPN3G4DCr6PY1lYwI24XPcxz5zW1qpbLok_kEg2n2v0GICsNkcyNKVq5JT8OVveFU_N4B5sdx0wczQ7sfskbI7coCLcHQTL_D-mA2MeIAdMK8jgqhmCG1e6OZmjdt95Gv6SWWd5w71RSRNTN44j6JfUvGyTsJZjRa7usQ4ILYDIgLGWczlzGoGslv4c7vOB-vpmTVT0FFqe58x4ux_nJfPL_wXLeGVk7XtQegzpJbYLTUOq40Y1Jk-ROmAUPTdGHjd421wtChu_8ZhdCcDj_JBHYuun_FGgo1m4eJXIn-ZiwXB1ASXanl0RHu1EhwAPorKtzhBJjgBraSC5e1M9DnX8uOu9uODzWgwYJ7bEYpBAQi7zZoeLokhbsUGrvOHPngtLrocM9tBw1kQM8IHM-zM1UDNgstjsFB91IjjOpSkwL7lMMp7vGr0O8tUEafBwgwPLqV4jNbJraH4HQpP4zYi_uCw4MYBxR_tLKhJelhpfRglAIAXHpgbh1WxlXYU8umcS6ZFTLNZgccqrs_U_5OmcoHg_SbU36t5QRcj2MNAVOKHXdtiz0uJoRnxz0zevlB2DHNMyOHBQsZTI7R4f7y0ZO_Clc35gVu9u9vvq90cU5MIK83zmN_0NtG5kooUDxi0Rb0uUuMMsG3a1CMq_IUvSVNDhG_cyihtMUpGXCXRalW8UyQUNduOQhJUE6yVg3ixjfQVj-tvtDFU-0f2lj4bZLSH9anTJpKSe2BHn3gK3Ba6tvqGiJ98UPz7ifJFDFHK6BtyNW7qqYArCcTPFBds_zb30CUYhrJU="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 124,
+    "completion_tokens": 866,
+    "total_tokens": 990,
+    "cost": 0.008815,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.000155,
+      "upstream_inference_completions_cost": 0.00866
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 734,
+      "image_tokens": 0
+    }
+  }
+}

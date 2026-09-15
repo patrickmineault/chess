@@ -1,0 +1,43 @@
+{
+  "id": "gen-1768244751-Exy4ae6ggsPNmcIRECXX",
+  "provider": "Novita",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1768244751,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"p\": 0.98,\n  \"explanation\": \"I am highly confident in my ability to generate 5 distinct, valid mate-in-1 scenarios for White. I have deep knowledge of chess rules, FEN notation, and checkmating patterns. I can construct simple yet correct positions where White delivers checkmate in one move, ensuring each scenario is unique in structure and mating pattern. I will use standard FEN formatting and clearly label each scenario with its name and winning move.\"\n}",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 125,
+    "completion_tokens": 105,
+    "total_tokens": 230,
+    "cost": 0.000195,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 3.75e-05,
+      "upstream_inference_completions_cost": 0.0001575
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

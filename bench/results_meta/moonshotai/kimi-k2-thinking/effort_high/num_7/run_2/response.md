@@ -1,0 +1,1 @@
+{"p":0.75,"explanation":"I am fairly confident that I could generate 7 distinct, valid mate‑in‑1 puzzles, each with a correct FEN and a clear winning move. There is a modest risk of a small oversight (e.g., a mis‑recorded FEN field or a move that is not actually forced mate), so I estimate the overall success probability around 75%."}

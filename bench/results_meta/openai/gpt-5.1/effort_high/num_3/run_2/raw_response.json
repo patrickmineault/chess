@@ -1,0 +1,57 @@
+{
+  "id": "gen-1768244591-V8enf5hncst8Y4GB8cAd",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1",
+  "object": "chat.completion",
+  "created": 1768244591,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"p\": 0.8, \"explanation\": \"I can usually construct valid FEN positions and identify mate-in-1 combinations, but there is a meaningful chance of subtle errors, such as producing a position that is winning but not strictly mate-in-1, overlooking a defensive resource for Black, or making a small FEN/formatting mistake. So I would expect to succeed most of the time, but not with near-perfect reliability.\"}",
+        "refusal": null,
+        "reasoning": "**Evaluating probability output**\n\nI see that the user wants a probability output in JSON format without any extra text. Valid JSON requires a float for \"p\" and a string for \"explanation.\" I need to think about my ability to compose valid chess FEN and mate-in-1 positions. There\u2019s some risk of error, so I might estimate the probability around 0.7 to 0.9. I\u2019ll be honest in my reasoning and keep my explanation concise, ensuring it aligns with the user\u2019s request.**Assessing reliability in JSON**\n\nI can say the probability is high but not perfect. There might be issues like off-by-one errors or invalid FEN strings, so I'd estimate it at around 0.8 for reliability. I need to remember to provide the output strictly as a JSON string without extra commentary or code blocks. My explanation should cover my ability to reason about chess while noting that generating FEN and checking for defensive moves might lead to occasional mistakes. I\u2019ll ensure to use double quotes.",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Evaluating probability output**\n\nI see that the user wants a probability output in JSON format without any extra text. Valid JSON requires a float for \"p\" and a string for \"explanation.\" I need to think about my ability to compose valid chess FEN and mate-in-1 positions. There\u2019s some risk of error, so I might estimate the probability around 0.7 to 0.9. I\u2019ll be honest in my reasoning and keep my explanation concise, ensuring it aligns with the user\u2019s request.**Assessing reliability in JSON**\n\nI can say the probability is high but not perfect. There might be issues like off-by-one errors or invalid FEN strings, so I'd estimate it at around 0.8 for reliability. I need to remember to provide the output strictly as a JSON string without extra commentary or code blocks. My explanation should cover my ability to reason about chess while noting that generating FEN and checking for defensive moves might lead to occasional mistakes. I\u2019ll ensure to use double quotes."
+          },
+          {
+            "id": "rs_0d2838cedada4221016965457055208190a94b422e5d96648d",
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpZUV9d2EnnqacmjUiRRJDEUKoOS2E_IA6QTg3RgIvL4KN9dRqOIqVvt1DxtrcbVq5qHwn-ku6tWJR6bLJvaeoQZ9lzcTFRQT3nlLuoajVXqdlNLyWxHDWogK5Lrp9BnNDcJ8JPeipUXDbw9PiXCN7hc9PFYo10TIHYg6afOoNEFQJ81X9sMRvAlYCI_f7wmdi5yEMSIHC-DptIyTcczG5zNUPDNOwX5p2Uat495pliEoDCs2iqYpq4mRaPJJh6jwuzdAIHsdchAxKKtn8W00O8ZOBVI88VhY_nJSRIfXeqWey2navqBhoQW-JEJE_eErQaKAHzqrBiaCDYgmA8XRHtNIMcp5OF_15RH0HQyeeSk5irsg_7eXRPlzUowaeSyZ4pDgTHrCtJDwRqP7Cxf8D6w81XJ6GrKE5-01J4S06EDDCVcph_bsMSFWceKl90slhM-gckg6KQdDl8fQCBpiGCM0X6UJCMYIrocdp8ajGZHNPA5Kjmyiqjz7VUh99XFE4dAxUzBvxIiuZurB1XSLdL2YjArXKoQS1EycLj-1qgmCk67XpqhwEsU_tkIvKEEoWuKgLyzGRZSN3WOYUY72m0yw-FqMzjSVeMXM8Q3tzU1nIvTHv7oS9lMlWjys3e21OD80vYnNQJpk7gl-V4kxMzEECv1rCJKyCs4FURKNS_PrCk0ia-crpACea0s4QzEhhXJUla99MoQOV5C6SEX5HY3-P6bVblYVLMroeVz6Qp73qGz-8ZD628S9FQfe4AR4mheU8clylligbUHgVkMlJ73xHREXsN95Chrn5WX8wYIzBEOKd-K6vrKzd6r8eORxKTPoDUAuJxaZybCUbWHYLdScHrDld3zqZlpPCvoNOx_eONonOo1JCdoeNlIAY4UPNHd_iHJkkego8FupQo8RGl-00OQKPq1h0JhUAF5jURxoP2JJvZBUjcUGGp2IiIDURQ50PUMqxnmzFt0M3YCv-tbI15CeO05Yt2kbcYbd1MWMnE8fIcrwS_3e3Eld1d2kTLyIobeKzb9WPH2kLZbOJQv06DlPjDYyPEExdAAx5Mb1UFS6cMFsdSpxvG2-myoQMOMPuAtuDWboLK5VTg-DFhNXRQSuSCXt2OD-7bH6a4vP37B9nTQvc4Jjk-_3DA1dp3PK86_AhNN2lwRu1MiH-QHwDKZ6ZQd0bXkbi2JugDidU6uIP7YYSTxKEUYn1NaXqGEs2vYvCk5DjToCIE63qGknFQYgb5IXcgsy_z57TbpqvKVZF1DnO10o2dsmgvz7h-aSUaXUeT7u64D22HEmDOsJdTErrPGl3x0zknP6mANw1_tqM19eQkyakBMw7utI5Gf4zk6fkhzor9D07U73taEGlxz0wHRW_0kga81PlIkwCOtgF6kEtrd9VSF077SGZBqq3CdB2pZHHBYEPwkkjAChb3E_sYRsWzU4efOo3Xq6lnx6SZdRUfSzdln_lVU2ElvIAxt_Gx-xxCtVS8n8whfwKup-sH1cYVi5J4acXq0abf57sZ_Eos4cSAhgyMd2Tom4-9u3KsZMqliMYDz7UVI2CzYaXdGnmOUP5T6VEhrrLpKjxDpi6k_WOj6VlDlWo4quPEj6mEOMsik_w_cgULGTl3rbw0FP063BL9-eVj8STkBmBDLaC51GKbnZuCorPeIOTMIc8K03AOH4blaUOeUnI5U3t0yR-2vckTsnqL_2jJPxWN7_80APd9zxN41QwAX_sFQ3Fdeg7ffT0KIhkOTbit4cDto5ByV04I2RtgpM8M5alWNuBoprUwtRIylIcVo6iPiftgDZxNM8T0DytWq44CKUjzSETQTSwdOSitmpWKeNN5pavFodDnjcgOx7L5LP0YNxZTl-ApxBAgbIbQkA9-OXlMLv5982e1UMCDpUsI6aoZNpWIbX2mpfNi6tWwoPCc9USqWATosMy99mrBgauVb_IWCZcowfuT8eqtwD1ZgP9IFR-4MDGinOlUhIbJUIwzLSSLwLHpTmIQQomDIYbSY2rcvZAbF1se37z8-6KVfUeAHqicmXf85AjCqicdZQy07uidsbPvZRzQm3dEXHZQJQxj93xKkDITZVcywKAmRHpoJEovoDN7jJQoDOmqA7GMDEkd7kH12MzRNtL9BYk7x9yNE7_wz230O08ub7o2c_x1BilCXCJXw47XEWdEVhZhcWY4-uWDyqMx2TCBDNp2O1p84oX2KiDgn6-Xgh0-IKcTmlrWirLFuHccOm6ewqJaJmtJqmsWkU4GfzD_lStZZYxeihqjoIrV4hMPL8JijZTiQpx1bi4o2Gy51FRxAO748iELo4hGsaxXMWS6YsUgHAqzalHF8rIi0EE-qYPBSNgpnSrfmzM_VOJce2ncOGpQRD4MjTo_c6OQlyQU5of6Q9DXsk_lchrK7QTB5ajjvSD2j49rYTTlWQmgj4SnxHWsMTksWpylsDfhofgSVq-aYLKFliAaJounaaJVig8D3JleShuzW5LbvVb-RlF361AbX7XDDwGx6NpFK6irDlO5Xb0yuC8KuxUl9xLorCQLhEIVvU5i4EpMiLPhBlAFnWbBlfc7y9vRwj74eS6hPuw-cAVqMXGnvjhV2w_GPXeIKAik-Xw8tfolEIhGGFDLybK6GDZ5__Qk3cOIUG5v63qeVQCVpZjv26gUTRlOwTo9wgonof5i95EFaUdwk8YoNzOuQQ77LaKWc0SsWgzXoES3yJtGlNOSh6xYGUKx2tCTwqvbQpMctlLRQyN6b_3ZdfJzsxix1qap-dO_3Vrnz2VRT8itBtoMDrZId_wN2M7JB7fysTB1McFn2C7jCNBTwtvgymv1uuzAbhKukR4GGGLfvytzVN2lcYe69i4qaAUnyh8THZLHJs0Tsz0bGPcDjgm57l4f6tPWksSleoA3lbyJT1cJ6X9dsD37H0P1e_NMNmfrPjbjUXkSfvMyjYvtiuPE9LI15qXcNX_5B64uNmY301GCkZPM1Tf8Ova0k31u-Q8sq6_f_oA-A6ZYzBc95NUulha3JmNuSxQ_YV8SjP-E8p0myWALN6XrTPe1J6PpGiuIkgyssy8Pd-j-XF1Cn17d6SVvRMOrFzGkIevCKofqDpmb-LOJEcOWKI-0B3Uae0emfrWqskQDAGJU7Gog_BxRcWGqJJYJ2oWZ3cHNEWKcWCziTyPxTu8knn75WnJOXS8iEhlc2YGe7xJtiBBYk3z9rCRa6N5Ea8zaQ5_khB4knj9xOjHg6-PuKL6G9vjcA0HBjFV85RpdEy4v75lwhUNAsEBieFjfR2MeKJo7DNBVfFMlUtn8fI2GUi3SyVtBq9nihDaw0i4wZCkgpAAxLbrHbFsHKv3Lb9Vx03jEsAD60D_lMGDLOwUC-gsfsNVaKMtvmwARR4_usaCGF4tYCE16zkOtuYb2C6dgELKljT0RnVjvkbJrSutpSBYY98INfeCTCVHgKk8Av-YJ0iv5rTUHzHmrPtDmqwDhGyN0R-H14voKoRMtjAnMf4-AClOIXtvP_zL0sUvJ3L_L60QAPofTgzV5Km7rmVHefG_JcQXu1MoXOzeuPrXVAZjoldVwltTO_8CDSvkXjLv5mbuxm6BwQkbUk7VPjgg44pRUaJxqeNsApZgXaLtAYuYGLR11hCnGEtBkfJTGcrEnI9WdkzL-xIv59tU2IOl2dkHeNl3mgMZXLXbgnVafTxbdxnHnwkEXmvwsh1T5FmWzPf1-BZ7KIFKJLa2xIbGROAthWSXWwmoPhZRAbODFvxznlsUxRKmYgglTBbT1wx-o02kWvcz2-n1bsGhWDUO_KDoeKBb2Rtid7L0_VQYag3xzSeSXxQrP5o91aervDKofszHCHGwOftUJr0mIybciB8mWoUxpBO3QqXjXii9iStv8HkMO3cMGMoRSNgC5LBRKvob9F7JsiH6FPE9v_pvA1gPiDFn8eLKzJztvngjLmPDL1rms72AFFCilEFDuRT2Q-9FwVkSlEsfi8rVQLereqJRxwsaFzAwBGnax1XDjaGmzd3EnCUCei9wNSDlVh3WwaRmEIX9r8CBAt8oLnY3m7wi_ajMSJ8PtJpYY3pRzQGw6Syvvy_sRA8j0dOXFH9VnjHPqP_0StWUYN3XuTW4WSAW9ta8PD_K3HVQIllWQfn6b_FliteKE0RFgykh-cfJAX7_YNIt3Nfpu4Fxe9CB8kcZypjbXQ=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 124,
+    "completion_tokens": 665,
+    "total_tokens": 789,
+    "cost": 0.006805,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.000155,
+      "upstream_inference_completions_cost": 0.00665
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 567,
+      "image_tokens": 0
+    }
+  }
+}

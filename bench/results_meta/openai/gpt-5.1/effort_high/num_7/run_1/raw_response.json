@@ -1,0 +1,57 @@
+{
+  "id": "gen-1768244609-WnBR30sq062M4dUPbgHi",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1",
+  "object": "chat.completion",
+  "created": 1768244609,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"p\": 0.72, \"explanation\": \"I can usually reason correctly about simple chess tactics and understand FEN notation, so constructing several mate-in-1 positions with solutions is within my capabilities. However, doing it seven times in a row while ensuring that each FEN is fully legal, that it is in fact White to move and mate in one (with no hidden defensive resources), and that all scenarios are distinct introduces multiple opportunities for subtle mistakes. Typical failure modes include: overlooking an unexpected defensive move for Black, creating an illegal position (e.g., impossible pawn structure or too many pieces of one type), mis-specifying the side to move, or making small FEN syntax errors (such as incorrect castling rights, en passant fields, or piece placement). Because these errors can be hard for me to self-detect without an engine or external checker, I would estimate a solid but not near-perfect success probability\u2014on the order of roughly 70%\u2014for producing seven fully correct, distinct mate-in-1 scenarios in the exact requested format in a single attempt.\"}",
+        "refusal": null,
+        "reasoning": "**Considering FEN positions**\n\nI'm thinking they want a float value around 0.82 or possibly 0.9, along with a clear explanation. I need to generate 7 distinct FEN positions for mate in one, using common patterns. It's crucial that the FEN values I generate are legal, and achieving this can be tricky without an engine. Given my knowledge, I estimate the probability around 0.7. The final response needs to be in JSON format, so it would look like: `{\"p\": 0.7, \"explanation\": \"...\"}`.**Following JSON format**\n\nI need to keep my response clear and concise, focusing solely on the JSON string without any additional commentary or context. It sounds like the goal is to provide a straightforward output that adheres to the expected format. With that in mind, I\u2019ll just generate the plain text JSON as required. Let's move forward and ensure everything stays within these parameters!",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Considering FEN positions**\n\nI'm thinking they want a float value around 0.82 or possibly 0.9, along with a clear explanation. I need to generate 7 distinct FEN positions for mate in one, using common patterns. It's crucial that the FEN values I generate are legal, and achieving this can be tricky without an engine. Given my knowledge, I estimate the probability around 0.7. The final response needs to be in JSON format, so it would look like: `{\"p\": 0.7, \"explanation\": \"...\"}`.**Following JSON format**\n\nI need to keep my response clear and concise, focusing solely on the JSON string without any additional commentary or context. It sounds like the goal is to provide a straightforward output that adheres to the expected format. With that in mind, I\u2019ll just generate the plain text JSON as required. Let's move forward and ensure everything stays within these parameters!"
+          },
+          {
+            "id": "rs_0301562fa2f1db32016965458214108197815a5cebaac1e04d",
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpZUWPubyM7PQgzVhKdujBZ5eVnlOTojKh6XwUBvNm_PZs1C5xWtp9ZCLV48Yv4MM_o_MIb0pLgssB7DPkTPbCY2v_mykEGvluKPDcvAOEIyCpwb0FjIxDD4PKEUnYCxKbR0rXgHNYoza-EWt6Pmy3juIwPIZp4ywPFZjm7v464oggTPpO4Ns0nBhf-sPtjrRN7GO1vEgSKyuyAGgygijoDi3VJeGxanFAwgRSaLrMVNwxY7hvParrzUmnYcGu9iN2rkaLQ-sGsOaP1kb6rgLlfKSRIlXTu_64mZwAgekLi_XJ_NCqd4GX84tWjiabvEMQXVlaP7FBhkIpw-peF7PuYkNGjI32YhET2xP3EoWj_hV2KEsP2mcpoXiy_GelewGSMmpFp-aThkxGY1TylH2SAbKM1Pt6xf1G4k5VbXXuiioG5eJFJu3rApFKWBWEa7HP87JPa5yrjPKl4OmqNzwicMle2m-tNIbu8q219qXi_aQs9YhVtCuKaZ1Z1IRh2pkFVjTu_byPYcpqqHo0vKLu7tYNsT9Kh8Vn0lWWtB1SHVbE1N3lHXOZWDuc4es8CzGvD31DDhsBaFGtsYJu2wAhxzBKZXfP9gt6gH3nUmEy6fp_nLUVyi27Eg8QDVk3SG_dLnapffP_41U-RYNBm0aWrHAcLhjMahnBDn3vxq5HhP1N_pC7q14AXdLzFwxCpTuq26FFDCRqXm5NMjFH_t1aBnM-XNZTnBAxo6c5Wh83WClXGK9j2x3IZq9DZmiieKlUylLGTuALNn8N7qpCVPk6jceCu38jEt59-agmKmCX3JdRTipTCSt48T3tx7fjIbevYPMlgyHDk75M-E9_0Gx9I22ePN69TBZjOzyEfLLJ7JuD04YQoUGLzvT2vvhMOHfqIJHgSxvIIVsSDmb_lBmkDIhg-cwKghxjoHlKOT6IlhPbrHI71opGkAcqJwnLstw2OCX-eGsKTLxHBoo0WK_LBWUCvmQbg-ec65pPI3dLF8XMFk_jwL9YxkJNpo9V34gfZT-dAooE-lNZC-NYzm_Zpb6E6t44CEgaBmbwLGNaW1uYsX3Lh-O4O3aN6szhBc8uK9bsZufL3Od5Cuqu3HGwIOCBreGRJpZShDhloAz90aY0VK8VQhMsB4VSdj1WY4fHix5IQgzkEhRMXO72Irb7K1aIKgkxd779J0KRpOHYiMKHN3DJ8CR_yc9VHhE25WepZM8KQprEljNoQtWdXKz4cQHNY1EJ-Fny0ooVKHAULjoA80STy3S27ol_KMj5uKnlz8u7-9GduidfnZ51YPdBYbclfz3r1KnxTZgRIg64RTZtua6eebJrVmGtfYkuSc12LqPnOri5Z2bphmK30X56mID8Bh0QPze0dZSv5E1zVUYwt3Ds_iAhO60TJTyefPkHpa6-OcqmTUGDX1u_b-OUEsAlBwUAkBk4PTnkcJ9Ir-w3_jZWjGuJ_ug2kg7csJqUwrmQH-GY3W2y3rCqevChnGY2wD73752RgTwmFFDVnL2kk4XzxEGXTw6_iCdkdQl02FoPKqIzqVjBIEEs_7UV2hEIkDeF5nc4_xIw4qdVZeyliPPukq1qTlQavXHK1-orfnfQA-bUkltsL3erguzObLmDimkyFMunRn17S1H9nusdEx_v6nlYAeQGTQXiso75gH6FHBR0laTfK187UF-ZN2I5AZE5Z_VgEuyXOQYg799TL21pxrFIRUpZ9ZvTNqdtDaDhzVWliJDPYG3cGmQOg3kocGbPvU3nbnxCaO3ivMFig-JixKnb50iCFzQNy3bkP2rK25V5dHZb2G8wPskcRuzKEPlHQ6s9X6shl4D0k6q0ZsuldE9JAf72LDpqQRC-TaO6stsjPd0cLaGpTrE6EkgAHevQnGnrpGwWGDxq4UMfBanW0itLo_-qNwFb_e4enFgIac71RRMih7lQI72ZBsMS9wMwclZycp9YiTZ10ROCUulA-d3F0cAjkiSPFrEq6wAnRkpCpuTvPCLf4VNgYpWFbq_hBkdyfALYxpvnW6AaPSgOYFPlHo8vXaX3PlrUFlb5PWCsIMiIKdU83e5g0W4J13mtAmCz1J4FS9C4doFzsntGK2RulYYicKY98_hvhTYeVIYUXs8ekZAJGZ1a_EBZjFC6yCV1HqT6wxVuF9wXrRidtDSmJ2kMrezX43_BWunClKEMJ-T1ZmSBuqG5AFQG54J-wmZ82cddhI8lfLmdmFy4WX_HwIHGd5hWTn7l-VhxyzZs8InyfJDvlvZ5j-m9pHdMeqQNhS6uavpAH_drciaKK_5XRnl07VvvlE2e1zDiv61H7JDZ3o4_d67scNdmbp4Gx2UkAWDl29rIcdI6Y__tdB0P5dd1pMySRaN0WkBfInkzlGzEaSs2e3XTUugZwzqMOW7wJaWEsE_kysNyg-t_SWV0zdaCVZMH37xBTFaGphZivH10xFv29eCV0Ve8mIgjDd2K4h6ILL5_RVaR95Hker3a9XsviAKUnVaCSBWSCBjSUMUXqfeq4jEIXCUu2RbbUS-hjRWapPuKe-FjXiUlIWBQmK951h9GtP8vve3iAJl-dukAspAWVE_Hqy71fxdHTTI9quROs69AG_JEcmEwNv3-vy53hmBo5P-vjxU5GeR_1cf_Dx9D36SbYAkVvxcXiQvzHgc9I8mFX5VXZGgu8Y7w-h5G9Pdpd_Kl7JhuQpC2QUCJDQ2jG6d-46z5bNg0Dcva6jmsirNK8PDYMPksN8Prbp7j36768oe5gGNykrO8-C0PSqvugYIPjvc5kcMg0axQpoVtRqY_PcWxTFd5W5cQjGnqpt6Vm25SQYTGQNFSrYuhSeiw4N0WP7ig8z2dYlEQzXSBtdGD1dIQsedR2q5VaDC8Z59tn6UbIE7DcXv_H82lClMw9rMgPc4MLX7y-Us_omwpimzjLK84TRUCQ_VT5X99TL6pyYPB3gEQzjKd6QttjkFZLYJaoGPKkJcCrHw9xSu2lx3KaoVC8xYA8JhHFil5oc_B25z8daPPJKYI2E2LMoH4ITr8turGs274nk2LiMkBh9LRXRfgu34h2DW4dxWhUw32EK7YiDCBoaQB9ujsYQAqSuHVu-oZzSum8jCHMcJJyAd2rIfP16sKtfmEDgw4uk9eUIeL423wMxta9_I5wNqpukuDixxLupZYf41IG-lcOrD4gEXZ7Auid97oECdmKaau2etR3xy9Jq4GVZVSts27Iy_0xlAC7FpTM7IUmFRFzyMG5KYpF5VNYE7isoqSNEn6LwRg8EJ4XGuVFEk3mHzBchUMLYRBq6rLob2uHjBw4YPWm2_rM-a68O90-mIO0doDefhBUgZ7edQLS-9gwa3wyxIv6rq6rMRP-K4mTTJWtQZJ9f77VnMWUsczB03iR3Nid84C8Jk_-m2jktSD_mPOzzmCQWbz_IrL13JjYX-Aye46M2BMQ7OL0B92eObtWNateUGp7QO1kUWXkybpj12FN6HHx5f93A=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 124,
+    "completion_tokens": 673,
+    "total_tokens": 797,
+    "cost": 0.006885,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.000155,
+      "upstream_inference_completions_cost": 0.00673
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 447,
+      "image_tokens": 0
+    }
+  }
+}

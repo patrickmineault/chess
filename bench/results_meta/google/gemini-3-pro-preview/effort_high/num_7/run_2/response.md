@@ -1,0 +1,6 @@
+```json
+{
+"p": 0.98,
+"explanation": "I have extensive training data involving chess games, tactical puzzles, and FEN notation. Generating 7 distinct, valid board states where White has a forced mate in one move is a straightforward task of retrieving or constructing standard checkmate patterns (e.g., Back Rank, Scholar's Mate, Smothered Mate, Queen/King endgames). I can verify the logic of piece placement to ensure move legality and precise notation with high reliability."
+}
+```

@@ -1,0 +1,5 @@
+{
+  "p": 0.86,
+  "explanation": "I can usually follow formatting instructions precisely and I understand both FEN notation and basic mate-in-1 patterns well enough to construct 10 distinct positions with correct winning moves for White. However, there is a non-trivial chance of subtle errors: an illegal FEN (e.g., impossible castling rights), overlooking a defensive resource so the move is not actually mate, accidentally repeating a pattern, or making a small formatting mistake (like misordering the FEN fields). Those risks keep the probability of a completely correct, first-try answer below 1.",
+  "parse_success": true
+}

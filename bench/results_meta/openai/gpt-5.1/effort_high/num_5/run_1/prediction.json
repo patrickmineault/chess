@@ -1,0 +1,5 @@
+{
+  "p": 0.8,
+  "explanation": "I can usually construct valid chess positions in FEN and identify mate-in-1 ideas based on learned patterns and rules, and I can reliably follow the requested formatting (code fences, line structure, etc.). However, I do not have an internal chess engine, so there is a non\u2011trivial chance that one or more constructed positions would be illegal, would not actually be mate in one, or would have multiple valid defenses or alternative mates. With five distinct scenarios, the probability that at least one contains such an error is significant, so I would not expect perfect reliability even though most of the output would likely be correct.",
+  "parse_success": true
+}

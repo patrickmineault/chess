@@ -1,0 +1,5 @@
+{
+  "p": 0.98,
+  "explanation": "I am highly confident in generating valid mate-in-1 scenarios for white. I can construct three distinct, legally valid chess positions with FEN notation and correct winning moves. These will be simple, clear, and adhere to chess rules \u2014 for example, using common checkmate patterns like back-rank mate, smothered mate, or queen/bishop mates. My training data includes extensive chess knowledge, so I can reliably produce accurate and diverse examples.",
+  "parse_success": true
+}

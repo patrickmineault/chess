@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkmate in One</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        #app {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            color: #e0e0e0;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .scenarios {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            padding: 8px 16px;
+            border: 2px solid #444;
+            background: #2a2a3e;
+            color: #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .scenario-btn:hover {
+            border-color: #666;
+            background: #333350;
+        }
+
+        .scenario-btn.active {
+            border-color: #4a9eff;
+            background: #1a3a5e;
+            color: #fff;
+        }
+
+        #description {
+            color: #aaa;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            min-height: 1.4em;
+        }
+
+        .board-wrapper {
+            display: inline-block;
+        }
+
+        .rank-label {
+            width: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .file-labels {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .file-label {
+            width: 60px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            padding-top: 4px;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            border: 2px solid #555;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .square.light { background: #f0d9b5; }
+        .square.dark { background: #b58863; }
+        .square.highlight-from { background: #aad751 !important; }
+        .square.highlight-to { background: #aad751 !important; }
+        .square.highlight-error { background: #e74c3c !important; }
+        .square.hover-target { box-shadow: inset 0 0 0 3px rgba(74, 158, 255, 0.7); }
+
+        .piece {
+            font-size: 46px;
+            line-height: 1;
+            cursor: default;
+        }
+
+        .piece.white-piece {
+            color: #fff;
+            -webkit-text-stroke: 1.2px #333;
+            paint-order: stroke fill;
+        }
+
+        .piece.black-piece {
+            color: #222;
+            -webkit-text-stroke: 0.5px #000;
+            paint-order: stroke fill;
+        }
+
+        .piece.draggable {
+            cursor: grab;
+            touch-action: none;
+        }
+
+        .piece.dragging {
+            opacity: 0.3;
+        }
+
+        .drag-ghost {
+            position: fixed;
+            font-size: 54px;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 1000;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+        }
+
+        .drag-ghost.white-piece {
+            color: #fff;
+            -webkit-text-stroke: 1.2px #333;
+            paint-order: stroke fill;
+        }
+
+        .drag-ghost.black-piece {
+            color: #222;
+        }
+
+        #feedback {
+            margin-top: 16px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-message {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .feedback-success {
+            background: #1a5e2a;
+            color: #4ade80;
+            border: 1px solid #2a8e4a;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-error {
+            background: #5e1a1a;
+            color: #f87171;
+            border: 1px solid #8e2a2a;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .controls { margin-top: 16px; }
+
+        #reset-btn {
+            padding: 10px 24px;
+            background: #2a2a3e;
+            color: #ccc;
+            border: 2px solid #444;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        #reset-btn:hover {
+            border-color: #666;
+            background: #333350;
+            color: #fff;
+        }
+
+        @media (max-width: 540px) {
+            #board {
+                grid-template-columns: repeat(8, 44px);
+                grid-template-rows: repeat(8, 44px);
+            }
+            .square { width: 44px; height: 44px; }
+            .piece { font-size: 34px; }
+            .drag-ghost { font-size: 40px; }
+            .file-label { width: 44px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Checkmate in One</h1>
+        <p class="subtitle">White to move &mdash; drag a piece to deliver checkmate!</p>
+        <div class="scenarios" id="scenarios"></div>
+        <p id="description"></p>
+        <div class="board-wrapper">
+            <div id="board-area"></div>
+            <div class="file-labels" id="file-labels"></div>
+        </div>
+        <div id="feedback"></div>
+        <div class="controls">
+            <button id="reset-btn">Reset Position</button>
+        </div>
+    </div>
+
+    <script>
+        // ── Piece symbols ──────────────────────────────────────────────
+        // Use filled symbols for all pieces; CSS color distinguishes sides
+        const SYM = {
+            K: '\u265A', Q: '\u265B', R: '\u265C',
+            B: '\u265D', N: '\u265E', P: '\u265F',
+        };
+        function sym(p) { return SYM[p.type]; }
+
+        // ── Scenarios ──────────────────────────────────────────────────
+        //
+        // 1) Back Rank Mate
+        //    White: Kg1, Rd1, Pf2, Pg2, Ph2
+        //    Black: Kf8, Pe7, Pf7, Pg7
+        //    Solution: Rd8#  (rook mates on 8th rank, king boxed by own pawns)
+        //
+        // 2) Support Mate
+        //    White: Kc8, Qc7
+        //    Black: Ke8, Rf8, Pd7, Pe7
+        //    Checks: Kc8 not attacked (Pe7→d6/f6, Pd7→c6/e6, Rf8→f-file/8th rank blocked by Ke8)
+        //            Ke8 not attacked (Kc8 2 files away, Qc7 not on any line to e8)
+        //    Solution: Qxd7# (c7→d7 captures pawn, checks e8 via diagonal;
+        //             d8=Qd7+Kc8, e7=Qd7 7th rank, f7=Qd7 7th rank, f8=rook, d7=Q protected by Kc8)
+        //
+        // 3) Scholar's Mate Pattern
+        //    White: Kg1, Qh5, Bc4
+        //    Black: Ke8, Rd8, Pd7, Pf7
+        //    Solution: Qxf7#  (queen takes f7 supported by bishop)
+
+        const scenarios = [
+            {
+                name: 'Back Rank Mate',
+                description: 'Use the rook to deliver checkmate on the back rank.',
+                pieces: {
+                    g1: { type: 'K', color: 'white' },
+                    d1: { type: 'R', color: 'white' },
+                    f2: { type: 'P', color: 'white' },
+                    g2: { type: 'P', color: 'white' },
+                    h2: { type: 'P', color: 'white' },
+                    f8: { type: 'K', color: 'black' },
+                    e7: { type: 'P', color: 'black' },
+                    f7: { type: 'P', color: 'black' },
+                    g7: { type: 'P', color: 'black' },
+                },
+                solution: { from: 'd1', to: 'd8' },
+                notation: 'Rd8#',
+            },
+            {
+                name: 'Support Mate',
+                description: 'Capture the pawn with the queen to deliver checkmate.',
+                pieces: {
+                    c8: { type: 'K', color: 'white' },
+                    c7: { type: 'Q', color: 'white' },
+                    e8: { type: 'K', color: 'black' },
+                    f8: { type: 'R', color: 'black' },
+                    d7: { type: 'P', color: 'black' },
+                },
+                solution: { from: 'c7', to: 'd7' },
+                notation: 'Qxd7#',
+            },
+            {
+                name: "Scholar's Mate",
+                description: 'Capture on f7 with the queen to deliver checkmate.',
+                pieces: {
+                    g1: { type: 'K', color: 'white' },
+                    h5: { type: 'Q', color: 'white' },
+                    c4: { type: 'B', color: 'white' },
+                    e8: { type: 'K', color: 'black' },
+                    d8: { type: 'R', color: 'black' },
+                    d7: { type: 'P', color: 'black' },
+                    f7: { type: 'P', color: 'black' },
+                },
+                solution: { from: 'h5', to: 'f7' },
+                notation: 'Qxf7#',
+            },
+        ];
+
+        // ── State ──────────────────────────────────────────────────────
+        let current = 0;
+        let board = {};
+        let solved = false;
+        let drag = null;
+
+        // ── Coord helpers ──────────────────────────────────────────────
+        function toSq(f, r) { return String.fromCharCode(97 + f) + (r + 1); }
+
+        // ── Init ───────────────────────────────────────────────────────
+        function init() {
+            buildScenarioButtons();
+            buildFileLabels();
+            document.getElementById('reset-btn').addEventListener('click', resetPosition);
+            document.addEventListener('pointermove', onPointerMove);
+            document.addEventListener('pointerup', onPointerUp);
+            loadScenario(0);
+        }
+
+        function buildScenarioButtons() {
+            const el = document.getElementById('scenarios');
+            scenarios.forEach((s, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'scenario-btn';
+                btn.textContent = s.name;
+                btn.addEventListener('click', () => loadScenario(i));
+                el.appendChild(btn);
+            });
+        }
+
+        function buildFileLabels() {
+            const el = document.getElementById('file-labels');
+            for (let f = 0; f < 8; f++) {
+                const d = document.createElement('div');
+                d.className = 'file-label';
+                d.textContent = String.fromCharCode(97 + f);
+                el.appendChild(d);
+            }
+        }
+
+        // ── Scenario loading ───────────────────────────────────────────
+        function loadScenario(index) {
+            current = index;
+            solved = false;
+            board = {};
+            const s = scenarios[index];
+            for (const [sq, piece] of Object.entries(s.pieces)) {
+                board[sq] = { ...piece };
+            }
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            document.getElementById('description').textContent = s.description;
+            document.getElementById('feedback').innerHTML = '';
+            renderBoard();
+        }
+
+        function resetPosition() { loadScenario(current); }
+
+        // ── Board rendering ────────────────────────────────────────────
+        function renderBoard() {
+            const area = document.getElementById('board-area');
+            area.innerHTML = '';
+
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'flex';
+
+            const labelsCol = document.createElement('div');
+            labelsCol.style.display = 'flex';
+            labelsCol.style.flexDirection = 'column';
+
+            for (let rank = 7; rank >= 0; rank--) {
+                const lbl = document.createElement('div');
+                lbl.className = 'rank-label';
+                lbl.style.height = '60px';
+                lbl.style.display = 'flex';
+                lbl.style.alignItems = 'center';
+                lbl.style.justifyContent = 'center';
+                lbl.textContent = rank + 1;
+                labelsCol.appendChild(lbl);
+            }
+
+            const boardEl = document.createElement('div');
+            boardEl.id = 'board';
+
+            for (let rank = 7; rank >= 0; rank--) {
+                for (let file = 0; file < 8; file++) {
+                    const sq = toSq(file, rank);
+                    const isLight = (file + rank) % 2 === 1;
+
+                    const cell = document.createElement('div');
+                    cell.className = 'square ' + (isLight ? 'light' : 'dark');
+                    cell.dataset.square = sq;
+
+                    const piece = board[sq];
+                    if (piece) {
+                        const pe = document.createElement('div');
+                        pe.className = 'piece ' + (piece.color === 'white' ? 'white-piece' : 'black-piece');
+                        pe.textContent = sym(piece);
+                        pe.dataset.square = sq;
+                        if (piece.color === 'white' && !solved) {
+                            pe.classList.add('draggable');
+                            pe.addEventListener('pointerdown', onPointerDown);
+                        }
+                        cell.appendChild(pe);
+                    }
+                    boardEl.appendChild(cell);
+                }
+            }
+
+            wrapper.appendChild(labelsCol);
+            wrapper.appendChild(boardEl);
+            area.appendChild(wrapper);
+        }
+
+        // ── Drag & Drop ───────────────────────────────────────────────
+        function onPointerDown(e) {
+            if (solved || drag) return;
+
+            const pieceEl = e.target.closest('.piece');
+            if (!pieceEl) return;
+
+            const sq = pieceEl.dataset.square;
+            const piece = board[sq];
+            if (!piece || piece.color !== 'white') return;
+
+            e.preventDefault();
+
+            const ghost = document.createElement('div');
+            ghost.className = 'drag-ghost white-piece';
+            ghost.textContent = sym(piece);
+            ghost.style.left = e.clientX + 'px';
+            ghost.style.top = e.clientY + 'px';
+            document.body.appendChild(ghost);
+
+            pieceEl.classList.add('dragging');
+            pieceEl.parentElement.classList.add('highlight-from');
+
+            drag = { piece, fromSquare: sq, pieceEl, ghost };
+        }
+
+        function onPointerMove(e) {
+            if (!drag) return;
+            e.preventDefault();
+
+            drag.ghost.style.left = e.clientX + 'px';
+            drag.ghost.style.top = e.clientY + 'px';
+
+            // Hover highlight
+            document.querySelectorAll('.square.hover-target').forEach(el =>
+                el.classList.remove('hover-target')
+            );
+            const sq = squareFromPoint(e.clientX, e.clientY);
+            if (sq && sq !== drag.fromSquare) {
+                const cell = document.querySelector(`.square[data-square="${sq}"]`);
+                if (cell) cell.classList.add('hover-target');
+            }
+        }
+
+        function onPointerUp(e) {
+            if (!drag) return;
+
+            // Clean up
+            document.querySelectorAll('.square.hover-target').forEach(el =>
+                el.classList.remove('hover-target')
+            );
+            drag.ghost.remove();
+            drag.pieceEl.classList.remove('dragging');
+            drag.pieceEl.parentElement.classList.remove('highlight-from');
+
+            const targetSq = squareFromPoint(e.clientX, e.clientY);
+            const from = drag.fromSquare;
+            const sol = scenarios[current].solution;
+
+            drag = null;
+
+            if (targetSq && from === sol.from && targetSq === sol.to) {
+                applyCorrectMove(from, targetSq);
+            } else if (targetSq && targetSq !== from) {
+                flashError(targetSq);
+            }
+        }
+
+        function squareFromPoint(cx, cy) {
+            const boardEl = document.getElementById('board');
+            if (!boardEl) return null;
+            const r = boardEl.getBoundingClientRect();
+            const x = cx - r.left;
+            const y = cy - r.top;
+            if (x < 0 || x >= r.width || y < 0 || y >= r.height) return null;
+            const sqW = r.width / 8;
+            const sqH = r.height / 8;
+            const file = Math.floor(x / sqW);
+            const rank = 7 - Math.floor(y / sqH);
+            if (file < 0 || file > 7 || rank < 0 || rank > 7) return null;
+            return toSq(file, rank);
+        }
+
+        // ── Move handling ─────────────────────────────────────────────
+        function applyCorrectMove(from, to) {
+            solved = true;
+            board[to] = board[from];
+            delete board[from];
+            renderBoard();
+
+            // Highlight the move
+            const fromEl = document.querySelector(`.square[data-square="${from}"]`);
+            const toEl = document.querySelector(`.square[data-square="${to}"]`);
+            if (fromEl) fromEl.classList.add('highlight-from');
+            if (toEl) toEl.classList.add('highlight-to');
+
+            const notation = scenarios[current].notation;
+            showFeedback('Checkmate! ' + notation, 'success');
+        }
+
+        function flashError(sq) {
+            const el = document.querySelector(`.square[data-square="${sq}"]`);
+            if (el) {
+                el.classList.add('highlight-error');
+                setTimeout(() => el.classList.remove('highlight-error'), 500);
+            }
+            showFeedback('Not quite \u2014 try again!', 'error');
+            setTimeout(() => {
+                const fb = document.getElementById('feedback');
+                if (fb.querySelector('.feedback-error')) fb.innerHTML = '';
+            }, 2000);
+        }
+
+        function showFeedback(msg, type) {
+            document.getElementById('feedback').innerHTML =
+                '<div class="feedback-message feedback-' + type + '">' + msg + '</div>';
+        }
+
+        // ── Go ─────────────────────────────────────────────────────────
+        init();
+    </script>
+</body>
+</html>

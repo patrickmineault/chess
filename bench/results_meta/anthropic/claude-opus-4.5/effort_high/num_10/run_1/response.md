@@ -1,0 +1,6 @@
+```json
+{
+  "p": 0.45,
+  "explanation": "I have solid knowledge of chess, FEN notation, and common mating patterns (back rank mates, smothered mates, queen+bishop batteries, etc.). I can reliably construct and describe these scenarios conceptually. However, FEN notation is error-prone—each of the 6 fields must be precisely correct, with exact piece placement across 8 ranks. Even small transcription errors (wrong square, forgetting a piece, incorrect castling rights) would invalidate a position. Additionally, I might misjudge whether a position is truly mate-in-1 (overlooking an escape square or blocking piece). With 10 distinct scenarios required, the compound probability of getting ALL of them perfectly valid is moderate. I'd likely get 7-9 correct, but achieving 10/10 with valid FEN and truly sound mate-in-1 positions has meaningful failure risk."
+}
+```

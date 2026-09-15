@@ -1,0 +1,42 @@
+{
+  "id": "gen-1768244755-CIqhWkTBnJ2AmRrabaVD",
+  "provider": "DeepInfra",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1768244755,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"p\": 0.98,\n  \"explanation\": \"I am highly confident in generating 7 distinct, valid mate-in-1 scenarios for White. I have extensive knowledge of chess rules, FEN notation, and tactical patterns. I can construct positions where White delivers checkmate in one move using different pieces and configurations (e.g., queen, rook, bishop, knight, pawn, discovered check, or back-rank mate). Each scenario will be unique and legally sound. Minor uncertainty (2%) accounts for potential edge cases or rare FEN formatting issues, but these are easily correctable.\"\n}",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 125,
+    "completion_tokens": 128,
+    "total_tokens": 253,
+    "cost": 0.0001786,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 2.5e-05,
+      "upstream_inference_completions_cost": 0.0001536
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

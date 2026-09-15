@@ -1,0 +1,31 @@
+{
+  "model": "openai/gpt-5.1",
+  "effort": "high",
+  "num_scenarios_requested": 5,
+  "predicted_p": 0.9,
+  "parse_success": true,
+  "run": 2,
+  "timestamp": "2026-01-12T14:03:31.402885",
+  "usage": {
+    "prompt_tokens": 124,
+    "completion_tokens": 585,
+    "total_tokens": 709,
+    "cost": 0.006005,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.000155,
+      "upstream_inference_completions_cost": 0.00585
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 456,
+      "image_tokens": 0
+    }
+  },
+  "has_reasoning": true
+}

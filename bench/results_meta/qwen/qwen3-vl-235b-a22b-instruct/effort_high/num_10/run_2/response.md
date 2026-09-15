@@ -1,0 +1,4 @@
+{
+  "p": 0.98,
+  "explanation": "I can generate 10 distinct, valid mate-in-1 scenarios for White with accurate FEN notation and correct winning moves. I have extensive knowledge of chess positions and checkmate patterns, and I can construct positions that are legal and non-redundant. The only minor risk is a rare oversight in FEN formatting or move legality, but my training data and internal validation make such errors extremely unlikely."
+}

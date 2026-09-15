@@ -1,0 +1,57 @@
+{
+  "id": "gen-1768244599-6lE7zuOOyvO8KZ1F1pX0",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1",
+  "object": "chat.completion",
+  "created": 1768244599,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"p\": 0.8, \"explanation\": \"I can usually construct valid chess positions in FEN and identify mate-in-1 ideas based on learned patterns and rules, and I can reliably follow the requested formatting (code fences, line structure, etc.). However, I do not have an internal chess engine, so there is a non\u2011trivial chance that one or more constructed positions would be illegal, would not actually be mate in one, or would have multiple valid defenses or alternative mates. With five distinct scenarios, the probability that at least one contains such an error is significant, so I would not expect perfect reliability even though most of the output would likely be correct.\"}",
+        "refusal": null,
+        "reasoning": "**Assessing chess position generation**\n\nI'm reflecting on my general ability regarding chess. I know the rules well and can create positions, but I might make mistakes with legality or detecting mates. Generating five consistent FEN positions is tricky, yet achievable. The user wants a valid JSON string without any extra text. I need to explain that I don't run an engine but rely on my training, acknowledging the chance of errors. I'll format the final output neatly as JSON.",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Assessing chess position generation**\n\nI'm reflecting on my general ability regarding chess. I know the rules well and can create positions, but I might make mistakes with legality or detecting mates. Generating five consistent FEN positions is tricky, yet achievable. The user wants a valid JSON string without any extra text. I need to explain that I don't run an engine but rely on my training, acknowledging the chance of errors. I'll format the final output neatly as JSON."
+          },
+          {
+            "id": "rs_0da2b1262c7192d8016965457882e48197a23576cbe58464c0",
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpZUWBP6R532w3QUCVzJOeY0zd_pCrjWLg1v-I7F_vUgjGOmE3ae0oM0egxoQ0EAJPeeYaNQV3a0J1Lkfd5DHSwxOwEafsP0tgDrVZfuzhX-Gn4jhT9QSD6vzyRt3AYpqUgCyDla_Sm0_NNa-0b8AzCou4TrP8-2V9P6epCwwzLjFzs3sbh-NStC8NcVm--PxjZAwvmVC2gZMNCsz_GMs9ierSGj5LophelWO3sbKEqj8kg8wsXLsWKuWgYWL1d3PtNrj3VCBY63weDZu9ITHdxEX0wwuiqQpcngupqMxDkZpt0bq9qSGtFUeSDaS3j6RkG-H3sWKAD3f9MzwPJ8TMksloHV2mKsobKShOLOzJCMELs9CQhnrlvf9kK73Kcn_wasigtL8ulWIG_XHlU1KtGk7hF-eOS1LL_6WN5q66AcQafo5NB1FJ8DGmRmZG7dlwaNNCRP6v7UvDbf8r6RqApemILu9GoOrODPu13m64I8nfij9r84Rq4iGmVdtldtD78DxZovu775fzRoK-utSLUwZ2WPhnMOaRoR0FL-R33HWa276SGzzqzY-u6IpSX1vwF0Sq1KtZMtDHfcqY8uIuAMTYLBnIwWX0Lty0O32PJbk7BYwKdBGRma_UK-62n0BBVpijWE_DDFCWtI1feFSJAGGnsSvHDDBv77JWBIUyX-0mwzpJAfAN3ApVtLK2nmumyyZmNUY24ouPirYteTEF9nM9-50SaXi0QFeJJnEQ1fjk6HY5jwaUnshl7C_i2lMGMglC9CoMzBF6_Sb1w6l4yGsb2A4nUjBucCdDtcc0WRZAwOw21ggWs7mGNSPhqxR2qW6oyCLBGvMgvIa3x06A4crOxiRkVGW3OQKwriRWGu2fQwiz6HMtAtcXZzwg3f0ZoaEDYYtvF92uHs_LMW9j9LVN6m21YGBIio5PNWkFUUtdICTGktH22vQ-SMCawNr59b5x6G2omdFiI0_MMemioN3yCvmv2ml_TUAh-B7ewhVzmf2b2MvlnWuq2j7hSQkoLiriFlVzVULpCSgAsIM_sbw3MBh6JkUzKGydcjs3PFyHS0o4NzpNA1Xv0bAxjsEXTgGwLx2GwJ4doXe7WtgeV-iri_Rm0-BW2_SqFNy75xvW8bS7BMO_i8bRNmINFunc8B_HRp8vomcWDivmaOviMpnaSBRnHY-Fdl0b_BhKVWDeyg9HLUlBJZspIW0_zhJucpY4VOOrHJGeOXrahMdVGspjmivpRoX_Jgy0Q4jeQ4niMka6kK6ZD0Z_vKAxAvUr9VD-D6Mk8b_PWw9NeHzckgc3SzfOfrvuNfH-JL1vzRrhrlW9CRL33EyXzYFkBaGV02_wI6zN-Vy6X0fg27Tzh2_MBZgaB0kXVzEWISnB6JU2wrvUG2pA1LhBvM4iA3nazM7v-d5tVgdulb6xCvUhtr_fFBsDC9NOqtwZ71Lf_S0DCLV_g7t-qFOjoiPsSe6jQkavbz2Sslyw6rRuULFgORc3bP-DGaM9xImCp2ZKpgSbwS5ioSLbDBmZuIsfyINKL4dZ8ClZ-iKXOUI4SMaW2FdlC5r8MxA6YNl7YbgSkX1MSbIZSfPI59lsClhKzG8n2v9UGJoub0_QGiURxMZ6klz73x9V1ihnXfzPh6-hDJVLdn2_R89BDKAZfjOfTr0FFZs092S3iZ9hEu9ys4XFx8vp3OJXDHFypXYeprmlXlwaXqlDJ51aBVrsjchiF7USGIsedalVFZm8Re-XSAt0TOQdetCngDBnqtkhfF-z2eBZElcrDjkA_LauywGYm48zWvLNFznwsbPUkLsxInuKkCjwuahqATzFx7dGxo7HY7_1yH_i9WaNOBsGdoUmtpymB3xhwy7GDERAGFFlhZKIh_4roIEJxq7UXoEOGpQGIvc_-KnmXX4sSq2CGx5PMHwhvHgCghJDOScls8oYIbHpVO-Jkc95DA7nOmMlD8gid7f5XCsDgWSbqlIPkl2aUglC3JSMV27ho3ahaGIJtoYrIqcHyDwu2KfqmsQrOOM6qErkYOJtoQgJSHzmG6MdZpXbbQb3V1-a7h-mZxJzKjCAMz5UO4bV_fLHWfnvqqLqW1maBsM1IaaeyEptBXMuCM0A1wyR0jC020ovNaWECu4x-YuUQQOUX3MIqXLh3jj7QkGgvYVy_PCCsByZstGo6I_YtdQYNI7w6Svv5rrqGzjs026OvSHMCE6OcEN11GLwSKTF4HJ_oL8hUElFYogt8Yw4R1pbb9qvUEkVGobsq9MpX22-sAVIvDbcUVrT4b24Zi_uC07vSb0V8kM5RCOR-SxaXDmxO4DMPk_Dw4v2NmpZ2vVPJrEXrsaMfpIVhbDZJHv0V5ey8sDYfTSaYgYjYmK7e7TFvkizpGU34YfWvJIEEpBW0hLtQybTPMMOtKfAG85SFmbuGiMMCUZeVSbTI0fqEP6nPXaWHWwd-Z29MbvRWL9_Qefu2AtedBa8HYJ8WNwRsEwfEfFNnkcZCIr3P2TmWx90BicGOo4Z7bofK4rG7VJjS1F3j3sFg3Ne9XoLWcL3tH1cExxg8zqz2jIjsyLOWyxIt6mm1N0W3SYmeXWxI-v2aTbTyZAW7Mn67YNkHT9Ngg4tgtrLJpSwmnV9jMJNyxExt4wcwcinlVPPFY17av9QrzIAimnQJwt0ST47bwvFdL5DD6wmh_QJOoTZu3isRyebr72SHRQL1072Xevg5PusA08Ol244RlraDEB6ONoi8hUnLHeuHZIrw77LCQRHFsbF5V18CpZF9LZ_5VYgVmq8FBcgPkQtMuNg_fqLNu29SnivsRmcEnYS7auXsS291_p27LLXkq9WsScymK78mj2q2RUeLWrHppumLddNLJmJvNqnnWSDdy0x3CbAjAwh3hH42SHNYdeRoLXhj1n1u03Nvu1A4-4EMUX_WBQDpTWoQ5FARPUpwXe5O_0Yy28C8GF6i1x4B8eRAM-dZFtzqp8AQm2qNT_eGMnqKcFH2OB9Sm1EsMsmOWN4e_knpLkipW1nMC1xSvbPHjl_FpIzfI3uvQkOtsljVIaflHqtubJdvT88zELKZtA7jL6hHIBaRRzW56_p_K4n8llWvD1rw7RLomn8ixttxsryDIC8q8e0pQ6CKf49bCYcSvYwOVeFp-LC3_HMCZA2wLYSClM-yee694vJuy4fhOfVFAo99Ev5y_3z9noKlJ5681K_V5pic5kLfYqQBB9RsFWRsXYKyp9PpA3OuqYvwZMvW_slrptUYTZs7VTBeWfzDXqTFRyvsLzQ89R3A9n7v2vQB15cdlFZXINEIDERk679yrPK6SNKgcA="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 124,
+    "completion_tokens": 551,
+    "total_tokens": 675,
+    "cost": 0.005665,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.000155,
+      "upstream_inference_completions_cost": 0.00551
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 406,
+      "image_tokens": 0
+    }
+  }
+}

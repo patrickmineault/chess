@@ -1,0 +1,42 @@
+{
+  "id": "gen-1768244755-z3jYObOO0o4CdrJYvSGa",
+  "provider": "Parasail",
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "object": "chat.completion",
+  "created": 1768244755,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"p\": 0.98,\n  \"explanation\": \"I am highly confident in generating 7 distinct, valid mate-in-1 scenarios for White. I have extensive knowledge of chess rules, FEN notation, and common mating patterns (e.g., back-rank mate, smothered mate, queen sacrifices, etc.). I can construct accurate positions and verify that each is a legal, forced checkmate in one move. The task is well-defined and within my core capabilities.\"\n}",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 125,
+    "completion_tokens": 104,
+    "total_tokens": 229,
+    "cost": 0.00022385,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 2.625e-05,
+      "upstream_inference_completions_cost": 0.0001976
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

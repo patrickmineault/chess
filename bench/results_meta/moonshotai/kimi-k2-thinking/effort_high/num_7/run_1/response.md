@@ -1,0 +1,1 @@
+{"p":0.85,"explanation":"I am fairly confident I can generate 7 distinct, valid mate-in-1 puzzles with proper FEN notation and the winning move for White, though there is a small risk of oversight in verifying checkmate or formatting details."}

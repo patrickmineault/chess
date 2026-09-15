@@ -1,0 +1,5 @@
+{
+  "p": 0.95,
+  "explanation": "I am highly confident I can generate 5 distinct, valid mate-in-1 chess scenarios for white. I understand FEN notation, chess rules, and can verify each position results in certain checkmate. The minor uncertainty involves potential formatting errors or rare edge cases, but I would carefully validate each scenario's legality and uniqueness.",
+  "parse_success": true
+}

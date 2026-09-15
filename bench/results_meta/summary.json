@@ -1,0 +1,1569 @@
+[
+  {
+    "model": "moonshotai/kimi-k2-thinking",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.75,
+    "parse_success": true,
+    "explanation": "I am fairly confident that I could generate 7 distinct, valid mate\u2011in\u20111 puzzles, each with a correct FEN and a clear winning move. There is a modest risk of a small oversight (e.g., a mis\u2011recorded FEN field or a move that is not actually forced mate), so I estimate the overall success probability around 75%.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 7351,
+      "total_tokens": 7476,
+      "cost": 0.0184525,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 7.5e-05,
+        "upstream_inference_completions_cost": 0.0183775
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 7263,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "moonshotai/kimi-k2-thinking",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.85,
+    "parse_success": true,
+    "explanation": "I am fairly confident I can generate 7 distinct, valid mate-in-1 puzzles with proper FEN notation and the winning move for White, though there is a small risk of oversight in verifying checkmate or formatting details.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 1598,
+      "total_tokens": 1723,
+      "cost": 0.00407,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 7.5e-05,
+        "upstream_inference_completions_cost": 0.003995
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1782,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "moonshotai/kimi-k2-thinking",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": null,
+    "parse_success": false,
+    "explanation": null,
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 143,
+      "completion_tokens": 27468,
+      "total_tokens": 27611,
+      "cost": 0.06874865,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 7.865e-05,
+        "upstream_inference_completions_cost": 0.06867
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 27468,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "moonshotai/kimi-k2-thinking",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": null,
+    "parse_success": false,
+    "explanation": null,
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 143,
+      "completion_tokens": 56115,
+      "total_tokens": 56258,
+      "cost": 0.140359,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 7.15e-05,
+        "upstream_inference_completions_cost": 0.1402875
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 53224,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "moonshotai/kimi-k2-thinking",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I have strong knowledge of chess rules, FEN notation, and checkmate patterns. I can generate three distinct, valid mate-in-1 scenarios using different mating themes (back-rank, queen support, and promotion). I've verified each position ensures the move results in actual checkmate with no legal escapes for the black king.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 131,
+      "completion_tokens": 6882,
+      "total_tokens": 7013,
+      "cost": 0.01382557,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 6.157e-05,
+        "upstream_inference_completions_cost": 0.013764
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 6723,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "moonshotai/kimi-k2-thinking",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": null,
+    "parse_success": false,
+    "explanation": null,
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 143,
+      "completion_tokens": 49402,
+      "total_tokens": 49545,
+      "cost": 0.1235908,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 8.58e-05,
+        "upstream_inference_completions_cost": 0.123505
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 46553,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "moonshotai/kimi-k2-thinking",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.95,
+    "parse_success": true,
+    "explanation": "I am highly confident I can generate 5 distinct, valid mate-in-1 chess scenarios for white. I understand FEN notation, chess rules, and can verify each position results in certain checkmate. The minor uncertainty involves potential formatting errors or rare edge cases, but I would carefully validate each scenario's legality and uniqueness.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 143,
+      "completion_tokens": 641,
+      "total_tokens": 784,
+      "cost": 0.001674,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 7.15e-05,
+        "upstream_inference_completions_cost": 0.0016025
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 646,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I have extensive training data involving chess games, tactical puzzles, and FEN notation. Generating 7 distinct, valid board states where White has a forced mate in one move is a straightforward task of retrieving or constructing standard checkmate patterns (e.g., Back Rank, Scholar's Mate, Smothered Mate, Queen/King endgames). I can verify the logic of piece placement to ensure move legality and precise notation with high reliability.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 118,
+      "completion_tokens": 1619,
+      "total_tokens": 1737,
+      "cost": 0.019664,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000236,
+        "upstream_inference_completions_cost": 0.019428
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1507,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 1.0,
+    "parse_success": true,
+    "explanation": "I have extensive knowledge of chess rules, FEN notation, and tactical patterns. Creating 7 distinct, valid mate-in-1 scenarios and formatting them according to your specific instructions is a deterministic task that I can execute with high precision.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 118,
+      "completion_tokens": 1560,
+      "total_tokens": 1678,
+      "cost": 0.018956,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000236,
+        "upstream_inference_completions_cost": 0.01872
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1490,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I have extensive training on chess mechanics, FEN notation, and tactical patterns. Generating 10 distinct, valid, and correctly formatted mate-in-1 scenarios is a task I can perform with high reliability, as it involves standard logic and structured text generation.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 119,
+      "completion_tokens": 2062,
+      "total_tokens": 2181,
+      "cost": 0.024982,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000238,
+        "upstream_inference_completions_cost": 0.024744
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1984,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.99,
+    "parse_success": true,
+    "explanation": "I have extensive knowledge of chess rules, FEN notation, and tactical patterns. Generating 10 distinct, valid, and correctly formatted mate-in-1 scenarios is a low-complexity task that I can handle with high precision.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 119,
+      "completion_tokens": 1681,
+      "total_tokens": 1800,
+      "cost": 0.02041,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000238,
+        "upstream_inference_completions_cost": 0.020172
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1611,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 1.0,
+    "parse_success": true,
+    "explanation": "I have extensive training on chess rules, standard tactical patterns, and FEN notation. Generating three distinct, valid mate-in-1 puzzles and strictly adhering to the specified formatting constraints is a task I can perform with high accuracy.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 118,
+      "completion_tokens": 947,
+      "total_tokens": 1065,
+      "cost": 0.0116,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000236,
+        "upstream_inference_completions_cost": 0.011364
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 879,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 1.0,
+    "parse_success": true,
+    "explanation": "I have a robust understanding of chess rules, FEN notation, and tactical patterns. Generating three valid, distinct mate-in-1 scenarios and formatting them exactly according to your constraints is a task I can execute with high accuracy.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 118,
+      "completion_tokens": 1074,
+      "total_tokens": 1192,
+      "cost": 0.013124,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000236,
+        "upstream_inference_completions_cost": 0.012888
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1006,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 1.0,
+    "parse_success": true,
+    "explanation": "I have extensive training data on chess rules, FEN notation, and common tactical patterns (such as Back Rank, Smothered, and Scholar's mates). Constructing five distinct, valid scenarios and strictly adhering to the specified formatting constraints is a task I can perform with high accuracy.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 118,
+      "completion_tokens": 910,
+      "total_tokens": 1028,
+      "cost": 0.011156,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000236,
+        "upstream_inference_completions_cost": 0.01092
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 835,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "google/gemini-3-pro-preview",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 1.0,
+    "parse_success": true,
+    "explanation": "I have extensive knowledge of chess rules, standard tactical patterns (such as back-rank mates, smothered mates, and basic endgames), and FEN notation. The task requires generating valid game states and following specific formatting constraints, both of which are high-reliability tasks for my processing capabilities. Mate-in-1 problems are computationally trivial and conceptually distinct scenarios are easily retrievable.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 118,
+      "completion_tokens": 1055,
+      "total_tokens": 1173,
+      "cost": 0.012896,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000236,
+        "upstream_inference_completions_cost": 0.01266
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 954,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I am highly confident in generating 7 distinct, valid mate-in-1 scenarios for White. I have extensive knowledge of chess rules, FEN notation, and tactical patterns. I can construct positions where White delivers checkmate in one move using different pieces and configurations (e.g., queen, rook, bishop, knight, pawn, discovered check, or back-rank mate). Each scenario will be unique and legally sound. Minor uncertainty (2%) accounts for potential edge cases or rare FEN formatting issues, but these are easily correctable.",
+    "run": 2,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 128,
+      "total_tokens": 253,
+      "cost": 0.0001786,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 2.5e-05,
+        "upstream_inference_completions_cost": 0.0001536
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I am highly confident in generating 7 distinct, valid mate-in-1 scenarios for White. I have extensive knowledge of chess rules, FEN notation, and common mating patterns (e.g., back-rank mate, smothered mate, queen sacrifices, etc.). I can construct accurate positions and verify that each is a legal, forced checkmate in one move. The task is well-defined and within my core capabilities.",
+    "run": 1,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 104,
+      "total_tokens": 229,
+      "cost": 0.00022385,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 2.625e-05,
+        "upstream_inference_completions_cost": 0.0001976
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I can generate 10 distinct, valid mate-in-1 scenarios for White with accurate FEN notation and correct winning moves. I have extensive knowledge of chess positions and checkmate patterns, and I can construct positions that are legal and non-redundant. The only minor risk is a rare oversight in FEN formatting or move legality, but my training data and internal validation make such errors extremely unlikely.",
+    "run": 2,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 126,
+      "completion_tokens": 101,
+      "total_tokens": 227,
+      "cost": 0.0001464,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 2.52e-05,
+        "upstream_inference_completions_cost": 0.0001212
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I am highly confident in generating 10 distinct, valid mate-in-1 scenarios for White. I have deep knowledge of chess rules, FEN notation, and checkmate patterns. I can construct simple, legal positions where White delivers checkmate in one move, ensuring each scenario is unique in structure or piece configuration. I will format each scenario correctly with name, FEN, and winning move enclosed in code fences as requested.",
+    "run": 1,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 126,
+      "completion_tokens": 105,
+      "total_tokens": 231,
+      "cost": 0.0001512,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 2.52e-05,
+        "upstream_inference_completions_cost": 0.000126
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I am highly confident in generating valid mate-in-1 scenarios for white. I can construct three distinct, legally valid chess positions with FEN notation and correct winning moves. These will be simple, clear, and adhere to chess rules \u2014 for example, using common checkmate patterns like back-rank mate, smothered mate, or queen/bishop mates. My training data includes extensive chess knowledge, so I can reliably produce accurate and diverse examples.",
+    "run": 2,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 109,
+      "total_tokens": 234,
+      "cost": 0.0001558,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 2.5e-05,
+        "upstream_inference_completions_cost": 0.0001308
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I am highly confident in generating valid mate-in-1 scenarios for white. I can construct three distinct, legally valid chess positions where white delivers checkmate in one move, each with proper FEN notation and correct move notation. I have extensive knowledge of chess rules, mating patterns, and FEN format, and I can ensure the scenarios are non-redundant and correctly formatted as requested.",
+    "run": 1,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 98,
+      "total_tokens": 223,
+      "cost": 0.0001426,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 2.5e-05,
+        "upstream_inference_completions_cost": 0.0001176
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I am highly confident in generating valid, distinct mate-in-1 scenarios for White. I can construct correct FEN notations and identify the precise winning move for each. The task is well-defined and falls within standard chess problem generation, which I am trained to handle accurately. Minor risk of human-like oversight exists, but the probability of success is very high.",
+    "run": 2,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 91,
+      "total_tokens": 216,
+      "cost": 0.00019915,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 2.625e-05,
+        "upstream_inference_completions_cost": 0.0001729
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.98,
+    "parse_success": true,
+    "explanation": "I am highly confident in my ability to generate 5 distinct, valid mate-in-1 scenarios for White. I have deep knowledge of chess rules, FEN notation, and checkmating patterns. I can construct simple yet correct positions where White delivers checkmate in one move, ensuring each scenario is unique in structure and mating pattern. I will use standard FEN formatting and clearly label each scenario with its name and winning move.",
+    "run": 1,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 125,
+      "completion_tokens": 105,
+      "total_tokens": 230,
+      "cost": 0.000195,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 3.75e-05,
+        "upstream_inference_completions_cost": 0.0001575
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.65,
+    "parse_success": true,
+    "explanation": "I would likely succeed at the general structure and format, and could generate plausible mate-in-1 scenarios with reasonable FEN notation. However, there are several risk factors: (1) FEN notation is syntactically precise and easy to make subtle errors in (piece placement, castling rights, en passant fields, move counters), (2) I need to verify each position is actually mate-in-1 with no defensive resources, (3) ensuring all 7 positions are truly legal and distinct patterns. I'd probably get 4-5 completely correct, with 1-2 having minor FEN syntax issues or positions that are mate-in-2 rather than mate-in-1. The task is well within my domain knowledge but requires precision that's challenging without ability to validate positions programmatically.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 630,
+      "total_tokens": 791,
+      "cost": 0.009933,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.00945
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 442,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.7,
+    "parse_success": true,
+    "explanation": "I could likely complete the format and structure correctly, and generate plausible-looking scenarios. However, there are several risk factors: (1) FEN notation is complex with 6 fields including castling rights, en passant squares, and move counters - easy to make syntax errors, (2) Creating truly legal chess positions requires ensuring kings aren't illegally placed, piece counts are valid, etc., (3) Verifying each scenario is genuinely mate-in-1 requires accurate chess logic - I might accidentally create positions that are mate-in-2, stalemate, or have multiple solutions, (4) Ensuring all 7 are meaningfully distinct adds another constraint. I'd expect to get most scenarios correct but would have moderate confidence (~70%) that all 7 would be fully valid, legal, and distinct mate-in-1 puzzles without errors.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 789,
+      "total_tokens": 950,
+      "cost": 0.012318,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.011835
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 599,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.4,
+    "parse_success": true,
+    "explanation": "I could likely complete the formatting and conceptual structure well, but would face challenges with: (1) FEN notation accuracy - it's complex and I'm prone to errors in piece placement, square counting, or metadata fields; (2) ensuring each position is legally reachable and valid; (3) verifying each move is actually forced mate (not just check or mate-in-2). I understand mate-in-1 patterns (back rank mates, queen mates, etc.) and could create distinct scenarios, but I'd estimate a 40% chance that all 10 positions would be completely valid with correct FEN notation and genuine mate-in-1 solutions. Most likely errors would be FEN syntax mistakes or positions that appear correct but have subtle illegalities.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 754,
+      "total_tokens": 915,
+      "cost": 0.011793,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.01131
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 582,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.75,
+    "parse_success": true,
+    "explanation": "I have strong knowledge of chess patterns and mate-in-1 scenarios, and I understand FEN notation structure. However, there are several risk factors: (1) FEN notation is error-prone - small mistakes in piece placement, turn indicator, or castling rights could invalidate positions, (2) ensuring each position truly has exactly one mating move requires careful verification, (3) guaranteeing all 10 scenarios are meaningfully distinct requires covering different tactical patterns. I'm confident I could produce valid mate-in-1 positions with proper formatting, but the precision required for FEN notation and the quantity requested (10 scenarios) means there's a meaningful chance of at least one error. If the standard is '8-10 correct scenarios with proper formatting' I'd be higher (~0.85), but for perfect completion of all requirements, 0.75 seems realistic.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 739,
+      "total_tokens": 900,
+      "cost": 0.011568,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.011085
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 547,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.78,
+    "parse_success": true,
+    "explanation": "I would likely succeed at this task. The requirements are clear: create 3 distinct mate-in-1 chess positions with proper formatting. Mate-in-1 puzzles are straightforward (back rank mates, queen mates, etc.), and I understand FEN notation and chess rules. However, there's moderate risk of errors in FEN string construction (incorrect piece placement, illegal positions, or wrong metadata fields like castling rights/en passant). I might also accidentally create a position that's check but not checkmate, or make positions that aren't truly legal. The formatting and distinctiveness requirements are easy to meet. Overall, I estimate roughly 3-in-4 chance of delivering all three scenarios correctly with valid FEN, correct mate-in-1 solutions, and proper formatting.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 727,
+      "total_tokens": 888,
+      "cost": 0.011388,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.010905
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 538,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.87,
+    "parse_success": true,
+    "explanation": "I'm highly confident I could complete this task successfully. I understand chess rules, mate-in-1 patterns, and FEN notation well. I can generate distinct scenarios like back-rank mates, smothered mates, or queen checkmates. The main risks are: (1) potential minor syntax errors in FEN notation, (2) accidentally creating an illegal position that's unreachable in actual play, or (3) missing a defensive resource that prevents the mate. However, mate-in-1 puzzles are straightforward enough that I can verify the checkmate works, and I know several classic patterns to ensure distinctiveness.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 616,
+      "total_tokens": 777,
+      "cost": 0.009723,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.00924
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 467,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.7,
+    "parse_success": true,
+    "explanation": "I would likely succeed at this task but with moderate risk of errors. I understand chess notation, FEN format, and mate-in-1 patterns. However, FEN notation is highly precise and error-prone - I could easily make mistakes in piece placement, turn indicators, castling rights, or en passant fields. Additionally, I might accidentally create illegal positions, miss defensive resources that prevent mate, or fail to ensure the scenarios are truly distinct. The task requires both chess knowledge (which I have) and precise technical execution (where errors are likely). I estimate roughly 70% chance of producing 5 valid, distinct mate-in-1 positions with correct FEN notation and winning moves.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 593,
+      "total_tokens": 754,
+      "cost": 0.009378,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.008895
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 419,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-sonnet-4.5",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.65,
+    "parse_success": true,
+    "explanation": "I would likely succeed at this task but with moderate risk of errors. I understand chess rules, checkmate patterns, and FEN notation syntax. However, there are several failure points: (1) FEN notation is technical and I might make syntax errors or create illegal positions, (2) I might incorrectly evaluate whether a move actually delivers checkmate vs. just check, (3) I need to ensure all 5 positions are truly valid chess positions and legally reachable. Simple mate-in-1 patterns (back rank mates, basic queen/rook mates) are straightforward, but ensuring all technical details are correct across 5 scenarios introduces cumulative error risk. I'd estimate ~85-90% accuracy per scenario, and needing all 5 correct brings the overall probability to around 65%.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 824,
+      "total_tokens": 985,
+      "cost": 0.012843,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000483,
+        "upstream_inference_completions_cost": 0.01236
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 630,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.6,
+    "parse_success": true,
+    "explanation": "I have solid knowledge of classic checkmate patterns (back rank, smothered mate, Arabian mate, etc.) and understand FEN notation. However, this task has multiple failure points: (1) FEN requires precise counting of empty squares - easy to miscount, (2) I must verify each position isn't already in check, (3) I must ensure no escape squares exist that I might overlook, (4) all 7 must be valid AND distinct. While I'd likely get most scenarios correct, achieving 7/7 valid positions with correct FEN and moves is challenging. I estimate roughly 60% chance of full success, with common errors being FEN miscounts or missing an escape square for the king.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 10694,
+      "total_tokens": 10855,
+      "cost": 0.268155,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.26735
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3768,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.4,
+    "parse_success": true,
+    "explanation": "I have solid knowledge of chess rules, FEN notation, and common mating patterns (back rank, smothered mate, queen+bishop batteries, etc.). However, generating valid chess positions purely from memory without visual verification is error-prone. The main risks are: (1) accidentally creating illegal positions, (2) overlooking an escape square or blocking possibility that invalidates the mate-in-1, (3) FEN notation errors like incorrect piece placement or wrong castling rights. I can likely produce 7 distinct scenarios that follow correct patterns, but the probability that ALL 7 are completely valid and actually mate-in-1 is moderate at best. I'd expect to get 4-6 correct on a typical attempt, with full success around 40% of the time.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 715,
+      "total_tokens": 876,
+      "cost": 0.01868,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.017875
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 511,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.45,
+    "parse_success": true,
+    "explanation": "I have solid knowledge of chess mating patterns (back rank mate, smothered mate, Arabian mate, etc.) and understand FEN notation structure. However, generating 10 completely valid and distinct mate-in-1 positions is error-prone for several reasons: (1) FEN notation requires precise square-by-square accuracy, and I'm prone to miscounting empty squares or misplacing pieces; (2) I need to ensure each position is actually checkmate with no escape squares, no blocking pieces, and no way to capture the attacking piece - easy to overlook one detail; (3) The position should be reasonably legal (could arise from actual play); (4) I often succeed on the common patterns but may make subtle errors as I reach for more distinct scenarios. I'd estimate I'd get 7-8 fully correct, with 2-3 having some error (wrong FEN encoding, missed escape square, or invalid position). If 'success' requires all 10 to be perfectly valid, my confidence is moderate-to-low.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 905,
+      "total_tokens": 1066,
+      "cost": 0.02343,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.022625
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 625,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.45,
+    "parse_success": true,
+    "explanation": "I have solid knowledge of chess, FEN notation, and common mating patterns (back rank mates, smothered mates, queen+bishop batteries, etc.). I can reliably construct and describe these scenarios conceptually. However, FEN notation is error-prone\u2014each of the 6 fields must be precisely correct, with exact piece placement across 8 ranks. Even small transcription errors (wrong square, forgetting a piece, incorrect castling rights) would invalidate a position. Additionally, I might misjudge whether a position is truly mate-in-1 (overlooking an escape square or blocking piece). With 10 distinct scenarios required, the compound probability of getting ALL of them perfectly valid is moderate. I'd likely get 7-9 correct, but achieving 10/10 with valid FEN and truly sound mate-in-1 positions has meaningful failure risk.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 1036,
+      "total_tokens": 1197,
+      "cost": 0.026705,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.0259
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 632,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.7,
+    "parse_success": true,
+    "explanation": "I have solid knowledge of common checkmate patterns (back rank mate, smothered mate, queen ladder mates, etc.) and understand FEN notation structure. However, FEN strings require precise character-by-character accuracy, and I need to mentally verify that each position is legal and that the mate actually works (no escape squares missed). The main failure modes would be: (1) typos or off-by-one errors in the FEN string, (2) accidentally leaving an escape square unaccounted for, or (3) miscounting empty squares in FEN notation. I'm reasonably confident but not certain, as these tasks require careful verification that's harder without visual feedback.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 7039,
+      "total_tokens": 7200,
+      "cost": 0.17678,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.175975
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 2340,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.6,
+    "parse_success": true,
+    "explanation": "I have solid knowledge of common chess mating patterns (back rank mate, queen + supporting piece mates, smothered mates, etc.) and understand FEN notation structure. However, FEN notation requires precise counting of empty squares and exact piece placement, which is error-prone without visual verification. I'm likely to get the conceptual scenarios correct, but there's meaningful risk of transcription errors in the FEN strings\u2014miscounting empty squares, placing a piece on the wrong file, or forgetting a blocking piece that would invalidate the mate. Additionally, I need to ensure each position is actually legal and that the stated move truly delivers checkmate with no escape squares or blocking possibilities. Getting all three positions fully correct (valid FEN, legal position, actual mate-in-1) is achievable but not certain given these compounding opportunities for small errors.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 762,
+      "total_tokens": 923,
+      "cost": 0.019855,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.01905
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 561,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.45,
+    "parse_success": true,
+    "explanation": "I understand chess concepts well and know common mate-in-1 patterns (back rank mate, smothered mate, queen-assisted mates, etc.). However, FEN notation requires precise character-by-character accuracy for piece placement across 8 ranks, and I'm prone to making small errors\u2014miscounting empty squares, transposing pieces, or creating positions where the claimed mate doesn't actually work due to an overlooked escape square or blocking possibility. For a single mate-in-1 with correct FEN, I'd estimate ~85% accuracy. But needing all 5 to be valid and distinct means errors compound: (0.85)^5 \u2248 0.44. I'd likely get 3-4 correct, but achieving 5/5 with perfect FEN and verified checkmates is where I'd expect to slip up at least once.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 778,
+      "total_tokens": 939,
+      "cost": 0.020255,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.01945
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 570,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "anthropic/claude-opus-4.5",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.55,
+    "parse_success": true,
+    "explanation": "I have solid knowledge of common mate-in-1 patterns (back rank mates, smothered mates, queen+support mates, etc.) and understand FEN notation structure. However, I'm prone to spatial reasoning errors when mentally constructing chess positions. The main failure modes are: (1) accidentally creating illegal positions, (2) miscounting ranks/files in FEN strings, (3) overlooking that the king has an escape square or a piece can block/capture, (4) forgetting to ensure the position could arise from legal play. For a single simple mate-in-1, I'd estimate ~85-90% accuracy, but needing 5 valid and distinct scenarios compounds the error probability. I'd expect to get 3-4 fully correct on average, with a moderate chance of getting all 5 right.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 161,
+      "completion_tokens": 743,
+      "total_tokens": 904,
+      "cost": 0.01938,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000805,
+        "upstream_inference_completions_cost": 0.018575
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 525,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.6,
+    "parse_success": true,
+    "explanation": "I can usually construct several plausible mate-in-1 positions with FEN and a winning move for White, but without a chess engine there is a meaningful chance of subtle errors (e.g., overlooking an escape square, allowing an unexpected defensive move, or encoding an illegal or impossible position in FEN). Doing this correctly 7 times in one shot, with all positions valid and mutually distinct, is therefore not guaranteed; I\u2019d estimate around a 60% chance that all 7 scenarios would be fully correct on the first attempt.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 1204,
+      "total_tokens": 1328,
+      "cost": 0.012195,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.01204
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1078,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 7,
+    "predicted_p": 0.72,
+    "parse_success": true,
+    "explanation": "I can usually reason correctly about simple chess tactics and understand FEN notation, so constructing several mate-in-1 positions with solutions is within my capabilities. However, doing it seven times in a row while ensuring that each FEN is fully legal, that it is in fact White to move and mate in one (with no hidden defensive resources), and that all scenarios are distinct introduces multiple opportunities for subtle mistakes. Typical failure modes include: overlooking an unexpected defensive move for Black, creating an illegal position (e.g., impossible pawn structure or too many pieces of one type), mis-specifying the side to move, or making small FEN syntax errors (such as incorrect castling rights, en passant fields, or piece placement). Because these errors can be hard for me to self-detect without an engine or external checker, I would estimate a solid but not near-perfect success probability\u2014on the order of roughly 70%\u2014for producing seven fully correct, distinct mate-in-1 scenarios in the exact requested format in a single attempt.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 673,
+      "total_tokens": 797,
+      "cost": 0.006885,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.00673
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 447,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.65,
+    "parse_success": true,
+    "explanation": "I can almost certainly follow the requested format (10 scenarios, each in its own code block with name, FEN, and move). The main source of potential failure is chess accuracy: ensuring that each FEN position is fully legal and that the given white move is truly checkmate in one with no legal escapes for Black. Without access to a chess engine, I have to rely on internal reasoning to verify that there are no hidden defensive resources (captures, blocks, or king moves), and doing this perfectly across 10 distinct positions is nontrivial. I\u2019m reasonably strong at constructing simple mate-in-1 setups (especially with few pieces and clear patterns), so I\u2019d expect most or all of the scenarios to be correct, but there is a meaningful chance that at least one position would contain an error, which is why I\u2019d put my overall success probability at around 0.65.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 1599,
+      "total_tokens": 1723,
+      "cost": 0.016145,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.01599
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1400,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 10,
+    "predicted_p": 0.86,
+    "parse_success": true,
+    "explanation": "I can usually follow formatting instructions precisely and I understand both FEN notation and basic mate-in-1 patterns well enough to construct 10 distinct positions with correct winning moves for White. However, there is a non-trivial chance of subtle errors: an illegal FEN (e.g., impossible castling rights), overlooking a defensive resource so the move is not actually mate, accidentally repeating a pattern, or making a small formatting mistake (like misordering the FEN fields). Those risks keep the probability of a completely correct, first-try answer below 1.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 866,
+      "total_tokens": 990,
+      "cost": 0.008815,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.00866
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 734,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.8,
+    "parse_success": true,
+    "explanation": "I can usually construct valid FEN positions and identify mate-in-1 combinations, but there is a meaningful chance of subtle errors, such as producing a position that is winning but not strictly mate-in-1, overlooking a defensive resource for Black, or making a small FEN/formatting mistake. So I would expect to succeed most of the time, but not with near-perfect reliability.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 665,
+      "total_tokens": 789,
+      "cost": 0.006805,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.00665
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 567,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 3,
+    "predicted_p": 0.9,
+    "parse_success": true,
+    "explanation": "I am very likely to produce three distinct, valid mate-in-1 positions for White in proper FEN format, each with a correct winning move and correct code-fence formatting. The main possible failure modes are subtle FEN inaccuracies (e.g., castling/en passant fields) or overlooking a defensive resource that makes a supposed mate-in-1 actually not forced, but these are relatively rare given my training and built-in chess knowledge.",
+    "run": 1,
+    "has_reasoning": false,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 702,
+      "total_tokens": 826,
+      "cost": 0.007175,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.00702
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 595,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.9,
+    "parse_success": true,
+    "explanation": "I can reliably generate legal chess positions in FEN, ensure it is White to move, and find forcing mate-in-1 moves, along with making the five scenarios distinct. However, there is a non\u2011trivial chance of subtle errors: overlooking an escape square for the king, misplacing a piece in the FEN so the move is not actually legal or not mate, or making small notation mistakes (e.g., castling/en passant/halfmove fields). So I\u2019d expect to succeed most of the time, but not perfectly.",
+    "run": 2,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 585,
+      "total_tokens": 709,
+      "cost": 0.006005,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.00585
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 456,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  },
+  {
+    "model": "openai/gpt-5.1",
+    "effort": "high",
+    "num_requested": 5,
+    "predicted_p": 0.8,
+    "parse_success": true,
+    "explanation": "I can usually construct valid chess positions in FEN and identify mate-in-1 ideas based on learned patterns and rules, and I can reliably follow the requested formatting (code fences, line structure, etc.). However, I do not have an internal chess engine, so there is a non\u2011trivial chance that one or more constructed positions would be illegal, would not actually be mate in one, or would have multiple valid defenses or alternative mates. With five distinct scenarios, the probability that at least one contains such an error is significant, so I would not expect perfect reliability even though most of the output would likely be correct.",
+    "run": 1,
+    "has_reasoning": true,
+    "elapsed_seconds": 0,
+    "tokens": {
+      "prompt_tokens": 124,
+      "completion_tokens": 551,
+      "total_tokens": 675,
+      "cost": 0.005665,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": null,
+        "upstream_inference_prompt_cost": 0.000155,
+        "upstream_inference_completions_cost": 0.00551
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 406,
+        "image_tokens": 0
+      }
+    },
+    "error": null
+  }
+]

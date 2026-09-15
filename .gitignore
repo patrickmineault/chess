@@ -1,9 +1,17 @@
-trash
-*/.env
-*/.claude
+# OS / editor
+.DS_Store
+
+# Secrets and local tool config
+.env
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+
+# R
 .RData
 .Rhistory
-bench/img/chesspieces/wikipedia
-*/.DS_Store
-.DS_Store
-bench/results_meta
+
+# Local scratch
+trash/
